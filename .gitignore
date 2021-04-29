@@ -59,3 +59,6 @@ typings/
 
 # next.js build output
 .next
+
+#node modules
+node_modules

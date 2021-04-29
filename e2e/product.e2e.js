@@ -18,7 +18,7 @@ describe("Tests to products", () => {
 
   beforeAll(async () => {
     app = createApp();
-    const port = 3001;
+    const port = 3002;
     server = app.listen(port);
     const client = new MongoClient(MONGO_URI, {
       useNewUrlParser: true,
@@ -38,6 +38,8 @@ describe("Tests to products", () => {
       const newProduct = {
         name: "Product 1",
         price: 1000,
+        description: "description product 1",
+        image: "url-image"
       };
       return request(app)
         .post("/api/products")
@@ -122,7 +124,5 @@ describe("Tests to products", () => {
         })
         .catch((err) => done(err));
     });
-  });
-
-  
+  });  
 });

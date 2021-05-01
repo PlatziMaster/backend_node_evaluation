@@ -8,9 +8,11 @@ const productService = require('../services/products');
 // Endpoint that returns a list of products
 router.get('/', async (req, res) => {
    try {
-      res.json({
-         response: "endpoint that returns a list of products"
-      });
+      let allAvailableProducts = await productService.getAllProducts();
+
+      if (allAvailableProducts) {
+         return res.json(allAvailableProducts);
+      }
    } catch (error) {
       console.log(error);
    }

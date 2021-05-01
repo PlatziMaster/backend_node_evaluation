@@ -14,10 +14,25 @@ async function getAllProducts() {
 }
 
 /**
+ * Gets the information about one product from the database
+ * @param {String} productId Id of the product to be searched 
+*/
+async function getOneProduct(productId) {
+   try {
+      let product = await mongoLibrary.getOne('categories',{_id: productId});
+
+      return product;
+   } catch (error) {
+      console.log(error);
+   }
+}
+
+/**
  * Inserts a new product in the database.
  * @param {Object} productData Body of the new product to be inserted.
  * @returns {Object} Saved product.
  */
+
 async function saveProduct(productData) {
    try {
       let savedProduct = await mongoLibrary.saveOne('products', productData);
@@ -59,6 +74,7 @@ async function deleteProduct(productId) {
 
 module.exports = {
    getAllProducts,
+   getOneProduct,
    saveProduct,
    updateProduct,
    deleteProduct

@@ -14,6 +14,20 @@ async function getAllCategories() {
 }
 
 /**
+ * Gets the information about one category from the database
+ * @param {String} productId Id of the category to be searched 
+*/
+async function getOneCategory(categoryId) {
+   try {
+      let product = await mongoLibrary.getOne('categories',{_id: categoryId});
+
+      return product;
+   } catch (error) {
+      console.log(error);
+   }
+}
+
+/**
  * Inserts a new category in the database.
  * @param {Object} categoryData Body of the new category to be inserted.
  * @returns {Object} Saved category.
@@ -59,6 +73,7 @@ async function deleteCategory(categoryId) {
 
 module.exports = {
    getAllCategories,
+   getOneCategory,
    saveCategory,
    updateCategory,
    deleteCategory

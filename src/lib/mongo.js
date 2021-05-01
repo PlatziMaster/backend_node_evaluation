@@ -2,44 +2,112 @@
 const { config } = require('../config/index');
 const {dbHost, dbName, dbPassword, dbUser} = config;
 
-// Mongo
+// Mongo config
 const MongoClient = require('mongodb').MongoClient;
 const uri = `mongodb+srv://${dbUser}:${dbPassword}@${dbHost}/${dbName}?retryWrites=true&w=majority`;
 const client = new MongoClient(uri, { useNewUrlParser: true, useUnifiedTopology: true });
 
-async function checkClientConnection() {
+/**
+ * Checks if the client is already connected and returns a db instance
+*/
+async function connectToDatabase() {
    if (!client.isConnected()) {
-      return client.connect();
+      await client.connect();
+      return client.db(dbName);
+   }
+   return client.db(dbName);
+}
+
+
+/**
+ * Gets all the documents of a collection
+ * @param {String} collection Name of the collection
+*/
+async function getAll (collection) {
+   try {
+      let db = await connectToDatabase();
+
+      let allElementsList =  await db.collection(collection).find();
+
+      return allElementsList;
+   } catch (error) {
+      console.log(error);
    }
 }
 
-let mongoLib = {
-   getAll: async(collection) => {
-      await checkClientConnection();
+/**
+ * Gets only one document of a collection by the id
+ * @param {String} collection Name of the collection
+ * @param {Object} query Query to be performed
+*/
+async function getOne (collection, query) {
+   try {
+      let db = await connectToDatabase();
 
-      let db = await client.db(dbName);
-      let allElementsList =  await db.collection(collection).find().toArray();
-
-      return allElementsList;
-   },
-   getOne: async(collection, query) => {
-      await checkClientConnection();
-
-      let db = await client.db(dbName);
-      let gatheredElement =  await db.collection(collection).findOne(query).toArray();
+      let gatheredElement =  await db.collection(collection).findOne(query);
 
       return gatheredElement;
-   },
-   saveOne: async(collection, contentData) => {
-      await checkClientConnection();
+   } catch (error) {
+      console.log(error);
+   }
+}
 
-      console.log(contentData);
+/**
+ * Inserts one document in the collection
+ * @param {String} collection Collection where the document will be saved
+ * @param {Object} contentData Body of the document that will be saved
+ */
+async function saveOne (collection, contentData) {
+   try {
+      let db = await connectToDatabase();
 
-      let db = await client.db(dbName);
       let savedElement = await db.collection(collection).insertOne(contentData);
 
       return savedElement;
+   } catch (error) {
+      console.log(error);
    }
 }
 
-module.exports = mongoLib;
+/**
+ * Replaces one document in the collection
+ * @param {String} collection Collection where the document will be replaced
+ * @param {String} documentId Id of the document that will be replaced
+ * @param {Object} contentData New body of the document that will be saved
+ */
+async function updateOne (collection, documentId,contentData) {
+   try {
+      let db = await connectToDatabase();
+
+      let updatedElement = await db.collection(collection).updateOne({_id:  documentId}, contentData);
+
+      return updatedElement;
+   } catch (error) {
+      console.log(error);
+   }
+}
+
+/**
+ * Deletes one document from the given collection
+ * @param {String} collection Collection where the document will be deleted
+ * @param {String} documentId Id of the document to be deleted
+ */
+async function deleteOne (collection, documentId) {
+   try {
+      let db = await connectToDatabase();
+
+      let deletedElement = await db.collection(collection).deleteOne({_id: documentId});
+
+      return deletedElement;
+   } catch (error) {
+      console.log(error);
+   }
+}
+
+module.exports = {
+   getAll,
+   getOne,
+   saveOne,
+   updateOne,
+   deleteOne,
+};

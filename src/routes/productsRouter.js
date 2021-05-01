@@ -27,7 +27,7 @@ router.get('/:id', async (req, res) => {
          return res.json(product);
       } else {
          return res.status(404).json({
-            status: "product not found"
+            status: "Product not found"
          });
       }
    } catch (error) {
@@ -47,7 +47,7 @@ router.post('/', async (req, res) => {
 
       res.status(201).json({
          productId: savedProduct.insertedId,
-         status: "product created"
+         status: "Product created"
       });
    } catch (error) {
       console.log(error);
@@ -68,11 +68,11 @@ router.put('/:id', async (req, res) => {
       if (updatedProduct) {
          return res.json({
             updatedProductId: requestedProductId,
-            status: "product modified"
+            status: "Product modified"
          });
       } else {
          return res.status(404).json({
-            status: "product not found"
+            status: "Product not found"
          });
       }
    } catch (error) {
@@ -92,11 +92,11 @@ router.delete('/:id', async (req, res) => {
       if (deletedProduct) {
          res.json({
             deletedProductId: requestedProductId,
-            status: "product deleted"
+            status: "Product deleted"
          });
       } else {
          return res.status(404).json({
-            status: "product not found"
+            status: "Product not found"
          });
       }
    } catch (error) {

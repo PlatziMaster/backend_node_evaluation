@@ -29,7 +29,7 @@ router.get('/:id', async (req, res) => {
          res.json(category);
       } else {
          res.status(404).json({
-            status: "category not found"
+            status: "Category not found"
          });
       }
    } catch (error) {
@@ -63,11 +63,13 @@ router.get('/:categoryId/products', async (req, res) => {
 //Endpoint to used create a category
 router.post('/', async (req, res) => {
    try {
-      let { category } = req.body;
+      let categoryData = req.body;
+
+      let savedCategory = await categoriesService.saveCategory(categoryData);
 
       res.status(201).json({
-         category: category,
-         status: "category created"
+         productId: savedCategory.insertedId,
+         status: "Category created"
       });
    } catch (error) {
       console.log(error);
@@ -80,12 +82,21 @@ router.post('/', async (req, res) => {
 // Endpoint used to modify an existing category
 router.put('/:id', async (req, res) => {
    try {
-      let { category } = req.body;
+      let requestedCategoryId = req.params.id;
+      let newCategoryData = req.body;
 
-      res.json({
-         replacedcategory: category,
-         status: "category modified"
-      });
+      let updatedCategory = await categoriesService.updateCategory(requestedCategoryId, newCategoryData);
+
+      if (updatedCategory) {
+         return res.json({
+            updatedCategoryId: requestedCategoryId,
+            status: "Category modified"
+         });
+      } else {
+         return res.status(404).json({
+            status: "Category not found"
+         });
+      }
    } catch (error) {
       console.log(error);
    }
@@ -96,12 +107,20 @@ router.put('/:id', async (req, res) => {
 /* ************** DELETE endpoints ************** */
 router.delete('/:id', async (req, res) => {
    try {
-      let { category } = req.body;
+      let requestedCategoryId = req.params.id;
 
-      res.json({
-         deletedcategory: category,
-         status: "category deleted"
-      });
+      let deletedCategory = await categoriesService.deleteCategory(requestedCategoryId);
+
+      if (deletedCategory) {
+         res.json({
+            deletedCategoryId: requestedCategoryId,
+            status: "Category deleted"
+         });
+      } else {
+         return res.status(404).json({
+            status: "Category not found"
+         });
+      }
    } catch (error) {
       console.log(error);
    }

@@ -28,9 +28,8 @@ async function getOneCategoryById(categoryId) {
 }
 
 async function getProductsByCategoryId(categoryId) {
-   let existingCategory = await mongoLibrary.getOneById(categoryId);
-
-   if (categoryExists) {
+   let existingCategory = await mongoLibrary.getOneById('categories', categoryId);
+   if (existingCategory) {
       let productsByCategory = await (await mongoLibrary.queryAll('products', { categoryId: existingCategory.name })).toArray();
       return productsByCategory;
    } else {

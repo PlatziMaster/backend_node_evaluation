@@ -35,7 +35,7 @@ async function getOneProductById(productId) {
 
 async function saveProduct(productData) {
    try {
-      let savedProduct = await mongoLibrary.saveOne('products', productData);
+      let savedProduct = await (await mongoLibrary.saveOne('products', productData)).ops[0];
 
       return savedProduct;
    } catch (error) {

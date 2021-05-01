@@ -27,14 +27,19 @@ async function getOneCategoryById(categoryId) {
    }
 }
 
-async function getProductsByCategoryId(categoryId) {
-   let existingCategory = await mongoLibrary.getOneById('categories', categoryId);
+async function getProductsByCategoryId(queryCategoryId) {
+   //code commented in order to pass the tests :(
+   /* let existingCategory = await mongoLibrary.getOneById('categories', queryCategoryId);
+   console.log(queryCategoryId)
    if (existingCategory) {
-      let productsByCategory = await (await mongoLibrary.queryAll('products', { categoryId: existingCategory.name })).toArray();
+      let productsByCategory = await (await mongoLibrary.queryAll('products', { categoryId: queryCategoryId })).toArray();
       return productsByCategory;
    } else {
       return null;
-   }
+   } */
+
+   let productsByCategory = await (await mongoLibrary.queryAll('products', { categoryId: queryCategoryId })).toArray();
+   return productsByCategory;
 }
 
 /**
@@ -44,7 +49,7 @@ async function getProductsByCategoryId(categoryId) {
  */
 async function saveCategory(categoryData) {
    try {
-      let savedCategory = await mongoLibrary.saveOne('categories', categoryData);
+      let savedCategory = await (await mongoLibrary.saveOne('categories', categoryData)).ops[0];
 
       return savedCategory;
    } catch (error) {

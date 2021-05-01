@@ -99,7 +99,16 @@ async function updateOne (collection, documentId, contentData) {
       let documentFound = await await db.collection(collection).findOne({ "_id": ObjectId(documentId) });
 
       if (documentFound) {
-         let updatedDocument = await db.collection(collection).replaceOne({_id: ObjectId(documentId)}, contentData);
+         let updateDoc = {
+            $set: {}
+         }
+
+         /* checks which parts of the data need to be changed */
+         for (key in contentData) {
+            updateDoc.$set[key] = contentData[key];
+         }
+         
+         let updatedDocument = await (await db.collection(collection).findOneAndUpdate({_id: ObjectId(documentId)}, updateDoc, {returnOriginal: false})).value;
          return updatedDocument;
       } else {
          return null;

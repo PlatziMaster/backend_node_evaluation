@@ -23,7 +23,7 @@ router.get('/:id', async (req, res) => {
    try {
       let requestedcategoryId = req.params.id;
 
-      let category = await categoriesService.getOneCategoryById(requestedcategoryId)
+      let category = await categoriesService.getOneCategoryById(requestedcategoryId);
 
       if (category) {
          res.json(category);
@@ -67,10 +67,7 @@ router.post('/', async (req, res) => {
 
       let savedCategory = await categoriesService.saveCategory(categoryData);
 
-      res.status(201).json({
-         productId: savedCategory.insertedId,
-         status: "Category created"
-      });
+      res.status(201).json(savedCategory);
    } catch (error) {
       console.log(error);
    }
@@ -88,10 +85,7 @@ router.put('/:id', async (req, res) => {
       let updatedCategory = await categoriesService.updateCategory(requestedCategoryId, newCategoryData);
 
       if (updatedCategory) {
-         return res.json({
-            updatedCategoryId: requestedCategoryId,
-            status: "Category modified"
-         });
+         return res.json(updatedCategory);
       } else {
          return res.status(404).json({
             status: "Category not found"
@@ -108,14 +102,12 @@ router.put('/:id', async (req, res) => {
 router.delete('/:id', async (req, res) => {
    try {
       let requestedCategoryId = req.params.id;
+      console.log(requestedCategoryId)
 
       let deletedCategory = await categoriesService.deleteCategory(requestedCategoryId);
-
+      console.log(deletedCategory);
       if (deletedCategory) {
-         res.json({
-            deletedCategoryId: requestedCategoryId,
-            status: "Category deleted"
-         });
+         res.json(true);
       } else {
          return res.status(404).json({
             status: "Category not found"

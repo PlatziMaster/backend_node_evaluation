@@ -22,11 +22,18 @@ router.get('/', async (req, res) => {
 router.get('/:id', async (req, res) => {
    try {
       let requestedProduct = req.params.id;
+      console.log(requestedProduct)
+      let product = await productService.getOneProductById(requestedProduct);
 
-      res.json({
-         response: "Endpoint that returns just one pruduct especified by id",
-         product: requestedProduct,
-      });
+      console.log(product)
+      if (product) {
+         return res.json(product);
+      } else {
+         return res.json({
+            status: "product not found"
+         })
+      }
+
    } catch (error) {
       console.log(error);
    }

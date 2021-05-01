@@ -3,7 +3,7 @@ const { config } = require('../config/index');
 const {dbHost, dbName, dbPassword, dbUser} = config;
 
 // Mongo config
-const MongoClient = require('mongodb').MongoClient;
+const {MongoClient, ObjectId} = require('mongodb');
 const uri = `mongodb+srv://${dbUser}:${dbPassword}@${dbHost}/${dbName}?retryWrites=true&w=majority`;
 const client = new MongoClient(uri, { useNewUrlParser: true, useUnifiedTopology: true });
 
@@ -55,15 +55,15 @@ async function queryAll (collection, query) {
 /**
  * Gets only one document of a collection by the id
  * @param {String} collection Name of the collection
- * @param {Object} query Query to be performed
+ * @param {String} documentId Document id to be searched
 */
-async function getOne (collection, query) {
+async function getOneById (collection, documentId) {
    try {
       let db = await connectToDatabase();
+      let gatheredDocument =  await db.collection(collection).findOne({ "_id": ObjectId(documentId) });
 
-      let gatheredElement =  await db.collection(collection).findOne(query);
-
-      return gatheredElement;
+      console.log(gatheredDocument)
+      return gatheredDocument;
    } catch (error) {
       console.log(error);
    }
@@ -124,7 +124,7 @@ async function deleteOne (collection, documentId) {
 module.exports = {
    getAll,
    queryAll,
-   getOne,
+   getOneById,
    saveOne,
    updateOne,
    deleteOne,

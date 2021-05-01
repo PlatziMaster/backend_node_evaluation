@@ -17,9 +17,9 @@ async function getAllProducts() {
  * Gets the information about one product from the database
  * @param {String} productId Id of the product to be searched 
 */
-async function getOneProduct(productId) {
+async function getOneProductById(productId) {
    try {
-      let product = await mongoLibrary.getOne('categories',{_id: productId});
+      let product = await mongoLibrary.getOneById('products', productId);
 
       return product;
    } catch (error) {
@@ -74,7 +74,7 @@ async function deleteProduct(productId) {
 
 module.exports = {
    getAllProducts,
-   getOneProduct,
+   getOneProductById,
    saveProduct,
    updateProduct,
    deleteProduct

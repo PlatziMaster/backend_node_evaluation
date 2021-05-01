@@ -2,9 +2,7 @@ const express = require('express');
 const router = express.Router();
 
 // Service
-//const productService = require('../services/products');
-
-
+const productService = require('../services/products');
 
 /* ************** GET endpoints ************** */
 // Endpoint that returns a list of products
@@ -38,10 +36,12 @@ router.get('/:id', async (req, res) => {
 //Endpoint to used create a product
 router.post('/', async (req, res) => {
    try {
-      let { product } = req.body;
+      let product  = req.body;
+
+      let savedProduct =  await productService.saveProduct(product);
 
       res.status(201).json({
-         product: product,
+         product: savedProduct,
          status: "product created"
       });
    } catch (error) {

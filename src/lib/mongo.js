@@ -7,10 +7,39 @@ const MongoClient = require('mongodb').MongoClient;
 const uri = `mongodb+srv://${dbUser}:${dbPassword}@${dbHost}/${dbName}?retryWrites=true&w=majority`;
 const client = new MongoClient(uri, { useNewUrlParser: true, useUnifiedTopology: true });
 
+async function checkClientConnection() {
+   if (!client.isConnected()) {
+      return client.connect();
+   }
+}
 
-client.connect(err => {
-  const collection = client.db("test").collection("devices");
-  // perform actions on the collection object
-  console.log("successfully connected to DB");
-  client.close();
-});
+let mongoLib = {
+   getAll: async(collection) => {
+      await checkClientConnection();
+
+      let db = await client.db(dbName);
+      let allElementsList =  await db.collection(collection).find().toArray();
+
+      return allElementsList;
+   },
+   getOne: async(collection, query) => {
+      await checkClientConnection();
+
+      let db = await client.db(dbName);
+      let gatheredElement =  await db.collection(collection).findOne(query).toArray();
+
+      return gatheredElement;
+   },
+   saveOne: async(collection, contentData) => {
+      await checkClientConnection();
+
+      console.log(contentData);
+
+      let db = await client.db(dbName);
+      let savedElement = await db.collection(collection).insertOne(contentData);
+
+      return savedElement;
+   }
+}
+
+module.exports = mongoLib;

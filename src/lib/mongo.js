@@ -87,25 +87,30 @@ async function saveOne (collection, contentData) {
 }
 
 /**
- * Replaces one document in the collection
+ * Finds and replaces one document in the collection
  * @param {String} collection Collection where the document will be replaced
  * @param {String} documentId Id of the document that will be replaced
  * @param {Object} contentData New body of the document that will be saved
  */
-async function updateOne (collection, documentId,contentData) {
+async function updateOne (collection, documentId, contentData) {
    try {
       let db = await connectToDatabase();
 
-      let updatedElement = await db.collection(collection).updateOne({_id:  documentId}, contentData);
+      let documentFound = await await db.collection(collection).findOne({ "_id": ObjectId(documentId) });
 
-      return updatedElement;
+      if (documentFound) {
+         let updatedDocument = await db.collection(collection).replaceOne({_id: ObjectId(documentId)}, contentData);
+         return updatedDocument;
+      } else {
+         return null;
+      }
    } catch (error) {
       console.log(error);
    }
 }
 
 /**
- * Deletes one document from the given collection
+ * Finds and deletes one document from the given collection
  * @param {String} collection Collection where the document will be deleted
  * @param {String} documentId Id of the document to be deleted
  */
@@ -113,9 +118,15 @@ async function deleteOne (collection, documentId) {
    try {
       let db = await connectToDatabase();
 
-      let deletedElement = await db.collection(collection).deleteOne({_id: documentId});
+      let documentFound = await db.collection(collection).findOne({ "_id": ObjectId(documentId) });
 
-      return deletedElement;
+      if (documentFound) {
+         let deletedDocument = await db.collection(collection).deleteOne({ "_id": ObjectId(documentId) });
+
+         return deletedDocument;
+      } else {
+         return null;
+      }
    } catch (error) {
       console.log(error);
    }

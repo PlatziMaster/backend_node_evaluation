@@ -10,9 +10,7 @@ router.get('/', async (req, res) => {
    try {
       let allAvailableProducts = await productService.getAllProducts();
 
-      if (allAvailableProducts) {
-         return res.json(allAvailableProducts);
-      }
+      return res.json(allAvailableProducts);
    } catch (error) {
       console.log(error);
    }
@@ -29,11 +27,10 @@ router.get('/:id', async (req, res) => {
       if (product) {
          return res.json(product);
       } else {
-         return res.json({
+         return res.status(404).json({
             status: "product not found"
          })
       }
-
    } catch (error) {
       console.log(error);
    }
@@ -50,7 +47,7 @@ router.post('/', async (req, res) => {
       let savedProduct =  await productService.saveProduct(product);
 
       res.status(201).json({
-         product: savedProduct,
+         productId: savedProduct.insertedId,
          status: "product created"
       });
    } catch (error) {
@@ -64,12 +61,21 @@ router.post('/', async (req, res) => {
 // Endpoint used to modify an existing product
 router.put('/:id', async (req, res) => {
    try {
-      let { product } = req.body;
+      let requestedProductId = req.params.id;
+      let newProductData = req.body;
 
-      res.json({
-         replacedProduct: product,
-         status: "product modified"
-      });
+      let updatedProduct = await productService.updateProduct(requestedProductId, newProductData);
+
+      if (updatedProduct) {
+         return res.json({
+            updatedProductId: requestedProductId,
+            status: "product modified"
+         });
+      } else {
+         return res.status(404).json({
+            status: "product not found"
+         });
+      }
    } catch (error) {
       console.log(error);
    }
@@ -80,12 +86,20 @@ router.put('/:id', async (req, res) => {
 /* ************** DELETE endpoints ************** */
 router.delete('/:id', async (req, res) => {
    try {
-      let { product } = req.body;
+      let requestedProductId = req.params.id;
 
-      res.json({
-         deletedProduct: product,
-         status: "product deleted"
-      });
+      let deletedProduct = await productService.deleteProduct(requestedProductId);
+
+      if (deletedProduct) {
+         res.json({
+            deletedProductId: requestedProductId,
+            status: "product deleted"
+         });
+      } else {
+         return res.status(404).json({
+            status: "product not found"
+         });
+      }
    } catch (error) {
       console.log(error);
    }

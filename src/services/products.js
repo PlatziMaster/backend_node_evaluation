@@ -44,7 +44,7 @@ async function saveProduct(productData) {
 }
 
 /**
- * Updates one product in the collection
+ * Finds a product and if exists it will be modified 
  * @param {String} productId Id of the product that will be updated
  * @param {Object} newProductData New body of the product that will be saved
  */

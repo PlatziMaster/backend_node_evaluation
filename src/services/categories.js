@@ -43,14 +43,13 @@ async function saveCategory(categoryData) {
 }
 
 /**
- * Updates one category in the collection
+ * Finds a category and if exists it will be modified 
  * @param {String} categoryId Id of the category that will be updated
  * @param {Object} newCategoryData New body of the category that will be saved
  */
-async function updateCategory(categoryId, newCategoryData) {
+ async function updateCategory(categoryId, newCategoryData) {
    try {
       let updatedCategory = await mongoLibrary.updateOne('categories', categoryId, newCategoryData);
-
       return updatedCategory;
    } catch (error) {
       console.log(error);

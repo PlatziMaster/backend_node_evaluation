@@ -36,6 +36,23 @@ async function getAll (collection) {
 }
 
 /**
+ * Gets all the documents of a collection by specifying a query
+ * @param {String} collection Name of the collection
+ * @param {Object} query Query to be performed by the db
+*/
+async function queryAll (collection, query) {
+   try {
+      let db = await connectToDatabase();
+
+      let queriedDocuments =  await db.collection(collection).find(query);
+
+      return queriedDocuments;
+   } catch (error) {
+      console.log(error);
+   }
+}
+
+/**
  * Gets only one document of a collection by the id
  * @param {String} collection Name of the collection
  * @param {Object} query Query to be performed
@@ -106,6 +123,7 @@ async function deleteOne (collection, documentId) {
 
 module.exports = {
    getAll,
+   queryAll,
    getOne,
    saveOne,
    updateOne,

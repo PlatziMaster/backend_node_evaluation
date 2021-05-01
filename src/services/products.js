@@ -1,7 +1,7 @@
 const mongoLibrary = require('../lib/mongo');
 
 /**
- * Gets all the existing products and returns a list with them
+ * Gets all the existing products
  * @returns {Array<Object>} Products array
 */
 async function getAllProducts() {

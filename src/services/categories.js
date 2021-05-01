@@ -1,12 +1,12 @@
 const mongoLibrary = require('../lib/mongo');
 
 /**
- * Gets all the existing categories
+ * Gets all the existing categories and returns a list with them
  * @returns {Array<Object>} Categories array
 */
 async function getAllCategories() {
    try {
-      let allCategories =  await mongoLibrary.getAll('categories');
+      let allCategories =  await (await mongoLibrary.getAll('categories')).toArray();
       return allCategories;
    } catch (error) {
       console.log(error);
@@ -19,11 +19,22 @@ async function getAllCategories() {
 */
 async function getOneCategoryById(categoryId) {
    try {
-      let product = await mongoLibrary.getOneById('categories',{_id: categoryId});
+      let product = await mongoLibrary.getOneById('categories', categoryId);
 
       return product;
    } catch (error) {
       console.log(error);
+   }
+}
+
+async function getProductsByCategoryId(categoryId) {
+   let existingCategory = await mongoLibrary.getOneById(categoryId);
+
+   if (categoryExists) {
+      let productsByCategory = await (await mongoLibrary.queryAll('products', { categoryId: existingCategory.name })).toArray();
+      return productsByCategory;
+   } else {
+      return null;
    }
 }
 
@@ -73,6 +84,7 @@ async function deleteCategory(categoryId) {
 module.exports = {
    getAllCategories,
    getOneCategoryById,
+   getProductsByCategoryId,
    saveCategory,
    updateCategory,
    deleteCategory

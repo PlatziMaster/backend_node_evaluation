@@ -2,7 +2,7 @@ const express = require('express');
 const router = express.Router();
 
 // Service
-//const categoryService = require('../services/categories');
+const categoriesService = require('../services/categories');
 
 
 
@@ -10,9 +10,9 @@ const router = express.Router();
 // Endpoint that returns a list of categories
 router.get('/', async (req, res) => {
    try {
-      res.json({
-         response: "endpoint that returns a list of categories"
-      });
+      let allCategoriesAvailable = await categoriesService.getAllCategories()
+
+      return res.json(allCategoriesAvailable);
    } catch (error) {
       console.log(error);
    }
@@ -21,12 +21,17 @@ router.get('/', async (req, res) => {
 // Endpoint that returns just one pruduct especified by id
 router.get('/:id', async (req, res) => {
    try {
-      let requestedcategory = req.params.id;
+      let requestedcategoryId = req.params.id;
 
-      res.json({
-         response: "Endpoint that returns just one category especified by id",
-         category: requestedcategory,
-      });
+      let category = await categoriesService.getOneCategoryById(requestedcategoryId)
+
+      if (category) {
+         res.json(category);
+      } else {
+         res.status(404).json({
+            status: "category not found"
+         });
+      }
    } catch (error) {
       console.log(error);
    }
@@ -35,12 +40,18 @@ router.get('/:id', async (req, res) => {
 // Endpoint that returns a list of products that match the category
 router.get('/:categoryId/products', async (req, res) => {
    try {
-      let productsList = req.params.categoryId;
+      let requestedcategoryId = req.params.categoryId;
 
-      res.json({
-         response: "Endpoint that returns a list of products that match the category",
-         productsList: productsList,
-      });
+      let productsByCategory = await categoriesService.getProductsByCategoryId(requestedcategoryId);
+
+      if (productsByCategory) {
+         return res.json(productsByCategory);
+      } else {
+         return res.status(404).json({
+            status: "This category does not exist"
+         });
+      }
+
    } catch (error) {
       console.log(error);
    }

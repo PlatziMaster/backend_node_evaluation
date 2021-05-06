@@ -7,7 +7,7 @@ const {mongoose} = require('./db/db');
 
 function createApp() { 
 
-  const html = `<h1>Hello to PlatziAPI</h1> \n
+  const html = `<h1>Hello to ToyStore</h1> \n
   <h3>Options:</h3>\n 
   <ul>\n
   <li><p>/api/categories</p></li>\n

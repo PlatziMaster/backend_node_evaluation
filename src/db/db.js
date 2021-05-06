@@ -1,7 +1,7 @@
 const mongoose = require('mongoose');
 const {config} = require('../config/index');
 
-const URI = "mongodb://"+config.dbHost+":"+config.dbPort+"/"+config.dbName;
+const URI = "mongodb+srv://"+config.dbUser+":"+config.dbPassword+"@"+config.dbHost+"/"+config.dbName+"?retryWrites=true&w=majority";
 
 const options = {
     useNewUrlParser: true, 

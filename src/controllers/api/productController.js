@@ -26,12 +26,17 @@ const controller = {
         })
         
     },
-    update: (req, res) => {
+    update: async (req, res) => {
         const { productId } = req.params
 
-        res.status(200).json({
-            data: 'actualizo prod'
+        await dbClient.connect()
+        database = dbClient.db(DB_NAME)
+        const products = database.collection(collection)
+        await products.updateOne({_id: ObjectId(productId)},{$set:{...req.body}})
+        products.findOne({_id: ObjectId(productId)}, (err, product) => {
+            res.status(200).json(product)
         })
+        
     },
     destroy: (req, res) => {
         const { productId } = req.params

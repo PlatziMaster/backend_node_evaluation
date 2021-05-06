@@ -2,7 +2,7 @@ const Product = require('../entities/product');
 
 const productController = {};
 
-productController.getProduct = async (req,res) => {
+productController.getProducts = async (req,res) => {
     const products = await Product.find();
     res.json(products);
 }

@@ -1,4 +1,5 @@
 const Category = require('../entities/category');
+const Product = require('../entities/product');
 
 const categoryController = {};
 
@@ -21,6 +22,13 @@ categoryController.getCategory = async (req,res) => {
     
     const category = await Category.findById(req.params.id);
     res.json(category);
+}
+
+categoryController.getProductsByCategory = async (req, res) =>{
+
+    const products = await Product.find({"categoryId" : req.params.id});
+    res.json(products); 
+
 }
 
 categoryController.editCategory = async (req,res) => {

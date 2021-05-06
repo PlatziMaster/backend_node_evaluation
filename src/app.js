@@ -2,7 +2,7 @@ const express = require('express');
 const cors = require('cors');
 const categoriesRoutes = require('./routes/category-routes');
 const productRaoutes = require('./routes/product-routes');
-
+const {mongoose} = require('./db/db');
 
 
 function createApp() { 

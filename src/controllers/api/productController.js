@@ -16,10 +16,15 @@ const controller = {
             data: 'producto'
         })
     },
-    store: (req, res) => {
-        res.status(201).json({
-            data: 'creo producto'
+    store: async (req, res) => {
+
+        await dbClient.connect()
+        database = dbClient.db(DB_NAME)
+        const products = database.collection(collection)
+        products.insertOne({ ...req.body }, (err, product) => {
+            res.status(201).json(product.ops[0])
         })
+        
     },
     update: (req, res) => {
         const { productId } = req.params

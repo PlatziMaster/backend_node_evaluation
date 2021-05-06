@@ -10,8 +10,14 @@ const controller = {
     show: (req, res) => {
 
     },
-    store: (req, res) => {
+    store: async (req, res) => {
+        await dbClient.connect()
+        const database = dbClient.db( DB_NAME )
+        const categories = database.collection(collection)
 
+        categories.insertOne({ ...req.body }, (err, category) => {
+            res.status(201).json(category.ops[0])
+        })
     },
     update: (req, res) => {
 

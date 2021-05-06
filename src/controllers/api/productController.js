@@ -13,12 +13,15 @@ const controller = {
             res.status(200).json(products)
         })
     },
-    show: (req, res) => {
+    show: async (req, res) => {
         const { productId } = req.params
+        await dbClient.connect()
+        database = dbClient.db(DB_NAME)
+        const products = database.collection(collection)
 
-        res.status(200).json({
-            data: 'producto'
-        })
+        const product = await products.findOne({_id: ObjectId(productId)})
+
+        res.status(200).json(product)
     },
     store: async (req, res) => {
 

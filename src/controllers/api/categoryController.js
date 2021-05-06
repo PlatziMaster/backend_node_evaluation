@@ -45,8 +45,18 @@ const controller = {
             res.status(200).json(category)
         } )
     },
-    destroy: (req, res) => {
+    destroy: async (req, res) => {
+        const { categoryId } = req.params
 
+        await dbClient.connect()
+        const database = dbClient.db( DB_NAME )
+        const categories = database.collection( collection )
+
+        categories.deleteOne({ _id: ObjectId(categoryId) }, (err, categories) => {
+            if( categories.deletedCount === 1 ){
+                res.status(200).json(true)
+            }
+        })
     },
     listProducts: async (req, res) => {
         const { categoryId } = req.params

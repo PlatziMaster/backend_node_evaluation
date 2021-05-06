@@ -4,8 +4,14 @@ const collection = "categories"
 const DB_NAME = process.env.MONGO_DB_NAME
 
 const controller = {
-    list: (req, res) => {
+    list: async (req, res) => {
+        await dbClient.connect()
+        const database = dbClient.db( DB_NAME )
+        const categories = database.collection( collection )
 
+        categories.find().toArray( (err, categories) => {
+            res.status(200).json(categories)
+        } )
     },
     show: (req, res) => {
 

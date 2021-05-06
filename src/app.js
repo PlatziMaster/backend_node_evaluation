@@ -16,7 +16,7 @@ function createApp() {
     res.json({
       email: 'fredy.ballesteros@gmail.com',
       arquitectura: 'https://github.com/fredyballest/backend_node_evaluation/blob/master/PropuestaArquite.gif',
-      herokudeploy: 'https://damp-harbor-12037.herokuapp.com/'
+      herokudeploy: 'https://protected-temple-34810.herokuapp.com/'
     })
 
   })

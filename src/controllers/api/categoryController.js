@@ -25,8 +25,17 @@ const controller = {
             res.status(201).json(category.ops[0])
         })
     },
-    update: (req, res) => {
+    update: async (req, res) => {
+        const { categoryId } = req.params
 
+        await dbClient.connect()
+        const database = dbClient.db( DB_NAME )
+        const categories = database.collection( collection )
+        
+        categories.updateOne({ _id: ObjectId(categoryId) }, { $set: { ...req.body } })
+        categories.findOne( { _id: ObjectId(categoryId) }, (err, category) => {
+            res.status(200).json(category)
+        } )
     },
     destroy: (req, res) => {
 

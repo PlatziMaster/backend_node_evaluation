@@ -1,6 +1,8 @@
 # Prueba de Backend NodeJS
 Crear un CRUD para crear productos conectado a MongoDB.
 
+Desplegado en Heroku en la url: https://plazti-toystore.herokuapp.com/
+
 ### Instalación
 ```
 npm install

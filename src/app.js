@@ -15,7 +15,7 @@ function createApp() {
   app.get('/',(req,res) => {
     res.json({
       email: 'fredy.ballesteros@gmail.com',
-      arquitectura: '',
+      arquitectura: 'https://github.com/fredyballest/backend_node_evaluation/blob/master/PropuestaArquite.gif',
       herokudeploy: 'https://damp-harbor-12037.herokuapp.com/'
     })
 

@@ -7,6 +7,8 @@ function createApp() {
   app.use(express.json());
 
   // ADD YOUR ROUTES
+
+  prueba()
   return app;
 }
 

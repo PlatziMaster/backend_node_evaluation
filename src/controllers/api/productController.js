@@ -45,11 +45,16 @@ const controller = {
         })
         
     },
-    destroy: (req, res) => {
+    destroy: async (req, res) => {
         const { productId } = req.params
 
-        res.status(200).json({
-            data: 'elimino prod'
+        await dbClient.connect()
+        database = dbClient.db(DB_NAME)
+        const products = database.collection(collection)
+        products.deleteOne({ _id: ObjectId(productId) }, (err, deleted) => {
+            if(deleted.deletedCount === 1){
+                res.status(200).json(true)
+            }
         })
     }
 }

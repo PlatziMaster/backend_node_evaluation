@@ -48,8 +48,16 @@ const controller = {
     destroy: (req, res) => {
 
     },
-    listProducts: (req, res) => {
+    listProducts: async (req, res) => {
+        const { categoryId } = req.params
 
+        await dbClient.connect()
+        const database = dbClient.db( DB_NAME )
+        const products = database.collection( "products" )
+
+        products.find({ categoryId: categoryId }).toArray( (err, products) => {
+            res.status(200).json(products)
+        } )
     }
 }
 

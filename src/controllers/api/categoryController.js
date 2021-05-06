@@ -13,8 +13,16 @@ const controller = {
             res.status(200).json(categories)
         } )
     },
-    show: (req, res) => {
+    show: async (req, res) => {
+        const { categoryId } = req.params
 
+        await dbClient.connect()
+        const database = dbClient.db( DB_NAME )
+        const categories = database.collection( collection )
+
+        categories.findOne({ _id: ObjectId( categoryId ) }, (err, category) => {
+            res.status(200).json(category)
+        })
     },
     store: async (req, res) => {
         await dbClient.connect()

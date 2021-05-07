@@ -109,13 +109,13 @@ describe("Tests to categories", () => {
   });
 
   describe("GET /api/categories/{id}/products", () => {
-    
+
     it("should return a list products by category", async (done) => {
       const categories = await database.collection(collection).find().toArray();
       expect(categories.length > 0).toBe(true);
       const category = categories[0];
       const products = [
-        { name: "Red",  price: 200, categoryId: `${category._id}` },
+        { name: "Red", price: 200, categoryId: `${category._id}` },
         { name: "Blue", price: 300, categoryId: `${category._id}` },
         { name: "Leon", price: 400 }
       ];
@@ -149,5 +149,5 @@ describe("Tests to categories", () => {
     });
   });
 
-  
+
 });

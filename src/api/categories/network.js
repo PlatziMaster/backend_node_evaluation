@@ -1,9 +1,13 @@
 const express = require('express');
+const multer = require('multer');
+const response = require('../../network/response');
+const storageMulter = require('../../lib/multerStorage')
+const {getCategories, updateCategory, addCategory, deleteCategory} = require('./controller');
+const uploadFile = require('../../lib/s3');
+
 const router = express.Router();
-const response = require('../../network/response')
-// Controllers
-const {getCategories, updateCategory, addCategory, deleteCategory} = require('./controller')
 const app = express();
+const upload = multer({storage: storageMulter});
 
 
 router.get('/', (req, res) => {
@@ -12,45 +16,36 @@ router.get('/', (req, res) => {
         .catch(error => response.error(req, res, 'Unexpected Error', 500, error))
 });
 
-router.get('/:id', (req, res) => {
-    getCategories(req.params.id)
+router.get('/:categoryId', (req, res) => {
+    getCategories(req.params.categoryId)
         .then(data => response.success(req, res, data))
         .catch(error => response.error(req, res, "Error al obtener categoria", 400, error))
 });
 
-router.post('/', (req, res) => {
-    addCategory(req.body.name, req.body.image)
-        .then((fullMessage) => {
-            response.success(req, res, fullMessage, '201');
-        })
-        .catch(error => {
-            response.error(req, res, 'Información invalida', 400, 'Error en controlador')
-        })
-
+router.post('/', upload.single('image'), async (req, res) => {
+    const resultFile = req.file ? await uploadFile(req.file) : ''
+    addCategory(req.body, resultFile)
+        .then((fullMessage) => response.success(req, res, fullMessage, '201'))
+        .catch(error => response.error(req, res, 'Información invalida', 400, 'Error en controlador'))
 });
 
-router.put('/:id', (req, res) => {
-    updateCategory(req.params.id, req.body.name, req.body.image)
-        .then((data) => {
-            response.success(req, res, data, 200);
-        })
-        .catch(error => {
-            response.error(req, res, 'Error interno', 500, error)
-        })
+router.put('/:categoryId', upload.single('image'), async (req, res) => {
+    const resultFile = req.file ? await uploadFile(req.file) : ''
+    updateCategory(req.params.categoryId, req.body, resultFile)
+        .then(data => response.success(req, res, data))
+        .catch(error => response.error(req, res, 'Error interno', 500, error))
 });
 
-router.delete('/:id', (req, res) => {
-    deleteCategory(req.params.id)
-        .then(() => {
-            response.success(req, res, `Categoria ${req.params.id} eliminado`);
-        })
-        .catch(error => {
-            response.error(req, res, 'Error interno', 500, error)
-        })
+router.delete('/:categoryId', (req, res) => {
+    deleteCategory(req.params.categoryId)
+        .then(() => response.success(req, res, `Categoria ${req.params.categoryId} eliminado`))
+        .catch(error => response.error(req, res, 'Error interno', 500, error))
 });
 
-router.get('/id/products', (req, res) => {
-    response.success(req, res, 'Productos con la categoria especificada');
+router.get('/:categoryId/products', (req, res) => {
+    getCategories(req.params.categoryId, true)
+        .then(products => response.success(req, res, products))
+        .catch(error => response.error(req, res, 'Error interno', 500, error))
 });
 
 app.use(router);

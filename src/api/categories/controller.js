@@ -1,51 +1,46 @@
 const store = require('./store');
 
-const addCategory = (name, image) => {
+const addCategory = (data, file) => {
     return new Promise((resolve, reject) => {
-        if (!name || !image) {
+        if (!data || !file) {
             console.error('[messageController] No hay name o image');
             return reject('Los datos son incorrectos');
         }
-        const descriptionCategory = {
-            name: name,
-            image: image
-        };
-        store.add(descriptionCategory);
-        resolve(descriptionCategory);
-    })
-}
+        data.image = file ? file.Location : ''
+        store.add(data);
+        resolve(data);
+    });
+};
 
-const getCategories = (filterCategory) => {
-    return new Promise((resolve, reject) => {
-        resolve(store.list(filterCategory));
-    })
-}
+const getCategories = (filterCategory, products = false) => {
+    return new Promise(resolve => resolve(store.list(filterCategory, products)));
+};
 
-const updateCategory = (id, name, image) => {
+const updateCategory = (categoryId, newDataCategory, newFile) => {
     return new Promise(async (resolve, reject) => {
-        if (!id || !name || !image) {
+        if (!categoryId || !newDataCategory || !newFile) {
             reject('Invalid data');
-            return false
         }
-        const result = await store.update(id, name, image)
+        newDataCategory.image = newFile ? newFile.Location : ''
+        const result = await store.update(categoryId, newDataCategory)
         resolve(result);
-    })
-}
+    });
+};
 
-const deleteCategory = (id) => {
+const deleteCategory = (categoryId) => {
     return new Promise((resolve, reject) => {
-        if (!id) {
+        if (!categoryId) {
             reject('Id invalido')
         }
-        store.remove(id)
+        store.remove(categoryId)
             .then(() => resolve())
             .catch(error => reject(error))
-    })
-}
+    });
+};
 
 module.exports = {
     addCategory,
     getCategories,
     updateCategory,
     deleteCategory,
-}
+};

@@ -63,3 +63,13 @@ Debes de crear un "Fork" de este proyecto, revolverlo desde tu cuenta personal.
 
 ### Licencia
 La licencia [MIT](https://opensource.org/licenses/MIT).
+
+## Notas finales
+
+El proyecto fue desplegado en un vps, el enlace es el siguiente
+
+https://platzi-evaluation.nuho.dev/api/
+
+La arquitectura utilizada fue una version mas simple de la "clean architecture"
+
+El proyecto funciona correctamente, sin embargo por alguna razon no fue capaz de pasar el ultimo test de "DELETE" en los endpoints de categoria 😕

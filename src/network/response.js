@@ -2,7 +2,7 @@ const statusMessages = {
     '200': 'Done',
     '201': 'Created',
     '400': 'Invalid format',
-    '500': 'Internal error',
+    '500': 'Internal error :(',
 };
 
 exports.success = function (req, resp, data, status = 200) {

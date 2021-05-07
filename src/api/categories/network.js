@@ -7,7 +7,16 @@ const uploadFile = require('../../lib/s3');
 
 const router = express.Router();
 const app = express();
-const upload = multer({storage: storageMulter});
+
+const fileFilter = (req, file, cb) => {
+    // reject a file
+    if (file.mimetype === 'image/jpg' || file.mimetype === 'image/jpeg' || file.mimetype === 'image/png') {
+        cb(null, true);
+    } else {
+        cb(null, false);
+    }
+}
+const upload = multer({storage: storageMulter, fileFilter: fileFilter, limits: {fileSize: 1024 * 1024 * 5}});
 
 
 router.get('/', (req, res) => {

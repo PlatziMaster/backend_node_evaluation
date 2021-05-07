@@ -1,17 +1,18 @@
 const request = require("supertest");
 const { MongoClient, ObjectId } = require("mongodb");
-
 const { config } = require("../src/config");
 const createApp = require("../src/app");
 
 const USER = encodeURIComponent(config.dbUser);
 const PASSWORD = encodeURIComponent(config.dbPassword);
 const DB_NAME = config.dbName;
-
-const MONGO_URI = `${config.dbConnection}://${USER}:${PASSWORD}@${config.dbHost}:${config.dbPort}?retryWrites=true&w=majority`;
+const MONGO_URI = `${config.dbConnection}://${USER}:${PASSWORD}@${config.dbHost}:${config.dbPort}`;
+console.log(MONGO_URI)
+// const MONGO_URI = `${config.dbConnection}srv://${USER}:${PASSWORD}@${config.dbHost}:${config.dbPort}?retryWrites=true&w=majority`;
+// console.log('DSDSD')
 const collection = 'categories';
 
-describe("Tests to categories", () => {
+describe("Teststocategories", () => {
   let app;
   let database;
   let server;
@@ -109,13 +110,13 @@ describe("Tests to categories", () => {
   });
 
   describe("GET /api/categories/{id}/products", () => {
-    
+
     it("should return a list products by category", async (done) => {
       const categories = await database.collection(collection).find().toArray();
       expect(categories.length > 0).toBe(true);
       const category = categories[0];
       const products = [
-        { name: "Red",  price: 200, categoryId: `${category._id}` },
+        { name: "Red", price: 200, categoryId: `${category._id}` },
         { name: "Blue", price: 300, categoryId: `${category._id}` },
         { name: "Leon", price: 400 }
       ];
@@ -149,5 +150,5 @@ describe("Tests to categories", () => {
     });
   });
 
-  
+
 });

@@ -13,8 +13,8 @@ const config = {
   filesRoute: process.env.FILES_ROUTE || 'files',
   bucketName: process.env.AWS_BUCKET_NAME,
   region: process.env.AWS_BUCKET_REGION,
-  accessKeyId: process.env.AWS_ACCESS_KEY,
-  secretAccessKey: process.env.AWS_SECRET_KEY,
+  accessKeyId: process.env.AWS_BUCKET_ACCESS_KEY,
+  secretAccessKey: process.env.AWS_BUCKET_SECRET_KEY,
 };
 
 module.exports = { config };

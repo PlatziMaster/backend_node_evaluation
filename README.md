@@ -29,19 +29,19 @@ Una Categoría debe tener los siguientes atributos:
 ## Requerimientos
 
 ### CRUD de productos
-[ ] GET `/api/products/` Endpoint para retornar la lista de productos.
-[ ] GET `/api/products/{id}/` Endpoint para retornar un producto.
-[ ] POST `/api/products/` Endpoint para crear un producto.
-[ ] PUT `/api/products/{id}/` Endpoint para modificar un producto.
-[ ] DELETE `/api/products/{id}/` Endpoint para eliminar un producto.
+- [ ] GET `/api/products/` Endpoint para retornar la lista de productos.
+- [ ] GET `/api/products/{id}/` Endpoint para retornar un producto.
+- [ ] POST `/api/products/` Endpoint para crear un producto.
+- [ ] PUT `/api/products/{id}/` Endpoint para modificar un producto.
+- [ ] DELETE `/api/products/{id}/` Endpoint para eliminar un producto.
 
 ### CRUD de categorías
-[ ] GET `/api/categories/` Endpoint para retornar la lista de categorías.
-[ ] GET `/api/categories/{id}/` Endpoint para retornar un categoría.
-[ ] POST `/api/categories/` Endpoint para crear un categoría.
-[ ] PUT `/api/categories/{id}/` Endpoint para modificar un categoría.
-[ ] DELETE `/api/categories/{id}/` Endpoint para eliminar un categoría.
-[ ] GET `/api/categories/{id}/products` Endpoint para retornar la lista de productos que pertenecen a una categoría.
+- [ ] GET `/api/categories/` Endpoint para retornar la lista de categorías.
+- [ ] GET `/api/categories/{id}/` Endpoint para retornar un categoría.
+- [ ] POST `/api/categories/` Endpoint para crear un categoría.
+- [ ] PUT `/api/categories/{id}/` Endpoint para modificar un categoría.
+- [ ] DELETE `/api/categories/{id}/` Endpoint para eliminar un categoría.
+- [ ] GET `/api/categories/{id}/products` Endpoint para retornar la lista de productos que pertenecen a una categoría.
 
 ## Instrucciones
 

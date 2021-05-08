@@ -8,4 +8,6 @@ app.listen(config.port, err => {
     console.error("Error: ", err);
     return;
   }
+  console.log(`SERVER ON PORT: ${config.port}`)
+  
 });

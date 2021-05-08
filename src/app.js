@@ -22,24 +22,6 @@ function createApp() {
         });
     });
     
-    // app.post('/create-data', function (req, res) {
-    //     // Sending request to create a data
-    //     db.collection('data').insertOne({ text: req.body.text }, function (
-    //         err,
-    //         info
-    //     ) {
-    //         res.json(info.ops[0])
-    //     })
-    // })
-    // // app.use('/api/categoire',require('./e2e/categories.e2e'))
-    // app.get('/', function (req, res) {
-    //     // getting all the data
-    //     db.collection('data')
-    //         .find()
-    //         .toArray(function (err, items) {
-    //             res.send(items)
-    //         })
-    // })
     return app;
 }
 

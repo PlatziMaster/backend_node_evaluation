@@ -21,7 +21,7 @@ module.exports = {
 			let response = {...format_response};
 			try {
 				response.data = await findOneById(req.params.id, collection_name);
-				response.completed = true;
+				response.completed = response.data instanceof Object;
 			} finally {
 				res.json(response);
 			}
@@ -38,7 +38,7 @@ module.exports = {
 		update: async (req, res) => {
 			let response = {...format_response};
 			try {
-				response.data = await update(req.params.id, req.body, collection_name);
+				response.completed = await update(req.params.id, req.body, collection_name);
 			} finally {
 				res.json(response);
 			}

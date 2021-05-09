@@ -19,8 +19,18 @@ const getCategoryById = async (id) => {
   const category = await db().collection(COLLECTION_NAME).findOne({ _id: uid });
   return category;
 };
+
+const updateCategory = async (id, data) => {
+  let uid = ObjectId(id);
+  db()
+    .collection(COLLECTION_NAME)
+    .updateOne({ _id: uid }, { $set: { ...data } });
+  const category = await getCategoryById(id);
+  return category;
+};
 module.exports = {
   getCategories,
   createCategory,
   getCategoryById,
+  updateCategory,
 };

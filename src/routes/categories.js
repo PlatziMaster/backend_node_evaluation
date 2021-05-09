@@ -4,6 +4,7 @@ const {
   getCategories,
   createCategory,
   getCategoryById,
+  updateCategory,
 } = require("../controller/category");
 
 router.get("/", async (req, res) => {
@@ -20,6 +21,11 @@ router.post("/", async (req, res) => {
 router.get("/:id", async (req, res) => {
   const category = await getCategoryById(req.params.id);
   console.log(category);
+  res.status(200).send(category);
+});
+
+router.put("/:id", async (req, res) => {
+  const category = await updateCategory(req.params.id, req.body);
   res.status(200).send(category);
 });
 module.exports = router;

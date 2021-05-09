@@ -22,7 +22,7 @@ const getCategoryById = async (id) => {
 
 const updateCategory = async (id, data) => {
   let uid = ObjectId(id);
-  db()
+  await db()
     .collection(COLLECTION_NAME)
     .updateOne({ _id: uid }, { $set: { ...data } });
   const category = await getCategoryById(id);

@@ -8,7 +8,7 @@ let collection_name;
 module.exports = {
 		set_collection: (c_name) => collection_name = c_name,
 		get_all: async (req, res) => {
-			let response = format_response;
+			let response = {...format_response};
 			try {
 				response.data = await findAll(collection_name);	
 				response.completed = true;
@@ -18,7 +18,7 @@ module.exports = {
 			
 		},
 		get_one: async (req, res) => {
-			let response = format_response;
+			let response = {...format_response};
 			try {
 				response.data = await findOneById(req.params.id, collection_name);
 				response.completed = true;
@@ -27,7 +27,7 @@ module.exports = {
 			}
 		},
 		create:	async (req, res) => {
-			let response = format_response;
+			let response = {...format_response};
 			try {
 				response.data = await create(req.body, collection_name);
 				response.completed = true;
@@ -36,7 +36,7 @@ module.exports = {
 			}
 		},
 		update: async (req, res) => {
-			let response = format_response;
+			let response = {...format_response};
 			try {
 				response.data = await update(req.params.id, req.body, collection_name);
 			} finally {
@@ -44,9 +44,9 @@ module.exports = {
 			}
 		},
 		remove:async (req, res) => {
-			let response = format_response;
+			let response = {...format_response};
 			try {
-				response.data = await remove(req.params.id, collection_name);
+				response.completed = await remove(req.params.id, collection_name);
 			} finally {
 				res.json(response);
 			}

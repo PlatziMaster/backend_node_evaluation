@@ -5,6 +5,7 @@ const {
   createCategory,
   getCategoryById,
   updateCategory,
+  deleteCategory,
 } = require("../controller/category");
 
 router.get("/", async (req, res) => {
@@ -27,5 +28,10 @@ router.get("/:id", async (req, res) => {
 router.put("/:id", async (req, res) => {
   const category = await updateCategory(req.params.id, req.body);
   res.status(200).send(category);
+});
+
+router.delete("/:id", async (req, res) => {
+  const count = await deleteCategory(req.params.id);
+  res.status(200).send(`${count} file was deleted`);
 });
 module.exports = router;

@@ -28,9 +28,23 @@ const updateCategory = async (id, data) => {
   const category = await getCategoryById(id);
   return category;
 };
+
+const deleteCategory = async (id) => {
+  uid = ObjectId(id);
+
+  let count;
+  await db()
+    .collection(COLLECTION_NAME)
+    .deleteOne({ _id: uid })
+    .then((result) => {
+      count = result.deletedCount;
+    });
+  return count;
+};
 module.exports = {
   getCategories,
   createCategory,
   getCategoryById,
   updateCategory,
+  deleteCategory,
 };

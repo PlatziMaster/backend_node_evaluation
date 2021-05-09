@@ -7,7 +7,10 @@ const MONGO_DB_NAME = process.env.MONGO_DB_NAME;
 
 const uri = `mongodb+srv://${USER}:${PASS}@${HOST}/${MONGO_DB_NAME}?retryWrites=true&w=majority`;
 
-const client = new MongoClient(uri);
+const client = new MongoClient(uri, 
+	{ useUnifiedTopology: true },
+	{ useNewUrlParser: true }, { connectTimeoutMS: 30000 }
+);
 
 async function testConnection() {
 	try {

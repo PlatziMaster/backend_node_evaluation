@@ -54,10 +54,11 @@ const update = async (id, newData, collectionName) => {
 		const collection = await getCollection(collectionName);
 		const filter = { _id: new ObjectID(id) };
 		const update = { $set: newData };
-		const result = await collection.updateOne(filter, update, {}, (r) => console.log(r)).then(r => r.ops[0]);
-		return result
+		await collection.updateOne(filter, update);
+		return true
 	} catch(e) {
 		console.error(`error updating the ${collectionName} with id: ${id}: `, e);
+		return false;
 	}
 };
 

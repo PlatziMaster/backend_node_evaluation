@@ -12,4 +12,4 @@ const category = {
 	remove: remove,
 }
 
-module.exports = products;
+module.exports = category;

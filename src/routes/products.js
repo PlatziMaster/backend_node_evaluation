@@ -6,6 +6,7 @@ const {
   getProductById,
   createProduct,
   deleteProduct,
+  updateProduct,
 } = require("../controller/products");
 
 router.get("/", async (req, res) => {
@@ -19,11 +20,13 @@ router.get("/:id", async (req, res) => {
 });
 
 router.post("/", async (req, res) => {
-  console.log("creatingProduct");
   let product = await createProduct(req.body);
   res.status(200).send(product);
 });
-
+router.put("/:id", async (req, res) => {
+  let product = await updateProduct(req.params.id, req.body);
+  res.status(200).send(product);
+});
 router.delete("/:id", async (req, res) => {
   let count = await deleteProduct(req.params.id);
   res.status(200).send(`${count} file was deleted`);

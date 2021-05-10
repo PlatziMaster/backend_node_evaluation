@@ -6,20 +6,21 @@ const format_response = {completed: false, data: {}}
 
 module.exports = {
 		get_all: (collection_name) => async (req, res) => {
-			let response = {...format_response};
+			let response = [];
 			try {
-				response.data = await findAll(collection_name);	
-				response.completed = true;
-			} finally {
+				response = await findAll(collection_name);	
+			} catch {
+				res.sendStatus(404);
+			}finally {
+				//res.sendStatus(200);
 				res.json(response);
 			}
 			
 		},
 		get_one: (collection_name) => async (req, res) => {
-			let response = {...format_response};
+			let response = {};
 			try {
-				response.data = await findOneById(req.params.id, collection_name);
-				response.completed = response.data instanceof Object;
+				response = await findOneById(req.params.id, collection_name);
 			} finally {
 				res.json(response);
 			}
@@ -29,7 +30,10 @@ module.exports = {
 			try {
 				response.data = await create(req.body, collection_name);
 				response.completed = true;
+			} catch {
+				res.sendStatus(404);
 			} finally {
+				res.sendStatus(201)
 				res.json(response);
 			}
 		},
@@ -42,9 +46,10 @@ module.exports = {
 			}
 		},
 		remove: (collection_name) => async (req, res) => {
-			let response = {...format_response};
+			let response = false;
 			try {
-				response.completed = await remove(req.params.id, collection_name);
+				await remove(req.params.id, collection_name);
+				response = true;
 			} finally {
 				res.json(response);
 			}

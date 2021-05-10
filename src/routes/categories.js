@@ -17,7 +17,7 @@ router.get("/", async (req, res) => {
 router.post("/", async (req, res) => {
   const category = await createCategory(req.body);
 
-  res.status(200).send(category);
+  res.status(201).send(category);
 });
 
 router.get("/:id", async (req, res) => {

@@ -21,7 +21,7 @@ router.get("/:id", async (req, res) => {
 
 router.post("/", async (req, res) => {
   let product = await createProduct(req.body);
-  res.status(200).send(product);
+  res.status(201).send(product);
 });
 router.put("/:id", async (req, res) => {
   let product = await updateProduct(req.params.id, req.body);

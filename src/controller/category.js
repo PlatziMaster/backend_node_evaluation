@@ -10,7 +10,6 @@ const getCategories = async () => {
 
 const createCategory = async (categoryData) => {
   let dbRef = await db();
-  console.log("----BD------");
   console.log(dbRef);
   const category = await dbRef
     .collection(COLLECTION_NAME)

@@ -1,12 +1,12 @@
 const { MongoClient } = require('mongodb');
 const { config } = require('../config/index');
 
-const { dev, dbUser, dbPassword, dbHost, dbName } = config;
+const { dev, dbUser, dbPassword, dbHost, dbName, dbConnection } = config;
 
-let uri = `mongodb://${dbHost}/${dbName}`;
+let uri = `${dbConnection}://${dbHost}/${dbName}`;
 
 if (!dev) {
-	uri = `mongodb+srv://${dbUser}:${dbPassword}@${dbHost}/${dbName}?retryWrites=true&w=majority`;
+	uri = `${dbConnection}://${dbUser}:${dbPassword}@${dbHost}/${dbName}?retryWrites=true&w=majority`;
 }
 
 const client = new MongoClient(uri, 

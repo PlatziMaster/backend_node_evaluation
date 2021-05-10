@@ -38,9 +38,9 @@ module.exports = {
 			}
 		},
 		update: (collection_name) => async (req, res) => {
-			let response = {...format_response};
+			let response = {};
 			try {
-				response.completed = await update(req.params.id, req.body, collection_name);
+				response = await update(req.params.id, req.body, collection_name);
 			} finally {
 				res.json(response);
 			}

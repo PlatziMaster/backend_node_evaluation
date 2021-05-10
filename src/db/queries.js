@@ -55,7 +55,7 @@ const update = async (id, newData, collectionName) => {
 		const filter = { _id: new ObjectID(id) };
 		const update = { $set: newData };
 		await collection.updateOne(filter, update);
-		return true
+		return collection.findOne(filter);
 	} catch(e) {
 		console.error(`error updating the ${collectionName} with id: ${id}: `, e);
 		return false;

@@ -1,6 +1,10 @@
 # Prueba de Backend NodeJS
 Crear un CRUD para crear productos conectado a MongoDB.
 
+### Heroku deployed
+
+API is up on: https://backend-node-evaluation.herokuapp.com/
+
 ### Instalación
 ```
 npm install
@@ -29,19 +33,19 @@ Una Categoría debe tener los siguientes atributos:
 ## Requerimientos
 
 ### CRUD de productos
-- [ ] GET `/api/products/` Endpoint para retornar la lista de productos.
-- [ ] GET `/api/products/{id}/` Endpoint para retornar un producto.
-- [ ] POST `/api/products/` Endpoint para crear un producto.
-- [ ] PUT `/api/products/{id}/` Endpoint para modificar un producto.
-- [ ] DELETE `/api/products/{id}/` Endpoint para eliminar un producto.
+- [x] GET `/api/products/` Endpoint para retornar la lista de productos.
+- [x] GET `/api/products/{id}/` Endpoint para retornar un producto.
+- [x] POST `/api/products/` Endpoint para crear un producto.
+- [x] PUT `/api/products/{id}/` Endpoint para modificar un producto.
+- [x] DELETE `/api/products/{id}/` Endpoint para eliminar un producto.
 
 ### CRUD de categorías
-- [ ] GET `/api/categories/` Endpoint para retornar la lista de categorías.
-- [ ] GET `/api/categories/{id}/` Endpoint para retornar un categoría.
-- [ ] POST `/api/categories/` Endpoint para crear un categoría.
-- [ ] PUT `/api/categories/{id}/` Endpoint para modificar un categoría.
-- [ ] DELETE `/api/categories/{id}/` Endpoint para eliminar un categoría.
-- [ ] GET `/api/categories/{id}/products` Endpoint para retornar la lista de productos que pertenecen a una categoría.
+- [x] GET `/api/categories/` Endpoint para retornar la lista de categorías.
+- [x] GET `/api/categories/{id}/` Endpoint para retornar un categoría.
+- [x] POST `/api/categories/` Endpoint para crear un categoría.
+- [x] PUT `/api/categories/{id}/` Endpoint para modificar un categoría.
+- [x] DELETE `/api/categories/{id}/` Endpoint para eliminar un categoría.
+- [x] GET `/api/categories/{id}/products` Endpoint para retornar la lista de productos que pertenecen a una categoría.
 
 ## Instrucciones
 

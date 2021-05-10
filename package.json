@@ -29,5 +29,8 @@
   "bugs": {
     "url": "https://github.com/platzi/escuelajs-reto-09/issues"
   },
-  "homepage": "https://github.com/platzi/escuelajs-reto-09#readme"
+  "homepage": "https://github.com/platzi/escuelajs-reto-09#readme",
+  "engines": {
+    "node": "12.16.3"
+  }
 }

@@ -3,26 +3,34 @@ const { ObjectId } = require("bson");
 const { db } = require("../lib/mongo");
 
 const getCategories = async () => {
-  const categories = await db().collection(COLLECTION_NAME).find({}).toArray();
+  let dbRef = await db();
+  const categories = await dbRef.collection(COLLECTION_NAME).find({}).toArray();
   return categories;
 };
 
 const createCategory = async (categoryData) => {
-  const category = await db()
+  let dbRef = await db();
+  console.log("----BD------");
+  console.log(dbRef);
+  const category = await dbRef
     .collection(COLLECTION_NAME)
     .insertOne(categoryData);
   return category;
 };
 
 const getCategoryById = async (id) => {
+  let dbRef = await db();
   let uid = ObjectId(id);
-  const category = await db().collection(COLLECTION_NAME).findOne({ _id: uid });
+  const category = await dbRef
+    .collection(COLLECTION_NAME)
+    .findOne({ _id: uid });
   return category;
 };
 
 const updateCategory = async (id, data) => {
+  let dbRef = await db();
   let uid = ObjectId(id);
-  await db()
+  await dbRef
     .collection(COLLECTION_NAME)
     .updateOne({ _id: uid }, { $set: { ...data } });
   const category = await getCategoryById(id);
@@ -30,10 +38,11 @@ const updateCategory = async (id, data) => {
 };
 
 const deleteCategory = async (id) => {
+  let dbRef = await db();
   uid = ObjectId(id);
 
   let count;
-  await db()
+  await dbRef
     .collection(COLLECTION_NAME)
     .deleteOne({ _id: uid })
     .then((result) => {
@@ -43,7 +52,8 @@ const deleteCategory = async (id) => {
 };
 
 const getProductsByCategory = async (id) => {
-  let products = await db()
+  let dbRef = await db();
+  let products = await dbRef
     .collection("products")
     .find({ "categoryId.$id": ObjectId(id) })
     .toArray();

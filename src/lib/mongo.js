@@ -1,7 +1,6 @@
 const mongoClient = require("mongodb").MongoClient;
 const { config } = require("../config/index");
 let { dbUser, dbPassword, dbHost, dbName, dbPort, dbConnection } = config;
-console.log(typeof dbPort);
 const uri = dbPort
   ? `${dbConnection}://${dbUser}:${dbPassword}@${dbHost}:${dbPort}/${dbName}`
   : `${dbConnection}://${dbUser}:${dbPassword}@${dbHost}/${dbName}?retryWrites=true`;

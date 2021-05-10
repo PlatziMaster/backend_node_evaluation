@@ -10,4 +10,5 @@ const config = {
   dbPort: process.env.MONGO_PORT,
   dbConnection: process.env.MONGO_CONNECTION,
 };
+
 module.exports = { config };

@@ -8,8 +8,8 @@ function createApp() {
   app.use(cors());
   app.use(express.json());
   app.use(express.urlencoded({ extended: false }));
-  connect();
   // ADD YOUR ROUTES
+  connect();
   app.use("/api/categories", categoriesRouter);
   app.use("/api/products", productsRouter);
   return app;

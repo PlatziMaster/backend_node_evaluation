@@ -41,10 +41,20 @@ const deleteCategory = async (id) => {
     });
   return count;
 };
+
+const getProductsByCategory = async (id) => {
+  let products = await db()
+    .collection("products")
+    .find({ "categoryId.$id": ObjectId(id) })
+    .toArray();
+  console.log(products);
+  return products;
+};
 module.exports = {
   getCategories,
   createCategory,
   getCategoryById,
   updateCategory,
   deleteCategory,
+  getProductsByCategory,
 };

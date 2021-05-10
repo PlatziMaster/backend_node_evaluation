@@ -6,6 +6,7 @@ const {
   getCategoryById,
   updateCategory,
   deleteCategory,
+  getProductsByCategory,
 } = require("../controller/category");
 
 router.get("/", async (req, res) => {
@@ -34,4 +35,10 @@ router.delete("/:id", async (req, res) => {
   const count = await deleteCategory(req.params.id);
   res.status(200).send(`${count} file was deleted`);
 });
+
+router.get("/:id/products", async (req, res) => {
+  const products = await getProductsByCategory(req.params.id);
+  res.status(200).send(products);
+});
+
 module.exports = router;

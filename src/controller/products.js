@@ -41,7 +41,8 @@ const updateProduct = async (id, data) => {
     .collection(COLLECTION_NAME)
     .updateOne({ _id: uid }, { $set: { ...update } });
 
-  const product = await getCategoryById(id);
+  const product = await getProductById(id);
+  console.log(product);
   return product;
 };
 

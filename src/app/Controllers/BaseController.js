@@ -6,10 +6,19 @@ class BaseController
   constructor(collection) {
     this.dbUser = encodeURIComponent(config.dbUser);
     this.dbPassword = encodeURIComponent(config.dbPassword);
+    this.host = config.dbHost;
     this.dbName = config.dbName;
-    this.mongoUri = `${config.dbConnection}://${this.dbUser}:${this.dbPassword}@${config.dbHost}:${config.dbPort}/${this.dbName}`;
     this.collection = collection;
+    this.setMongoUri();
     this.setConnection();
+  }
+
+  setMongoUri = () => {
+    if (this.host === 'localhost') {
+      this.mongoUri = `${config.dbConnection}://${this.dbUser}:${this.dbPassword}@${this.host}:${config.dbPort}/${this.dbName}?retryWrites=true&w=majority`;
+    } else {
+      this.mongoUri = `mongodb+srv://${this.dbUser}:${this.dbPassword}@${this.host}/${this.dbName}?retryWrites=true&w=majority`;
+    }
   }
 
   setConnection = async () => {

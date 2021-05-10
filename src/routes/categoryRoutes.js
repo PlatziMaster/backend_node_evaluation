@@ -5,8 +5,6 @@ const CategoryController = require('../app/Controllers/CategoryController');
 
 async function categoryRoutes(app) {
   let router = express.Router();
-  let server;
-  let database;
   let categoryController = new CategoryController('categories');
 
   app.use('/api/categories', router);

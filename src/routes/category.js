@@ -10,5 +10,8 @@ module.exports = (app) => {
 		.get(category.get_one)
 		.put(category.update)
 		.delete(category.remove)
+	
+	app.route('/api/categories/:id/products')
+		.get(category.productsByCategoy)
 
 };

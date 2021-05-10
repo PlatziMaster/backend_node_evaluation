@@ -15,10 +15,10 @@ const getCollection = async (name) => {
 
 const closeConnection = async () => await client.close();
 
-const findAll = async (collectionName) => {
+const findAll = async (collectionName,filter={}) => {
 	try {
 		const collection = await getCollection(collectionName);
-		const result = await collection.find().toArray();
+		const result = await collection.find(filter).toArray();
 		return result;
 	} catch(e) {
 		console.error(`error fetching all ${collectionName}: `, e);
@@ -74,11 +74,23 @@ const remove = async (id, collectionName) => {
 	}
 };
 
+const aggregateMatch = async (filter, collectionName) => {
+	try {
+		const collection = await getCollection(collectionName);
+		const aggregate = [...filter]
+		const result = await collection.aggregate(aggregate).toArray()
+		return result
+	} catch (e) {
+		console.error(`error executing the aggregate function on ${collectionName}: `, e);
+	}
+}
+
 module.exports = {
 	findAll: findAll,
 	findOneById: findOneById,
 	create: create,
 	update: update,
 	remove: remove,
+	aggregateMatch: aggregateMatch,
 };
 

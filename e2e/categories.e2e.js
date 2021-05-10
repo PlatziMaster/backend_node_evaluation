@@ -8,9 +8,9 @@ const USER = encodeURIComponent(config.dbUser);
 const PASSWORD = encodeURIComponent(config.dbPassword);
 const DB_NAME = config.dbName;
 
-const MONGO_URI = `${config.dbConnection}://${USER}:${PASSWORD}@${config.dbHost}:${config.dbPort}?retryWrites=true&w=majority`;
-const collection = 'categories';
-
+const MONGO_URI = `${config.dbConnection}://${USER}:${PASSWORD}@${config.dbHost}:${config.dbPort}`;
+console.log(MONGO_URI);
+const collection = "categories";
 describe("Tests to categories", () => {
   let app;
   let database;
@@ -37,14 +37,16 @@ describe("Tests to categories", () => {
     it("should create a new category", async (done) => {
       const newCategory = {
         name: "Category 1",
-        image: 'https://via.placeholder.com/150',
+        image: "https://via.placeholder.com/150",
       };
       return request(app)
         .post("/api/categories")
         .send(newCategory)
         .expect(201)
         .then(async ({ body }) => {
-          const rta = await database.collection(collection).findOne({ _id: ObjectId(body._id) });
+          const rta = await database
+            .collection(collection)
+            .findOne({ _id: ObjectId(body._id) });
           expect(body.name).toBe(rta.name);
           expect(body.image).toBe(rta.image);
           done();
@@ -61,7 +63,9 @@ describe("Tests to categories", () => {
         .then(async ({ body }) => {
           expect(body.length).toBe(1);
           const model = body[0];
-          const rta = await database.collection(collection).findOne({ _id: ObjectId(model._id) });
+          const rta = await database
+            .collection(collection)
+            .findOne({ _id: ObjectId(model._id) });
           expect(model.name).toBe(rta.name);
           expect(model.image).toBe(rta.image);
           done();
@@ -76,7 +80,7 @@ describe("Tests to categories", () => {
       expect(categories.length > 0).toBe(true);
       const category = categories[0];
       const changes = {
-        name: 'change',
+        name: "change",
       };
       return request(app)
         .put(`/api/categories/${category._id}`)
@@ -109,17 +113,16 @@ describe("Tests to categories", () => {
   });
 
   describe("GET /api/categories/{id}/products", () => {
-    
     it("should return a list products by category", async (done) => {
       const categories = await database.collection(collection).find().toArray();
       expect(categories.length > 0).toBe(true);
       const category = categories[0];
       const products = [
-        { name: "Red",  price: 200, categoryId: `${category._id}` },
+        { name: "Red", price: 200, categoryId: `${category._id}` },
         { name: "Blue", price: 300, categoryId: `${category._id}` },
-        { name: "Leon", price: 400 }
+        { name: "Leon", price: 400 },
       ];
-      await database.collection('products').insertMany(products);
+      await database.collection("products").insertMany(products);
       return request(app)
         .get(`/api/categories/${category._id}/products`)
         .expect(200)
@@ -148,6 +151,4 @@ describe("Tests to categories", () => {
         .catch((err) => done(err));
     });
   });
-
-  
 });

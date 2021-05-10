@@ -1,11 +1,13 @@
 const { MongoClient } = require('mongodb');
+const { config } = require('../config/index');
 
-const USER = process.env.MONGO_USER;
-const PASS = process.env.MONGO_PASSWORD;
-const HOST = process.env.MONGO_HOST;
-const MONGO_DB_NAME = process.env.MONGO_DB_NAME;
+const { dev, dbUser, dbPassword, dbHost, dbName } = config;
 
-const uri = `mongodb+srv://${USER}:${PASS}@${HOST}/${MONGO_DB_NAME}?retryWrites=true&w=majority`;
+let uri = `mongodb://${dbHost}/${dbName}`;
+
+if (!dev) {
+	uri = `mongodb+srv://${dbUser}:${dbPassword}@${dbHost}/${dbName}?retryWrites=true&w=majority`;
+}
 
 const client = new MongoClient(uri, 
 	{ useUnifiedTopology: true },

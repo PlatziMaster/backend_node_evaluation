@@ -1,6 +1,10 @@
 # Prueba de Backend NodeJS
 Crear un CRUD para crear productos conectado a MongoDB.
 
+### Heroku deployed
+
+API is up on: https://backend-node-evaluation.herokuapp.com/
+
 ### Instalación
 ```
 npm install

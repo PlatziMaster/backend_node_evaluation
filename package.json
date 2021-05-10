@@ -6,8 +6,11 @@
   "dependencies": {
     "cors": "^2.8.5",
     "dotenv": "^8.2.0",
+    "ejs": "^3.1.6",
     "express": "^4.17.1",
-    "mongodb": "^3.6.6"
+    "mongodb": "^3.6.6",
+    "mongoose": "^5.12.7",
+    "morgan": "^1.10.0"
   },
   "devDependencies": {
     "jest": "^26.6.3",

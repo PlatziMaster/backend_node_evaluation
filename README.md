@@ -7,6 +7,7 @@ Crear un CRUD para crear productos conectado a MongoDB.
 La rama de deploy se encuentra en heroku/deploy
 
 [Este es el link a la app](https://platzimastertest.herokuapp.com/)
+[Y este es el link las request en postman](https://www.getpostman.com/collections/a880d1d5a0d12fcc75b1)
 
 ### Instalación
 

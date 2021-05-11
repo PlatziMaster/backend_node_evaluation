@@ -1,27 +1,65 @@
-import { MongoClient as MONGO_CLIENT } from 'mongodb';
+const { MongoClient, ObjectId } = require("mongodb");
+const { config } = require('../config/index');
 
-const MONGO_USER = process.env.MONGO_USER;
-const MONGO_PASS = process.env.MONGO_PASS;
-const MONGO_HOST = process.env.MONGO_HOST;
-const MONGO_DB_NAME = process.env.MONGO_DB_NAME;
+const MONGO_USER = encodeURIComponent(config.dbUser);
+const MONGO_PASSWORD = process.env.MONGO_PASS;
+const MONGO_HOST = encodeURIComponent(config.dbPassword);
+const MONGO_DB_NAME = config.dbName;
+const MONGO_URI = process.env.MONGO_URI;
 
-const URI = `mongodb+srv://${MONGO_USER}:${MONGO_PASS}@${MONGO_HOST}/${MONGO_DB_NAME}?retryWrites=true&w=majority`
+const URI = `mongodb+srv://${MONGO_USER}:${MONGO_PASSWORD}@${MONGO_HOST}/${MONGO_DB_NAME}?retryWrites=true&w=majority`;
 
-const client = new MongoClient(URI);
+class MongoConnection {
+    constructor() {
+        this.client = new MongoClient(MONGO_URI, { useUnifiedTopology: true, useNewUrlParser: true });
+        this.dbName = MONGO_DB_NAME;
+    }
 
-async function connectionTest() {
-    try {
+    connect() {
+        if(!MongoConnection.connection) {
+            MongoConnection.connection = new Promise((resolve, reject) =>{
+                this.client.connect(err => {
+                    if(err) {
+                        reject(err);
+                    }
+                    console.log('successfull connection!')
+                    resolve(this.client.db(this.dbName));
+                })
+            })
+        }
+        
+        return MongoConnection.connection;
+    }
 
-        await client.connect();
+    getAll(colletionName, query) {
+        return this.connect().then(db => {
+            return db.colletion(colletionName).find(query).toArray();
+        })
+    }
 
-        await client.db(MONGO_DB_NAME).command({ping:1});
-        console.log('succesfull connection')
-    } finally {
-        await client.close();
+    get(colletionName, id) {
+        return this.connect().then(db => {
+            return db.collection(colletionName).findOne({ _id: ObjectId(id)})
+        })
+    }
+
+    create(colletionName, data) {
+        return this.connect().then(db => {
+            return db.collection(colletionName).insertOne(data)
+        }).then(result => result.insertedId);
+    }
+
+    update(colletionName, id, data) {
+        return this.connect().then(db => {
+            return db.collection(colletionName).updateOne({ _id: Object(id)}, { $set: data}, { upsert: true})
+        }).then(result => result.upsertedId || id);
+    }
+
+    delete(colletionName, id) {
+        return this.connect().then(db => {
+            return db.collection(colletionName).deleteOne(id);
+        }).then(() => id);
     }
 }
 
-connectionTest().catch(console.dir)
-
-export const client = client;
-export const connectionTest = connectionTest;
+module.exports = MongoConnection; 

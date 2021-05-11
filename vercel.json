@@ -1,0 +1,23 @@
+{
+  "name": "RetoPlatziProductsAnibal",
+  "version": 2,
+  "builds": [
+    {
+      "src": "src/index.js",
+      "use": "@vercel/node"
+    }
+  ],
+  "routes": [
+    {
+      "src":"/.*",
+      "dest":"src/index.js"
+    }
+  ],
+  "env":{
+    "DB_USER":"@retoplatzi-product-db-user",
+    "DB_PASSWORD":"@retoplatzi-product-db-user",
+    "DB_HOST":"@retoplatzi-product-db-host",
+    "DB_NAME":"@retoplatzi-product-db-name"
+  }
+
+}

@@ -1,7 +1,8 @@
 const express = require('express');
 const router = express.Router();
 
-const Product = require('../models/product.js');
+const Product = require('../models/product');
+const Category = require('../models/product'); 
 
 router.get('/', async (req, res) => {
     const product =  await Product.find();
@@ -11,10 +12,17 @@ router.get('/', async (req, res) => {
     });
 });
 
+
 router.post('/add', async (req, res) =>{
     const product =  new Product(req.body);
     await product.save();
     res.redirect('/');
+});
+
+router.get('/',async (req, res) => {
+    const category = new Category(req.body);
+    await category.save();
+    res.redirect('/'); 
 });
 
 router.get('/edit/:id', async (req, res) => {
@@ -22,6 +30,14 @@ router.get('/edit/:id', async (req, res) => {
     const product = await Product.findById(id);
     res.render('edit', {
         product
+    });
+});
+
+router.get('/edit/:id', async (req, res) =>{
+    const { id } = req-params;
+    const category = await Category.findById(id);
+    res.render('edit', {
+        category
     });
 });
 
@@ -40,9 +56,21 @@ router.post('/edit/:id', async(req, res) => {
     res.redirect('/');
 });
 
+router.post('/edit/:id', async (req, res) => {
+    const { id } = req.params;
+    await Category.update({_id: id}, req.body);
+    res.redirect('/');
+});
+
 router.get('/delete/:id', async (req, res) => {
     const { id } = req.params;
     await Product.remove({_id: id});
+    res.redirect('/');
+});
+
+router.get('/delete/:id', async (req, res) => {
+    const { id } = req.params;
+    await Category.remove({_id: id})
     res.redirect('/');
 });
 

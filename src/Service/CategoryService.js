@@ -24,8 +24,8 @@ class CategoryService {
 
     async updateCategory(categoryId, category) {
         const updatedProductId = await this.connection.update(this.collection, categoryId, category);
-        const updatedCategory = await this.connection.getUpdated(this.collection, updatedProductId);
-        return updatedCategory;
+        //const updatedCategory = await this.connection.getUpdated(this.collection, updatedProductId);
+        return updatedProductId;
     }
 
     async deleteCategory(categoryId) {
@@ -34,7 +34,8 @@ class CategoryService {
     }
 
     async getProductsByCategory(categoryId) {
-        const query = { 'categoryId' : categoryId };
+        var o_id = new ObjectId(categoryId);
+        const query = { categoryId : categoryId };
         const products = await this.connection.getAll('product', query);
         return products || [];
     }

@@ -38,13 +38,10 @@ function categoryRoutes(app) {
 
     router.put('/:id', async function(req, res, next) {
         const { id } = req.params;
-        const category = {
-            name: req.body.name,
-            image: req.body.image
-        }
+        const { body : category } = req; 
         console.log(id);
         try {
-            const updatedCategoryId = await categoryService.updateCategory(id, category);
+            const updatedCategoryId = await categoryService.updateCategory(id, {category});
             res.status(200).json(updatedCategoryId);
         } catch(error) {
             next(error);

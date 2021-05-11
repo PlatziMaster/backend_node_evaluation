@@ -57,8 +57,8 @@ class MongoConnection {
 
     update(colletionName, id, data) {
         return this.connect().then(db => { 
-            return db.collection(colletionName).updateOne({ _id: ObjectId(id)}, { $set:data },{ upsert:true });
-        }).then(result => result.upsertedId || id);
+            return db.collection(colletionName).findOneAndUpdate({ _id: ObjectId(id)}, { $set:data },{ upsert:true, returnOriginal:false });
+        }).then(result => result.value);
     }
 
     delete(colletionName, id) {

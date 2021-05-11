@@ -24,8 +24,8 @@ class ProductService {
 
     async updateProduct(productId, product) {
         const updatedProductId = await this.connection.update(this.collection, productId, product);
-        const updatedProduct = await this.connection.getUpdated(this.collection, updatedProductId);
-        return updatedProduct;
+        //const updatedProduct = await this.connection.getUpdated(this.collection, updatedProductId);
+        return updatedProductId;
     }
 
     async deleteProduct(productId) {

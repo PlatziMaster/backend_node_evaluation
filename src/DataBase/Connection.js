@@ -33,7 +33,7 @@ class MongoConnection {
 
     getAll(colletionName, query) {
         return this.connect().then(db => {
-            return db.colletion(colletionName).find(query).toArray();
+            return db.collection(colletionName).find(query).toArray();
         })
     }
 

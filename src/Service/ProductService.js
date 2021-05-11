@@ -7,15 +7,30 @@ class ProductService {
         this.connection = new MongoConnection();
     }
 
-    async getProducts({ category }) {
+    async getProducts( category ) {
         const query = category && { category: { $in: category } };
         const products = await this.connection.getAll(this.collection, query);
         return products || [];        
     }
 
+    async getProduct(productId) {
+        const product = await this.connection.get(this.collection, productId);
+        return product || {};
+    }
+
     async createProduct(product) {
-        const insretedProductId = await this.connection.create(this.collection, product);
-        return insretedProductId;
+        const insertedProductId = await this.connection.create(this.collection, product);
+        return insertedProductId;
+    }
+
+    async updateProduct(productId, product) {
+        const updatedProductId = await this.connection.update(this.collection, productId, product);
+        return updatedProductId;
+    }
+
+    async deleteProduct(productId) {
+        const deletedProductId = await this.connection.delete(this.collection, productId);
+        return deletedProductId;
     }
 }
 

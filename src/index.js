@@ -1,5 +1,9 @@
-const { config } = require('./config');
+const { config } = require('./config/index');
 const createApp = require('./app');
+
+const connectDB = require('./config/db');
+
+connectDB()
 
 const app = createApp();
 

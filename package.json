@@ -5,14 +5,23 @@
   "main": "index.js",
   "dependencies": {
     "cors": "^2.8.5",
-    "dotenv": "^8.2.0",
+    "dotenv": "^9.0.1",
     "express": "^4.17.1",
     "mongodb": "^3.6.6"
   },
   "devDependencies": {
+    "eslint": "^7.26.0",
+    "eslint-config-prettier": "^8.3.0",
+    "eslint-plugin-prettier": "^3.4.0",
+    "husky": "^6.0.0",
     "jest": "^26.6.3",
+    "lint-staged": "^11.0.0",
     "nodemon": "^1.19.4",
+    "prettier": "^2.3.0",
     "supertest": "^6.1.3"
+  },
+  "lint-staged": {
+    "*.js": "eslint --cache --fix"
   },
   "scripts": {
     "dev": "DEBUG=app:* nodemon src/index.js",

@@ -61,4 +61,4 @@ typings/
 .next
 
 #carpeta views
-views/*
+src/views/*

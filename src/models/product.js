@@ -1,16 +1,16 @@
 const mongoose = require('mongoose');
-mongoose.Schema = mongoose.Schema;
+const Schema = mongoose.Schema;
 
-const productSchema =  new Schema({
+const productSchema = new Schema({
     name: String,
-    price: Int,
+    price: Number,
     description: String,
-    categoryId: Int
-}); 
+    categoryId: Number
+}) 
 
-const categorySchema = new Schema({
-    name: String,
-});
+// const categorySchema = new Schema({
+//     name: String,
+// });
 
 module.exports =  mongoose.model('product', productSchema);
-module.exports =  mongoose.model('category', categorySchema);
+//module.exports =  mongoose.model('category', categorySchema);

@@ -1,6 +1,8 @@
 const express = require('express');
 const cors = require('cors');
+
 const productRoutes = require('./Routes/ProductRoutes.js')
+const categoryRoutes = require('./Routes/CategoryRoutes')
 
 function createApp() { 
   const app = express();
@@ -8,6 +10,7 @@ function createApp() {
   app.use(express.json());
 
   productRoutes(app);
+  categoryRoutes(app);
 
   return app;
 }

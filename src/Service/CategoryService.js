@@ -8,7 +8,7 @@ class CategoryService {
     }
 
     async getCategories() {
-        const categories = await this.connection.getAll(this.collection, query);
+        const categories = await this.connection.getAll(this.collection);
         return categories || [];        
     }
 
@@ -33,7 +33,8 @@ class CategoryService {
     }
 
     async getProductsByCategory(categoryId) {
-        const products = await this.connection.getAll(this.collection, query);
+        const query = categoryId && { 'data.categoryId':categoryId };
+        const products = await this.connection.getAll('product', query);
         return products || [];
     }
 }

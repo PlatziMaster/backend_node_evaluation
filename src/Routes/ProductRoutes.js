@@ -8,19 +8,18 @@ function productRoutes(app) {
     app.use('/api/products', router);
 
     router.get('/', async function(req, res, next) {
-        const category = req.query;
         try {
-            const products = await productService.getProducts({ category });
+            const products = await productService.getProducts();
             res.status(200).json(products);
         } catch(error) {
             next(error);
         }
     })
 
-    router.get('/:productId', async function(req, res, next){
-        const { productId } = req.params;
+    router.get('/:id', async function(req, res, next){
+        const { id } = req.params;
         try {
-            const product = await productService.getProduct(productId);
+            const product = await productService.getProduct(id);
             res.status(200).json(product);
         } catch(error) {
             next(error);
@@ -37,21 +36,21 @@ function productRoutes(app) {
         }
     })
 
-    router.put('/:productId', async function(req, res, next){
-        const { productId } = req.params;
+    router.put('/:id', async function(req, res, next){
+        const { id } = req.params;
         const { body: product} = req;
         try {
-            const updatedproductId = await productService.updateProduct({productId, product});
+            const updatedproductId = await productService.updateProduct({id, product});
             res.status(200).json(updatedproductId);
         } catch(error) {
             next(error);
         }
     })
 
-    router.delete('/:productI',async function(req, res, next) {
-        const { productId } = req.params;
+    router.delete('/:id',async function(req, res, next) {
+        const { id } = req.params;
         try {
-            const deletedProductId = await productService.deleteProduct({productId});
+            const deletedProductId = await productService.deleteProduct({id});
             res.status(200).json(deletedProductId);
         } catch(error) {
             next(error);

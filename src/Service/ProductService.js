@@ -7,9 +7,8 @@ class ProductService {
         this.connection = new MongoConnection();
     }
 
-    async getProducts( category ) {
-        const query = category && { category: { $in: category } };
-        const products = await this.connection.getAll(this.collection, query);
+    async getProducts() {
+        const products = await this.connection.getAll(this.collection);
         return products || [];        
     }
 

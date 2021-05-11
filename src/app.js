@@ -2,6 +2,7 @@ const path = require('path');
 const express = require('express');
 const morgan = require('morgan');
 const mongoose = require('mongoose');
+const fileUpload = require('express-fileupload');
 
 //const cors = require('cors');
 const app = express();
@@ -19,6 +20,7 @@ const indexRoutes = require('./routes/index');
 app.set('port', process.env.PORT || 3000);
 app.set('views', path.join(__dirname, 'views'));
 app.set('view engine', 'ejs');
+app.use(fileUpload());
 
 app.listen(app.get('port'), () => {
   console.log(`Server on port ${app.get('port')}`);

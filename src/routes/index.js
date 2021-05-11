@@ -25,6 +25,15 @@ router.get('/edit/:id', async (req, res) => {
     });
 });
 
+router.post('/upload',(req,res) => {
+    const file = req.files.file;
+    file.mv(`./files/${file.name}`, err => {
+        if(err) return res.status(500).send({msg: err});
+        
+        return res.status(200).send({msg: 'File Uploaded'});
+    });
+})
+
 router.post('/edit/:id', async(req, res) => {
     const { id } = req.params;
     await Product.update({_id: id}, req.body);

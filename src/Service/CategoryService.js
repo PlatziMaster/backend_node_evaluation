@@ -3,7 +3,7 @@ const ObjectId = require('mongodb')
 
 class CategoryService {
     constructor() {
-        this.collection = 'category';
+        this.collection = 'categories';
         this.connection = new MongoConnection();
     }
 
@@ -24,16 +24,17 @@ class CategoryService {
 
     async updateCategory(categoryId, category) {
         const updatedProductId = await this.connection.update(this.collection, categoryId, category);
-        return updatedProductId;
+        const updatedCategory = await this.connection.getUpdated(this.collection, updatedProductId);
+        return updatedCategory;
     }
 
     async deleteCategory(categoryId) {
-        const deletedCategoryId = await this.connection.delete(this.collection, categoryId);
-        return deletedCategoryId;
+        const wasDeleted = await this.connection.delete(this.collection, categoryId);
+        return wasDeleted;
     }
 
     async getProductsByCategory(categoryId) {
-        const query = categoryId && { 'data.categoryId':categoryId };
+        const query = { 'categoryId' : categoryId };
         const products = await this.connection.getAll('product', query);
         return products || [];
     }

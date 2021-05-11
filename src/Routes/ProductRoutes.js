@@ -40,7 +40,7 @@ function productRoutes(app) {
         const { id } = req.params;
         const { body: product} = req;
         try {
-            const updatedproductId = await productService.updateProduct({id, product});
+            const updatedproductId = await productService.updateProduct(id, product);
             res.status(200).json(updatedproductId);
         } catch(error) {
             next(error);
@@ -50,8 +50,8 @@ function productRoutes(app) {
     router.delete('/:id',async function(req, res, next) {
         const { id } = req.params;
         try {
-            const deletedProductId = await productService.deleteProduct({id});
-            res.status(200).json(deletedProductId);
+            const wasDeleted = await productService.deleteProduct({id});
+            res.status(200).json(wasDeleted);
         } catch(error) {
             next(error);
         }

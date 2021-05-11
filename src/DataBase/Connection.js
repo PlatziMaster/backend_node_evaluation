@@ -39,26 +39,32 @@ class MongoConnection {
 
     get(colletionName, id) {
         return this.connect().then(db => {
-            return db.collection(colletionName).findOne({ _id: ObjectId(id)})
+            return db.collection(colletionName).findOne({ _id: ObjectId(id)});
+        })
+    }
+
+    getUpdated(colletionName, id) {
+        return this.connect().then(db => {
+            return db.collection(colletionName).findOne({ _id: id});
         })
     }
 
     create(colletionName, data) {
         return this.connect().then(db => {
-            return db.collection(colletionName).insertOne(data)
-        }).then(result => result.insertedId);
+            return db.collection(colletionName).insertOne(data);
+        }).then(result => result.ops[0]);
     }
 
     update(colletionName, id, data) {
-        return this.connect().then(db => {
-            return db.collection(colletionName).updateOne({ _id: Object(id)}, { $set: data}, { upsert: true})
+        return this.connect().then(db => { 
+            return db.collection(colletionName).updateOne({ _id: ObjectId(id)}, { $set:data },{ upsert:true });
         }).then(result => result.upsertedId || id);
     }
 
     delete(colletionName, id) {
         return this.connect().then(db => {
             return db.collection(colletionName).deleteOne(id);
-        }).then(() => id);
+        }).then(() => true);
     }
 }
 

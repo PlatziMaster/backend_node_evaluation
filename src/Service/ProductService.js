@@ -3,7 +3,7 @@ const ObjectId = require('mongodb')
 
 class ProductService {
     constructor() {
-        this.collection = 'product';
+        this.collection = 'products';
         this.connection = new MongoConnection();
     }
 
@@ -24,12 +24,13 @@ class ProductService {
 
     async updateProduct(productId, product) {
         const updatedProductId = await this.connection.update(this.collection, productId, product);
-        return updatedProductId;
+        const updatedProduct = await this.connection.getUpdated(this.collection, updatedProductId);
+        return updatedProduct;
     }
 
     async deleteProduct(productId) {
-        const deletedProductId = await this.connection.delete(this.collection, productId);
-        return deletedProductId;
+        const wasDeleted = await this.connection.delete(this.collection, productId);
+        return wasDeleted;
     }
 }
 

@@ -36,11 +36,15 @@ function categoryRoutes(app) {
         }
     })
 
-    router.put('/:id', async function(req, res, next){
+    router.put('/:id', async function(req, res, next) {
         const { id } = req.params;
-        const { body: category} = req;
+        const category = {
+            name: req.body.name,
+            image: req.body.image
+        }
+        console.log(id);
         try {
-            const updatedCategoryId = await categoryService.updateCategory({id, category});
+            const updatedCategoryId = await categoryService.updateCategory(id, category);
             res.status(200).json(updatedCategoryId);
         } catch(error) {
             next(error);
@@ -50,8 +54,8 @@ function categoryRoutes(app) {
     router.delete('/:id',async function(req, res, next) {
         const { id } = req.params;
         try {
-            const deletedCategoryId = await categoryService.deleteCategory({id});
-            res.status(200).json(deletedCategoryId);
+            const wasDeleted = await categoryService.deleteCategory({id});
+            res.status(200).json(wasDeleted);
         } catch(error) {
             next(error);
         }

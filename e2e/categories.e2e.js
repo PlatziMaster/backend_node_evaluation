@@ -8,7 +8,7 @@ const USER = encodeURIComponent(config.dbUser);
 const PASSWORD = encodeURIComponent(config.dbPassword);
 const DB_NAME = config.dbName;
 
-const MONGO_URI = `${config.dbConnection}://${USER}:${PASSWORD}@${config.dbHost}:${config.dbPort}?retryWrites=true&w=majority`;
+const MONGO_URI = `${config.dbConnection}://${config.dbHost}:${config.dbPort}?retryWrites=true&w=majority`;
 const collection = 'categories';
 
 describe("Tests to categories", () => {

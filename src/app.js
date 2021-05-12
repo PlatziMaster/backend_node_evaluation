@@ -1,28 +1,21 @@
-const express = require('express');
-const cors = require('cors');
+const express = require("express");
+const cors = require("cors");
 
+var indexRouter = require("./routes/index");
+var productsRouter = require("./routes/products");
+var categoriesRouter = require("./routes/categories");
 
-var allowlist = ['https://www.luzdeluna-autohotel.com', 'https://master.drsmqkphy0xld.amplifyapp.com','http://localhost:3000']
+function createApp() {
+  var app = express();
+  app.use(express.json());
+  app.use(cors());
 
-var corsOptionsDelegate = function (req, callback) {
-  var corsOptions;
-  if (allowlist.indexOf(req.header('Origin')) !== -1) {
-    corsOptions = { origin: true } // reflect (enable) the requested origin in the CORS response
-  } else {
-    corsOptions = { origin: false } // disable CORS for this request
-  }
-  callback(null, corsOptions) // callback expects two parameters: error and options
+  app.use("/", indexRouter);
+  app.use("/api/products", productsRouter);
+  app.use("/api/categories", categoriesRouter);
+
+  // ADD YOUR ROUTES
+  return app;
 }
-var indexRouter = require('./routes/index');
-var productsRouter = require('./routes/products');
-var categoriesRouter = require('./routes/categories');
 
-var app = express();
-app.use(express.json());
-app.use(cors(corsOptionsDelegate));
-
-app.use('/', indexRouter);
-app.use('/products', productsRouter);
-app.use('/categories', categoriesRouter);
-
-module.exports = app;
+module.exports = createApp;

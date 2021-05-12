@@ -18,7 +18,8 @@
   "scripts": {
     "dev": "DEBUG=app:* nodemon src/index.js",
     "start": "node ./bin/www",
-    "test:e2e": "jest --forceExit --config ./e2e/jest-e2e.json"
+    "test:e2e": "jest --forceExit --config ./e2e/jest-e2e.json",
+    "clear_jest": "jest --clearCache"
   },
   "repository": {
     "type": "git",

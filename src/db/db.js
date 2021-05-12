@@ -1,7 +1,9 @@
 const { MongoClient, ObjectId } = require("mongodb");
+const { config } = require("../config/index");
 
-const MONGO_URI =
-  "mongodb://localhost:27017/?readPreference=primary&appname=platzi&ssl=false";
+const MONGO_URI = config.dev
+  ? config.dbLocalConnection
+  : `${config.dbConnection}://${config.dbUser}:${config.dbPassword}@${config.dbHost}:${config.dbPort}?ssl=true&replicaSet=atlas-13tboi-shard-0&authSource=admin&retryWrites=true&w=majority`;
 
 const ERROR_MESSAGE = "please try again in a few minutes";
 
@@ -39,6 +41,19 @@ class DataConnection {
         .db(this.dbName)
         .collection(this.collection)
         .find()
+        .toArray();
+    } else {
+      return [{ message: ERROR_MESSAGE }];
+    }
+  }
+
+  async getByQuery(query) {
+    await this.connect();
+    if (this.mongo_client.isConnected()) {
+      return this.mongo_client
+        .db(this.dbName)
+        .collection(this.collection)
+        .find(query)
         .toArray();
     } else {
       return [{ message: ERROR_MESSAGE }];

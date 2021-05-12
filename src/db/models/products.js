@@ -1,9 +1,8 @@
-export class Product {
-    constructor(name, price,description,categoryId,image) {
-      this.name = name;
-      this.price = price;
-      this.description = description;
-      this.categoryId = categoryId;
-      this.image = image;
-    }
-}
+const Validator = require('jsonschema').Validator;
+const schema = require('./productSchema.json');
+
+exports.validProduct = (product)=>{
+    var v = new Validator();
+    const res = v.validate(product, schema);
+    return res;
+};

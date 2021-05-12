@@ -1,36 +1,35 @@
 const request = require("supertest");
 const { MongoClient, ObjectId } = require("mongodb");
 
-const { config } = require("../src/config");
-const createApp = require("./../src/app");
+const { config } = require("../src/config/index");
+var createApp = require('../src/app');
 
-const USER = encodeURIComponent(config.dbUser);
-const PASSWORD = encodeURIComponent(config.dbPassword);
-const DB_NAME = config.dbName;
+const MONGO_URI = config.dev
+  ? config.dbLocalConnection
+  : `${config.dbConnection}://${config.dbUser}:${config.dbPassword}@${config.dbHost}:${config.dbPort}?ssl=true&replicaSet=atlas-13tboi-shard-0&authSource=admin&retryWrites=true&w=majority`;
 
-const MONGO_URI = `${config.dbConnection}://${USER}:${PASSWORD}@${config.dbHost}:${config.dbPort}?retryWrites=true&w=majority`;
 const collection = 'products';
 
 describe("Tests to products", () => {
-  let app;
+
   let database;
   let server;
-
+  let app;
   beforeAll(async () => {
     app = createApp();
-    const port = 3001;
+    var port = '3002';
     server = app.listen(port);
     const client = new MongoClient(MONGO_URI, {
       useNewUrlParser: true,
       useUnifiedTopology: true,
     });
     await client.connect();
-    database = client.db(DB_NAME);
+    database = client.db(config.dbName);
   });
 
   afterAll(async () => {
     server.close();
-    database.dropDatabase();
+    
   });
 
   describe("POST /api/products", () => {

@@ -1,11 +1,13 @@
-//const client = require('../db/connection');
 const DataConnection = require('../db/db')
+const CollectionNameCategories = "categories";
 
 exports.insertCategory = async (category)=>{
-    const conn = new DataConnection('categories');
+    const conn = new DataConnection(CollectionNameCategories);
     try {
         var result = await conn.insertOne(category);
-        return result;
+        if (result.insertedId)
+            return await this.getCategory(result.insertedId);
+        return [];
     } catch (error) {
        console.log(error);
     }finally{
@@ -14,7 +16,7 @@ exports.insertCategory = async (category)=>{
 }
 
 exports.getCategory = async (categoryId)=>{
-    const conn = new DataConnection('categories');
+    const conn = new DataConnection(CollectionNameCategories);
     try {
         var result = await conn.getOne(categoryId);
         return result;
@@ -26,7 +28,7 @@ exports.getCategory = async (categoryId)=>{
 }
 
 exports.getCategories = async ()=>{
-    const conn = new DataConnection('categories');
+    const conn = new DataConnection(CollectionNameCategories);
     try {
         var result = await conn.getAll();
         return result;
@@ -38,10 +40,12 @@ exports.getCategories = async ()=>{
 }
 
 exports.updateCategory = async (id,category)=>{
-    const conn = new DataConnection('categories');
+    const conn = new DataConnection(CollectionNameCategories);
     try {
         var result = await conn.updateOne(id,category)
-        return result;
+        if (result.modifiedCount)
+            return await this.getCategory(id);
+        return [];
     } catch (error) {
        console.log(error);
     }finally{
@@ -50,7 +54,7 @@ exports.updateCategory = async (id,category)=>{
 }
 
 exports.deleteCategory = async (id)=>{
-    const conn = new DataConnection('categories');
+    const conn = new DataConnection(CollectionNameCategories);
     try {
         var result = await conn.deleteOne(id)
         return result;

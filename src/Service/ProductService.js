@@ -1,5 +1,4 @@
 const  MongoConnection = require('../DataBase/Connection');
-const ObjectId = require('mongodb')
 
 class ProductService {
     constructor() {
@@ -24,7 +23,6 @@ class ProductService {
 
     async updateProduct(productId, product) {
         const updatedProductId = await this.connection.update(this.collection, productId, product);
-        //const updatedProduct = await this.connection.getUpdated(this.collection, updatedProductId);
         return updatedProductId;
     }
 

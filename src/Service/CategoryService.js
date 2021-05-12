@@ -1,5 +1,4 @@
 const  MongoConnection = require('../DataBase/Connection');
-const ObjectId = require('mongodb')
 
 class CategoryService {
     constructor() {
@@ -24,7 +23,6 @@ class CategoryService {
 
     async updateCategory(categoryId, category) {
         const updatedProductId = await this.connection.update(this.collection, categoryId, category);
-        //const updatedCategory = await this.connection.getUpdated(this.collection, updatedProductId);
         return updatedProductId;
     }
 
@@ -34,9 +32,7 @@ class CategoryService {
     }
 
     async getProductsByCategory(categoryId) {
-        var o_id = new ObjectId(categoryId);
-        const query = { categoryId : categoryId };
-        const products = await this.connection.getAll('product', query);
+        const products = await this.connection.getAll('products', { categoryId: categoryId });
         return products || [];
     }
 }

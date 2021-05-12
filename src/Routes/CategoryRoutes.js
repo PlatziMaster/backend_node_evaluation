@@ -51,17 +51,17 @@ function categoryRoutes(app) {
     router.delete('/:id',async function(req, res, next) {
         const { id } = req.params;
         try {
-            const wasDeleted = await categoryService.deleteCategory({id});
+            const wasDeleted = await categoryService.deleteCategory(id);
             res.status(200).json(wasDeleted);
         } catch(error) {
             next(error);
         }
     })
 
-    router.get(':id/products', async function(req, res, next) {
+    router.get('/:id/products', async function(req, res, next) {
         const { id } = req.params;
         try {
-            const products = await categoryService.getProductsByCategory({id});
+            const products = await categoryService.getProductsByCategory(id);
             res.status(200).json(products);
         } catch(error) {
             next(error);

@@ -2,13 +2,14 @@ require('dotenv').config();
 
 const config = {
   dev: process.env.NODE_ENV !== 'production',
-  port: process.env.PORT || 3000,
+  port: process.env.PORT || 3001,
   dbUser: process.env.MONGO_USER,
   dbPassword: process.env.MONGO_PASSWORD,
   dbHost: process.env.MONGO_HOST,
   dbName: process.env.MONGO_DB_NAME,
   dbPort: process.env.MONGO_PORT,
   dbConnection: process.env.MONGO_CONNECTION,
+  dbLocalConnection: process.env.MONGO_LOCAL_CONNECTION,
 };
 
 module.exports = { config };

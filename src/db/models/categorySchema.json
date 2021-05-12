@@ -1,0 +1,14 @@
+{
+  "$schema": "http://json-schema.org/draft-04/schema#",
+  "title": "CategoryItem",
+  "type": "object",
+  "properties": {
+    "name": {
+      "type": "string"
+    },
+    "image": {
+      "type": "string"
+    }
+  },
+  "required": ["name", "image"]
+}

@@ -15,4 +15,10 @@ router.post('/createCategory', async (req, res) => {
    res.redirect('/');
 });
 
+router.delete('/deleteCategory/:id', async (req, res) => {
+    console.log('entra a delete');
+    const { id } = req.params;
+    await Category.remove({_id: id})
+    res.redirect('/');
+});
 module.exports = router;

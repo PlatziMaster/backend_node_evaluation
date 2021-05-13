@@ -44,7 +44,7 @@
                              <td> <%= categories[i].name %> </td>
                              <td>
                                  <a href="" class="btn btn-info">Editar</a>
-                                 <a href="" class="btn btn-danger">Eliminar</a>
+                                 <a data-method="delete" href="/deleteCategory/<%= categories[i]._id %>" class="btn btn-danger">Eliminar</a>
                              </td>
                          </tr>
                             

@@ -40,7 +40,8 @@ class ObjectValidator {
     this.addValidator(
       prop,
       "string",
-      (obj, prop) => typeof obj[prop] === "string"
+      (obj, prop) =>
+        typeof obj[prop] === "string" || typeof obj[prop] === "undefined"
     );
   }
 
@@ -48,7 +49,8 @@ class ObjectValidator {
     this.addValidator(
       prop,
       "number",
-      (obj, prop) => typeof obj[prop] === "number"
+      (obj, prop) =>
+        typeof obj[prop] === "number" || typeof obj[prop] === "undefined"
     );
   }
 

@@ -36,13 +36,27 @@ class Collection {
       return null;
     }
   }
+
+  async updateOne(id, data) {
+    try {
+      if (Object.keys(data).length === 0) return await this.findOneById(id);
+      const filter = { _id: new ObjectId(id) };
+      const update = { $set: data };
+      await this.instance.updateOne(filter, update);
+      return await this.findOneById(id);
+    } catch (error) {
+      return null;
+    }
+  }
 }
 
 class DB {
   constructor() {
     this.instance = null;
-    this.categories = null;
-    this.products = null;
+    this.collections = {
+      categories: null,
+      products: null,
+    };
   }
 
   async connect() {
@@ -53,8 +67,8 @@ class DB {
       });
       await client.connect();
       this.instance = client.db(DB_NAME);
-      this.categories = new Collection(this.instance, "categories");
-      this.products = new Collection(this.instance, "products");
+      this.collections.categories = new Collection(this.instance, "categories");
+      this.collections.products = new Collection(this.instance, "products");
     }
   }
 }

@@ -1,6 +1,6 @@
 const express = require("express");
 const cors = require("cors");
-const { categoriesRoutes } = require("./routes");
+const { categoriesRoutes, productsRoutes } = require("./api");
 const notFoundHandler = require("./middleware/notFoundHandler");
 const {
     errorHandler,
@@ -15,6 +15,7 @@ function createApp() {
 
     // ADD YOUR ROUTES
     categoriesRoutes(app);
+    productsRoutes(app);
     app.use(notFoundHandler);
 
     app.use(logErrors);

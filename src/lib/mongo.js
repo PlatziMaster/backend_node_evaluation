@@ -5,11 +5,10 @@ const USER = encodeURIComponent(config.MONGO_USER);
 const PASSWORD = encodeURIComponent(config.MONGO_PASSWORD);
 const DB_NAME = config.MONGO_DB_NAME || "products";
 
-const MONGO_URI = `mongodb://${USER}:${PASSWORD}@${config.MONGO_HOST}/${DB_NAME}?retryWrites=true&w=majority`;
+const MONGO_URI = `${config.MONGO_CONNECTION}://${USER}:${PASSWORD}@${config.MONGO_HOST}/${DB_NAME}?retryWrites=true&w=majority`;
 
 class MongoLib {
     constructor() {
-        console.log(MONGO_URI);
         this.client = new MongoClient(MONGO_URI, { useNewUrlParser: true });
         this.dbName = DB_NAME;
     }

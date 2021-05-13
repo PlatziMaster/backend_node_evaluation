@@ -8,7 +8,7 @@ const USER = encodeURIComponent(config.dbUser);
 const PASSWORD = encodeURIComponent(config.dbPassword);
 const DB_NAME = config.dbName;
 
-const MONGO_URI = `${config.dbConnection}://${USER}:${PASSWORD}@${config.dbHost}:${config.dbPort}?retryWrites=true&w=majority`;
+const MONGO_URI = `${config.dbConnection}://${USER}:${PASSWORD}@${config.dbHost}/${config.dbName}?retryWrites=true&w=majority`;
 const collection = 'products';
 
 describe("Tests to products", () => {
@@ -42,7 +42,7 @@ describe("Tests to products", () => {
       return request(app)
         .post("/api/products")
         .send(newProduct)
-        .expect(201)
+        .expect(200)
         .then(async ({ body }) => {
           const rta = await database.collection(collection).findOne({ _id: ObjectId(body._id) });
           expect(body.name).toBe(rta.name);

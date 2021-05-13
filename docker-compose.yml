@@ -1,6 +1,15 @@
 version: '3.3'
 
 services:
+  app:
+    image: backend
+    environment:
+      MONGO_URL: "mongodb://db:27017/backend"
+    depends_on:
+      - mongo
+    ports:
+      - "3000-30001:3000"
+
   mongo:
     image: mongo:4.4
     environment:

@@ -9,3 +9,4 @@ app.listen(config.port, err => {
     return;
   }
 });
+console.log('Listening in http://localhost:'+config.port);

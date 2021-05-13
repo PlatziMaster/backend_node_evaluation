@@ -8,8 +8,8 @@ const USER = encodeURIComponent(config.dbUser);
 const PASSWORD = encodeURIComponent(config.dbPassword);
 const DB_NAME = config.dbName;
 
-const MONGO_URI = `${config.dbConnection}://${USER}:${PASSWORD}@${config.dbHost}:${config.dbPort}?retryWrites=true&w=majority`;
-const collection = 'categories';
+const MONGO_URI = `${config.dbConnection}://${USER}:${PASSWORD}@${config.dbHost}/${config.dbName}?retryWrites=true&w=majority`;
+const collection = 'products';
 
 describe("Tests to categories", () => {
   let app;
@@ -42,7 +42,7 @@ describe("Tests to categories", () => {
       return request(app)
         .post("/api/categories")
         .send(newCategory)
-        .expect(201)
+        .expect(200)
         .then(async ({ body }) => {
           const rta = await database.collection(collection).findOne({ _id: ObjectId(body._id) });
           expect(body.name).toBe(rta.name);

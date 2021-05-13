@@ -1,5 +1,7 @@
 require('dotenv').config();
 
+
+
 const config = {
   dev: process.env.NODE_ENV !== 'production',
   port: process.env.PORT || 3000,
@@ -10,5 +12,6 @@ const config = {
   dbPort: process.env.MONGO_PORT,
   dbConnection: process.env.MONGO_CONNECTION,
 };
+
 
 module.exports = { config };

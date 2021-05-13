@@ -6,6 +6,8 @@ const collection = "categories";
 
 async function products(req, res) {
   const db = await getDb();
+  const category = await db.collections.categories.findOneById(req.params.id);
+  if (!category) return res.status(404).json({ message: "Category not found" });
   const products = await db.collections.products.findAll({
     categoryId: req.params.id,
   });

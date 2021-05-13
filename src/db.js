@@ -48,6 +48,15 @@ class Collection {
       return null;
     }
   }
+
+  async deleteOneById(id) {
+    try {
+      const result = await this.instance.deleteOne({ _id: new ObjectId(id) });
+      return result.deletedCount === 1;
+    } catch (error) {
+      return false;
+    }
+  }
 }
 
 class DB {

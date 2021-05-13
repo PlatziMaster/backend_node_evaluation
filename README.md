@@ -40,7 +40,7 @@ Una Categoría debe tener los siguientes atributos:
 - [x] GET `/api/categories/{id}/` Endpoint para retornar un categoría.
 - [x] POST `/api/categories/` Endpoint para crear un categoría.
 - [x] PUT `/api/categories/{id}/` Endpoint para modificar un categoría.
-- [ ] DELETE `/api/categories/{id}/` Endpoint para eliminar un categoría.
+- [x] DELETE `/api/categories/{id}/` Endpoint para eliminar un categoría.
 - [ ] GET `/api/categories/{id}/products` Endpoint para retornar la lista de productos que pertenecen a una categoría.
 
 ## Instrucciones

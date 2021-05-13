@@ -46,4 +46,10 @@ async function update(req, res) {
   res.status(404).json(errorsResponse.notFound);
 }
 
-module.exports = { getAll, getOne, create, update };
+async function deleteOne(req, res) {
+  const success = await db.collections.categories.deleteOneById(req.params.id);
+  if (success) return res.json({ message: "Successfully deleted" });
+  res.status(404).json(errorsResponse.notFound);
+}
+
+module.exports = { getAll, getOne, create, update, delete: deleteOne };

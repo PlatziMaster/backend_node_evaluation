@@ -1,4 +1,8 @@
-class ValidationError extends Error {}
+class ValidationError extends Error {
+  toJSON() {
+    return { message: this.message };
+  }
+}
 
 class ObjectValidator {
   constructor(config) {

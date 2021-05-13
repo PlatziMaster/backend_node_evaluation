@@ -18,12 +18,9 @@ module.exports = {
   create: create(
     collection,
     CreateProductDto,
-    "unexpected error while creating product",
-    validateCategory
+    "unexpected error while creating product"
+    // validateCategory
   ),
-  update: update(collection, UpdateProductDto, (db, product) => {
-    if (typeof product.categoryId === "undefined") return [];
-    return validateCategory(db, product);
-  }),
+  update: update(collection, UpdateProductDto),
   delete: deleteOne(collection),
 };

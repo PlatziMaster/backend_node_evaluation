@@ -82,6 +82,16 @@ class DB {
   }
 }
 
-const singleton = new DB();
+var singleton = null;
 
-module.exports = singleton;
+async function getDb() {
+  if (singleton == null) {
+    singleton = new DB();
+  }
+  if (singleton.instance == null) {
+    await singleton.connect();
+  }
+  return singleton;
+}
+
+module.exports = getDb;

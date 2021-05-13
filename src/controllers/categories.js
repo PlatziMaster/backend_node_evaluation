@@ -1,10 +1,11 @@
-const db = require("../db");
+const getDb = require("../db");
 const { CreateCategoryDto, UpdateCategoryDto } = require("../models/category");
 const { getAll, getOne, create, update, deleteOne } = require("./generic");
 
 const collection = "categories";
 
 async function products(req, res) {
+  const db = await getDb();
   const products = await db.collections.products.findAll({
     categoryId: req.params.id,
   });

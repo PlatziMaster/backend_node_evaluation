@@ -1,4 +1,4 @@
-const db = require("../db");
+const getDb = require("../db");
 
 const commonResponse = {
   notFound: { message: "Not found" },
@@ -7,12 +7,15 @@ const commonResponse = {
 };
 
 function getAll(collection) {
-  return async (req, res) =>
+  return async (req, res) => {
+    const db = await getDb();
     res.json(await db.collections[collection].findAll());
+  };
 }
 
 function getOne(collection) {
   return async (req, res) => {
+    const db = await getDb();
     const item = await db.collections[collection].findOneById(req.params.id);
     if (item) return res.json(item);
     res.status(404).json(commonResponse.notFound);
@@ -21,6 +24,7 @@ function getOne(collection) {
 
 function create(collection, dto, unexpectedErrorMessage, dbValidation = null) {
   return async (req, res) => {
+    const db = await getDb();
     const { errors, obj } = dto.validate(req.body);
     if (errors.length > 0) {
       return res.status(400).json({ errors });
@@ -31,15 +35,16 @@ function create(collection, dto, unexpectedErrorMessage, dbValidation = null) {
         return res.status(400).json({ errors: dbValRes });
     }
     const dbRes = await db.collections[collection].insertOne(obj);
-    if (dbRes) {
-      return res.json(dbRes);
+    if (!dbRes) {
+      res.status(500).json({ errors: [{ message: unexpectedErrorMessage }] });
     }
-    res.status(500).json({ errors: [{ message: unexpectedErrorMessage }] });
+    return res.status(201).json(dbRes);
   };
 }
 
 function update(collection, dto, dbValidation = null) {
   return async (req, res) => {
+    const db = await getDb();
     const { errors, obj } = dto.validate(req.body);
     if (errors.length > 0) return res.status(400).json({ errors });
     if (Object.keys(obj).length === 0)
@@ -62,11 +67,12 @@ function update(collection, dto, dbValidation = null) {
 
 function deleteOne(collection) {
   return async (req, res) => {
+    const db = await getDb();
     const success = await db.collections[collection].deleteOneById(
       req.params.id
     );
-    if (success) return res.json(commonResponse.successfulDelete);
-    res.status(404).json(commonResponse.notFound);
+    if (!success) return res.status(404).json(commonResponse.notFound);
+    return res.json(success);
   };
 }
 

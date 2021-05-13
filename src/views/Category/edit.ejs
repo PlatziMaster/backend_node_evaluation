@@ -15,14 +15,18 @@
    
     <div class="container">
         <div class="row">
-            <div class="col-md-2">
-                <a href="/categories" class="btn btn-info">Categorias</a>
+            <div class="col-md-5">
+                <div class="card">
+                    <div class="card-body">
+                        <form action="/editCategory/<%= category._id%>" method="POST">
+                            <div class="form-group mb-2">
+                                <input type="text" name="name" placeholder="Ingresa el nombre de la categoría" class="form-control" value="<%= category.name %>">
+                            </div>
+                            <button type="submit" class="btn btn-primary">Guardar</button>
+                        </form>
+                    </div>
+                </div>
             </div>
-
-            <div class="col-md-2">
-                <a href="/products" class="btn btn-info">Productos</a>
-            </div>
-
         </div>
     </div>
 </body>

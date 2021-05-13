@@ -1,0 +1,68 @@
+
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta http-equiv="X-UA-Compatible" content="IE=edge">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Platzi Master Test</title>
+    <link href="https://cdn.jsdelivr.net/npm/bootstrap@5.0.0/dist/css/bootstrap.min.css" rel="stylesheet" integrity="sha384-wEmeIV1mKuiNpC+IOBjI7aAzPcEZeedi5yW5f2yOq55WWLwNGmvvx4Um1vskeMj0" crossorigin="anonymous">
+</head>
+<body>
+    <nav class="navbar navbar-dark bg-dark mb-4">
+        <a href="/" class="navbar-brand">Platzi Master Test</a>
+    </nav>
+   
+    <div class="container">
+        <div class="row">
+            <div class="col-md-5">
+                <div class="card">
+                    <div class="card-body">
+                        <form action="/createProduct" method="POST">
+                            <div class="form-group mb-2">
+                                <input type="text" name="name" placeholder="Ingresa el nombre del producto" class="form-control mb-2">
+                                <input type="text" name="price" placeholder="Ingresa el precio del producto" class="form-control mb-2">
+                                <input type="text" name="description" placeholder="Ingresa la descripción del producto" class="form-control mb-2">
+                                <select name="categoryId" class="form-control mb-2">
+                                    <option value=”0”>Seleccionar</option>
+                                    <% for(var i = 0; i < categories.length; i++ ){ %>
+                                        <option value=”<%= categories[i]._id %>”><%= categories[i].name %></option>
+                                    <% } %>
+                                </select>
+                            </div>
+                            <button type="submit" class="btn btn-primary">Guardar</button>
+                        </form>
+                    </div>
+                </div>
+            </div>
+
+            <div class="col-md-7">
+                <table class="table table-bordered table-hover">
+                    <thead>
+                        <tr>
+                            <th>Id</th>
+                            <th>Nombre</th>
+                            <th>Opciones</th>
+                        </tr>
+                    </thead>
+                    <tbody>
+                      <% for(var i = 0; i < products.length; i++ ){ %>
+                         <tr>
+                             <td> <%= i + 1 %></td>
+                             <td> <%= products[i].name %> </td>
+                             <td>
+                                 <a href="/editProduct/<%= products[i]._id %>" class="btn btn-info">Editar</a>
+                                 <a href="/deleteProduct/<%= products[i]._id %>" class="btn btn-danger">Eliminar</a>
+                             </td>
+                         </tr>
+                            
+                        <% } %> 
+                    </tbody>
+                </table>
+            </div>
+
+        </div>
+        <a href="/" class="btn btn-success">Inicio</a>
+    </div>
+</body>
+</html>

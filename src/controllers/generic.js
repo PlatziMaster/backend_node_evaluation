@@ -19,11 +19,16 @@ function getOne(collection) {
   };
 }
 
-function create(collection, dto, unexpectedErrorMessage) {
+function create(collection, dto, unexpectedErrorMessage, dbValidation = null) {
   return async (req, res) => {
     const { errors, obj } = dto.validate(req.body);
     if (errors.length > 0) {
       return res.status(400).json({ errors });
+    }
+    if (typeof dbValidation === "function") {
+      const dbValRes = await dbValidation(db, obj);
+      if (dbValRes.length !== 0)
+        return res.status(400).json({ errors: dbValRes });
     }
     const dbRes = await db.collections[collection].insertOne(obj);
     if (dbRes) {
@@ -33,12 +38,17 @@ function create(collection, dto, unexpectedErrorMessage) {
   };
 }
 
-function update(collection, dto) {
+function update(collection, dto, dbValidation = null) {
   return async (req, res) => {
     const { errors, obj } = dto.validate(req.body);
     if (errors.length > 0) return res.status(400).json({ errors });
     if (Object.keys(obj).length === 0)
       return res.status(400).json(commonResponse.invalidBody);
+    if (typeof dbValidation === "function") {
+      const dbValRes = await dbValidation(db, obj);
+      if (dbValRes.length !== 0)
+        return res.status(400).json({ errors: dbValRes });
+    }
     const dbRes = await db.collections[collection].updateOne(
       req.params.id,
       obj

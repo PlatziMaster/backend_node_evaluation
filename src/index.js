@@ -1,12 +1,12 @@
 const { config } = require("./config");
 const createApp = require("./app");
-const GetDb = require("./db");
+const db = require("./db");
 
 const app = createApp();
 
 async function run() {
   try {
-    await GetDb(); // Initialize the db connection
+    await db.connect(); // Initialize the db connection
   } catch (error) {
     console.error("Error: Cant connect to database ", error);
     return;

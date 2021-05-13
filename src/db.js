@@ -8,6 +8,15 @@ const DB_NAME = config.dbName;
 const MONGO_PORT = !config.dbConnectionIsSrv ? `:${config.dbPort}` : "";
 const MONGO_URI = `${config.dbConnection}://${USER}:${PASSWORD}@${config.dbHost}${MONGO_PORT}?retryWrites=true&w=majority`;
 
+const client = new MongoClient(MONGO_URI, {
+  useNewUrlParser: true,
+  useUnifiedTopology: true,
+});
+
+function isConnected() {
+  return !!client && !!client.topology && client.topology.isConnected();
+}
+
 class Collection {
   constructor(db, name) {
     this.instance = db.collection(name);
@@ -70,11 +79,7 @@ class DB {
 
   async connect() {
     if (!this.instance) {
-      const client = new MongoClient(MONGO_URI, {
-        useNewUrlParser: true,
-        useUnifiedTopology: true,
-      });
-      await client.connect();
+      if (!isConnected()) await client.connect();
       this.instance = client.db(DB_NAME);
       this.collections.categories = new Collection(this.instance, "categories");
       this.collections.products = new Collection(this.instance, "products");
@@ -82,16 +87,18 @@ class DB {
   }
 }
 
-var singleton = null;
+// var singleton = null;
 
 async function getDb() {
-  if (singleton == null) {
-    singleton = new DB();
-  }
-  if (singleton.instance == null) {
-    await singleton.connect();
-  }
-  return singleton;
+  // if (singleton == null) {
+  //   singleton = new DB();
+  // }
+  // if (singleton.instance == null) {
+  //   await singleton.connect();
+  // }
+  const db = new DB();
+  await db.connect();
+  return db;
 }
 
 module.exports = getDb;

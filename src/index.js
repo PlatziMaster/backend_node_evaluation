@@ -3,7 +3,6 @@ const createApp = require('./app');
 const mongoose = require('mongoose');
 
 const app = createApp();
-
 app.listen(config.port, err => {
   if (err) {
     console.error("Error: ", err);

@@ -1,5 +1,4 @@
 require('dotenv').config();
-const path = require('path');
 
 const config = {
   dev: process.env.NODE_ENV !== 'production',
@@ -10,8 +9,6 @@ const config = {
   dbName: process.env.MONGO_DB_NAME || 'PlatziMasterTest',
   dbPort: process.env.MONGO_PORT || '27017',
   dbConnection: process.env.MONGO_CONNECTION,
-  views: path.join(__dirname, 'views'),
-  viewEngine: 'ejs',
 };
 
 module.exports = { config };

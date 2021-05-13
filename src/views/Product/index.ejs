@@ -42,6 +42,9 @@
                         <tr>
                             <th>Id</th>
                             <th>Nombre</th>
+                            <th>Precio</th>
+                            <th>Descripcion</th>
+                            <th>Categoria</th>
                             <th>Opciones</th>
                         </tr>
                     </thead>
@@ -50,6 +53,9 @@
                          <tr>
                              <td> <%= i + 1 %></td>
                              <td> <%= products[i].name %> </td>
+                             <td> <%= products[i].price %> </td>
+                             <td> <%= products[i].description %> </td>
+                             <td></td>
                              <td>
                                  <a href="/editProduct/<%= products[i]._id %>" class="btn btn-info">Editar</a>
                                  <a href="/deleteProduct/<%= products[i]._id %>" class="btn btn-danger">Eliminar</a>

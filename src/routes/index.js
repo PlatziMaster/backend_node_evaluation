@@ -60,4 +60,25 @@ router.post('/createProduct', async (req, res) => {
     res.redirect('/Products');
  });
 
+ router.get('/editProduct/:id', async(req, res) => {
+    const { id } = req.params;
+    const product = await Product.findById(id);
+    const categories = await Category.find();
+    res.render('Product/edit', {
+        product,
+        categories
+    });
+});
+
+router.post('/editProduct/:id', async(req, res) => {
+    const { id } = req.params;
+    await Product.update({_id: id}, req.body);
+    res.redirect('/products')
+});
+
+ router.get('/deleteProduct/:id', async (req, res) => {
+    const { id } = req.params;
+    await Product.remove({_id: id})
+    res.redirect('/Products');
+});
 module.exports = router;

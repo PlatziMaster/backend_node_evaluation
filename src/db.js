@@ -28,6 +28,14 @@ class Collection {
       return null;
     }
   }
+
+  async insertOne(obj) {
+    try {
+      return await this.instance.insertOne(obj).then((r) => r.ops[0]);
+    } catch (error) {
+      return null;
+    }
+  }
 }
 
 class DB {

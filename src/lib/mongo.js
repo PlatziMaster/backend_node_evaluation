@@ -3,14 +3,14 @@ const { config } = require("../config");
 
 const USER = encodeURIComponent(config.MONGO_USER);
 const PASSWORD = encodeURIComponent(config.MONGO_PASSWORD);
-const DB_NAME = config.MONGO_DB_NAME || "products";
+const DB_NAME = config.MONGO_DB_NAME;
 
-const MONGO_URI = `${config.MONGO_CONNECTION}://${USER}:${PASSWORD}@${config.MONGO_HOST}/${DB_NAME}?retryWrites=true&w=majority`;
+const MONGO_URI = `${config.MONGO_CONNECTION}://${USER}:${PASSWORD}@${config.MONGO_HOST}:${config.MONGO_PORT}?retryWrites=true&w=majority`;
 
 class MongoLib {
     constructor() {
         this.client = new MongoClient(MONGO_URI, { useNewUrlParser: true });
-        this.dbName = DB_NAME;
+        this.DB_NAME = DB_NAME;
     }
 
     connect() {
@@ -20,8 +20,7 @@ class MongoLib {
                     if (err) {
                         reject(err);
                     } else {
-                        console.log("Connected to database");
-                        resolve(this.client.db(this.dbName));
+                        resolve(this.client.db(this.DB_NAME));
                     }
                 });
             });
@@ -48,21 +47,21 @@ class MongoLib {
             .then((db) => {
                 return db.collection(collection).insertOne(data);
             })
-            .then((result) => result.insertedId);
+            .then((result) => result);
     }
 
     update(collection, id, data) {
         return this.connect()
             .then((db) => {
-                return db.collection(collection).updateOne(
+                return db.collection(collection).findOneAndUpdate(
                     {
                         _id: ObjectId(id),
                     },
                     { $set: data },
-                    { upsert: true }
+                    { returnOriginal: false }
                 );
             })
-            .then((result) => result.upsertedId || id);
+            .then((result) => result);
     }
 
     delete(collection, id) {

@@ -1,17 +1,21 @@
 const express = require("express");
-const Category = require("../services/categories");
-const Products = require("../services/categories");
+const Categories = require("../services/categories");
+const Products = require("../services/products");
 const validationHandler = require("../middleware/validationHandler");
 const {
     categoryCreateSchema,
     categoryUpdateSchema,
     productCreateSchema,
-    productUpdateSchema,
     idSchema,
 } = require("../schemas");
 
-const categories = new Category();
+const categories = new Categories();
+const products = new Products();
 
+/**
+ * The categories api routes
+ * @param {*} app
+ */
 const categoriesRoutes = (app) => {
     const router = express.Router();
 
@@ -20,7 +24,7 @@ const categoriesRoutes = (app) => {
     router.get("/", async (req, res, next) => {
         try {
             const data = await categories.all();
-            res.status(200).json({ data });
+            res.status(200).json(data);
         } catch (err) {
             next(err);
         }
@@ -33,9 +37,23 @@ const categoriesRoutes = (app) => {
                 const { categoryId } = req.params;
                 const category = await categories.find(categoryId);
                 if (category) {
-                    res.status(200).json({ data: category });
+                    res.status(200).json(category);
+                } else {
+                    res.status(404).json({ message: "Not found" });
                 }
-                res.status(404).json({ message: "Not found" });
+            } catch (err) {
+                next(err);
+            }
+        }
+    );
+    router.get(
+        "/:categoryId/products",
+        validationHandler({ categoryId: idSchema }, "params"),
+        async (req, res, next) => {
+            try {
+                const { categoryId } = req.params;
+                const data = (await products.all(categoryId)) || [];
+                res.status(200).json(data);
             } catch (err) {
                 next(err);
             }
@@ -47,8 +65,8 @@ const categoriesRoutes = (app) => {
         async (req, res, next) => {
             try {
                 const { body: category } = req;
-                const _id = await categories.create({ category });
-                res.status(201).json({ status: "success", _id });
+                const insertedDocument = await categories.create({ category });
+                res.status(201).json(insertedDocument);
             } catch (err) {
                 next(err);
             }
@@ -64,7 +82,7 @@ const categoriesRoutes = (app) => {
                 const { body: category } = req;
                 const { categoryId } = req.params;
                 const data = await categories.update({ categoryId, category });
-                res.status(200).json({ status: "success", data });
+                res.status(200).json(data);
             } catch (err) {
                 next(err);
             }
@@ -78,7 +96,7 @@ const categoriesRoutes = (app) => {
             try {
                 const { categoryId } = req.params;
                 await categories.destroy(categoryId);
-                res.status(200).json({ status: "success" });
+                res.status(200).json(true);
             } catch (err) {
                 next(err);
             }
@@ -86,6 +104,10 @@ const categoriesRoutes = (app) => {
     );
 };
 
+/**
+ * The products api routes
+ * @param {*} app
+ */
 const productsRoutes = (app) => {
     const router = express.Router();
 
@@ -93,23 +115,24 @@ const productsRoutes = (app) => {
 
     router.get("/", async (req, res, next) => {
         try {
-            const data = await Products.all();
-            res.status(200).json({ data });
+            const data = await products.all();
+            res.status(200).json(data);
         } catch (err) {
             next(err);
         }
     });
     router.get(
-        "/:categoryId",
+        "/:productId",
         validationHandler({ productId: idSchema }, "params"),
         async (req, res, next) => {
             try {
                 const { productId } = req.params;
-                const product = await Products.find(productId);
+                const product = await products.find(productId);
                 if (product) {
-                    res.status(200).json({ data: product });
+                    res.status(200).json(product);
+                } else {
+                    res.status(404).json({ message: "Not found" });
                 }
-                res.status(404).json({ message: "Not found" });
             } catch (err) {
                 next(err);
             }
@@ -121,8 +144,8 @@ const productsRoutes = (app) => {
         async (req, res, next) => {
             try {
                 const { body: product } = req;
-                const insertedId = await Products.create({ product });
-                res.status(201).json({ status: "success", insertedId });
+                const insertedDocument = await products.create({ product });
+                res.status(201).json(insertedDocument);
             } catch (err) {
                 next(err);
             }
@@ -132,13 +155,16 @@ const productsRoutes = (app) => {
     router.put(
         "/:productId",
         validationHandler({ productId: idSchema }, "params"),
-        validationHandler(productUpdateSchema),
         async (req, res, next) => {
             try {
                 const { body: product } = req;
                 const { productId } = req.params;
-                const data = await Products.update({ productId, product });
-                res.status(200).json({ status: "success", data });
+                const updatedDocument = await products.update({
+                    productId,
+                    product,
+                });
+
+                res.status(200).json(updatedDocument);
             } catch (err) {
                 next(err);
             }
@@ -151,8 +177,8 @@ const productsRoutes = (app) => {
         async (req, res, next) => {
             try {
                 const { productId } = req.params;
-                await Products.destroy(productId);
-                res.status(200).json({ status: "success" });
+                await products.destroy(productId);
+                res.status(200).json(true);
             } catch (err) {
                 next(err);
             }

@@ -15,11 +15,20 @@ class Categories {
     }
 
     async create({ category }) {
-        return await this.mongoDB.create(this.collection, category);
+        const insertedDocument = await this.mongoDB.create(
+            this.collection,
+            category
+        );
+        return insertedDocument.ops[0];
     }
 
     async update({ categoryId, category } = {}) {
-        return await this.mongoDB.update(this.collection, categoryId, category);
+        const updatedDocument = await this.mongoDB.update(
+            this.collection,
+            categoryId,
+            category
+        );
+        return updatedDocument.value;
     }
 
     async destroy(categoryId) {

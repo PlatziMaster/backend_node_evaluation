@@ -25,13 +25,11 @@ const productCreateSchema = {
     price,
     image,
     description,
-    categoryId: idSchema.required(),
 };
 
 const productUpdateSchema = {
     name,
     price,
-    categoryId: idSchema,
 };
 
 module.exports = {

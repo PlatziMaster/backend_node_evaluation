@@ -6,8 +6,10 @@ class Products {
         this.mongoDB = new MongoLib();
     }
 
-    async all() {
-        return (await this.mongoDB.getAll(this.collection)) || [];
+    async all(categoryId = null) {
+        const query = categoryId && { categoryId: { $in: [categoryId] } };
+        const data = await this.mongoDB.getAll(this.collection, query);
+        return data || [];
     }
 
     async find(productId) {
@@ -15,11 +17,20 @@ class Products {
     }
 
     async create({ product }) {
-        return await this.mongoDB.create(this.collection, product);
+        const insertedDocument = await this.mongoDB.create(
+            this.collection,
+            product
+        );
+        return insertedDocument.ops[0];
     }
 
     async update({ productId, product } = {}) {
-        return await this.mongoDB.update(this.collection, productId, product);
+        const updatedDocument = await this.mongoDB.update(
+            this.collection,
+            productId,
+            product
+        );
+        return updatedDocument.value;
     }
 
     async destroy(productId) {

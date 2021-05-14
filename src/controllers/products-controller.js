@@ -1,15 +1,17 @@
 const Product = require('../models/product')
+const ProductsRepository = require('../repositories/products-repository')
 
 const ProductsController = {
     async index (request, response) {
         try {
-            const products = await Product.find()
+            const products = await ProductsRepository.all()
 
             return response.send({
                 data: products,
             })
         } catch (error) {
             console.log(error)
+
             return response
                 .status(404)
                 .send({ message: 'Entity not found.' })
@@ -25,7 +27,7 @@ const ProductsController = {
         })
 
         try {
-            product = await product.save()
+            product = await ProductsRepository.createOrUpdate(product)
 
             return response.status(201).send({
                 data: product
@@ -40,7 +42,13 @@ const ProductsController = {
     },
     async show (request, response) {
         try {
-            const product = await Product.findOne({ _id: request.params.id })
+            const product = await ProductsRepository.find(request.params.id)
+
+            if (!product) {
+                return response.status(404).send({
+                    message: 'Entity not found.'
+                })
+            }
 
             return response.send({
                 data: product
@@ -55,7 +63,13 @@ const ProductsController = {
     },
     async update (request, response) {
         try {
-            let product = await Product.findOne({ _id: request.params.id })
+            let product = await ProductsRepository.find(request.params.id)
+
+            if (!product) {
+                return response.status(404).send({
+                    message: 'Entity not found.'
+                })
+            }
 
             product.name = request.body.name
             product.price = request.body.price
@@ -63,7 +77,7 @@ const ProductsController = {
             product.categoryId = request.body.categoryId
             product.image = request.body.image
 
-            product = await product.save()
+            product = await ProductsRepository.createOrUpdate(product)
 
             return response.send({
                 data: product
@@ -78,7 +92,13 @@ const ProductsController = {
     },
     async delete (request, response) {
         try {
-            const product = await Product.findOne({ _id: request.params.id })
+            const product = await ProductsRepository.find(request.params.id)
+
+            if (!product) {
+                return response.status(404).send({
+                    message: 'Entity not found.'
+                })
+            }
 
             await product.delete()
 

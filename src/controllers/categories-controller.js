@@ -35,7 +35,7 @@ const CategoriesController = {
         })
     },
     show: function (request, response) {
-        Category.find({ _id: request.params.id }, function (error, category) {
+        Category.findOne({ _id: request.params.id }, function (error, category) {
             if (error) {
                 console.log(error)
                 return response.status(404).send({

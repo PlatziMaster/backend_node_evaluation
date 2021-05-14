@@ -2,12 +2,14 @@ const Model = require('./model');
 const ProductsModel = require('../products/model');
 
 async function getCategorias(id) {
-    let filter = {};
     if(id != null){
-        filter = { _id: id };
+        const categories = await Model.findOne({_id: id});
+        return categories;
     }
-    const categories = await Model.find(filter);
-    return categories;
+    else{
+        const categories = await Model.find({});
+        return categories;
+    }
 }
 
 const addCategoria = (category) => {
@@ -17,7 +19,8 @@ const addCategoria = (category) => {
 
 async function updateCategoria(id, category) {
     const updatedCategory = await Model.findByIdAndUpdate(id, category);
-    return updatedCategory
+    const result = await Model.findOne({_id: id});
+    return result
 };
 
 const deleteCategoria = (id) => {

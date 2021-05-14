@@ -2,25 +2,15 @@ const store = require('./store');
 
 const getCategorias = (id) => store.getCategorias(id);
 
-const addCategoria = (name, image) => {
+const addCategoria = (categoria) => {
     return new Promise((resolve, reject) => {
-        if (!name || !image) {
-            console.error('[categoriesController] Datos incompletos');
-            return reject('Datos incompletos');
-        }
-        categoria = {"name":name, "image":image}
-        store.addCategoria(categoria);
-        resolve(categoria);
+        const result = store.addCategoria(categoria);
+        resolve(result);
     });
 };
 
-const updateCategoria = (id, name, image) => {
+const updateCategoria = (id, categoria) => {
     return new Promise((resolve, reject) => {
-        if (!id || !name || !image) {
-            console.error('[categoriesController] Datos incompletos');
-            return reject('Datos incompletos');
-        }
-        categoria = {"name":name, "image":image}
         const result = store.updateCategoria(id, categoria);
         resolve(result);
     });

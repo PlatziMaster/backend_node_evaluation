@@ -22,16 +22,16 @@ router.get('/:id',function(req,res){
 //Endpoint para crear un categoría.
 router.post('/',function(req,res){
     console.log("[categoriesNetwork] Endpoint para crear un categoría.")
-    controller.addCategoria(req.body.name, req.body.image)
-        .then(response.success(req,res,"Categoría añadida correctamente",201))
+    controller.addCategoria(req.body)
+        .then(categoria => response.success(req,res,categoria,201))
         .catch(error => response.error(req,res,'Error al añadir una categoría',500,error))
 });
 
 //Endpoint para modificar un categoría.
 router.put('/:id',function(req,res){
     console.log("[categoriesNetwork] Endpoint para modificar un categoría.")
-    controller.updateCategoria(req.params.id, req.body.name, req.body.image)
-        .then(response.success(req, res, `Categoría ${req.params.id} modificada`, 200))
+    controller.updateCategoria(req.params.id, req.body)
+        .then(categoria => response.success(req, res, categoria, 200))
         .catch(error => response.error(req, res, `Error al modificar la categoría ${req.params.id}`, 500, error))
 });
 
@@ -39,16 +39,12 @@ router.put('/:id',function(req,res){
 router.delete('/:id',function(req,res){
     console.log("[categoriesNetwork] Endpoint para eliminar un categoría.")
     controller.deleteCategoria(req.params.id)
-        .then(() => response.success(req, res, `Categoría ${req.params.id} eliminada`, 200))
-        .catch(error => response.error(req, res, `Error al eliminar la categoría ${req.params.id}`, 500, error))
+        .then(response.delete(req,res,true,200))
+        .catch(response.delete(req,res,false,400))
 });
 
 //Endpoint para retornar la lista de productos que pertenecen a una categoría.
 router.get('/:categoryId/products', (req, res) => {
-    if(req.params.categoryId == null){
-        error => response.error(req, res, `Favor de mandar "categoryId" para continuar`, 500, error)
-    }
-
     controller.getProductosByCategoria(req.params.categoryId)
         .then(products => response.success(req, res, products, 200))
         .catch(error => response.error(req, res, `Error al consultar productos por categoría`, 500, error))

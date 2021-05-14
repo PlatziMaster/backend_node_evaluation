@@ -1,101 +1,85 @@
 const Category = require('../models/category')
 
 const CategoriesController = {
-    index: function (request, response) {
-        Category.find(function(error, categories) {
-            if (error) {
-                console.log(error)
-                return response
-                    .status(404)
-                    .send({ message: 'Unable to retrieve categories.' })
-            }
+    async index (request, response) {
+        try {
+            const categories = await Category.find()
 
             return response.send({
                 data: categories,
             })
-        })
+        } catch (error) {
+            console.log(error)
+
+            return response
+                .status(404)
+                .send({ message: 'Entity not found.' })
+        }
     },
-    store: function (request, response) {
-        const category = new Category({
+    async store (request, response) {
+        let category = new Category({
             name: request.body.name,
             image: request.body.image,
         })
 
-        category.save(function(error, category) {
-            if (error) {
-                console.log(error)
-                return response.status(422).send({
-                    message: 'Something went wrong.'
-                })
-            }
+        try {
+            category = await category.save()
 
             return response.status(201).send({
                 data: category
             })
-        })
+        } catch (error) {
+            console.log(error)
+
+            return response.status(422).send({
+                message: 'Something went wrong.'
+            })
+        }
     },
-    show: function (request, response) {
-        Category.findOne({ _id: request.params.id }, function (error, category) {
-            if (error) {
-                console.log(error)
-                return response.status(404).send({
-                    message: 'Entity not found.'
-                })
-            }
+    async show (request, response) {
+        try {
+            const category = await Category.findOne({ _id: request.params.id })
 
             return response.send({
                 data: category
             })
-        })
+        } catch (e) {
+            return response.status(404).send({
+                message: 'Entity not found.'
+            })
+        }
     },
-    update: function (request, response) {
-        Category.findOne({ _id: request.params.id }, function (error, category) {
-            if (error) {
-                console.log(error)
-                return response.status(404).send({
-                    message: 'Entity not found.'
-                })
-            }
+    async update (request, response) {
+        try {
+            let category = await Category.findOne({ _id: request.params.id })
 
             category.name = request.body.name
             category.image = request.body.image
 
-            category.save(function(savingError, category) {
-                if (savingError) {
-                    console.log(savingError)
-                    return response.status(422).send({
-                        message: 'Unprocessable entity.'
-                    })
-                }
+            category = await category.save()
 
-                return response.send({
-                    data: category
-                })
+            return response.send({
+                data: category
             })
-        })
+        } catch (e) {
+            return response.status(422).send({
+                message: 'Unprocessable entity.'
+            })
+        }
     },
-    delete: function (request, response) {
-        Category.findOne({ _id: request.params.id }, function (error, category) {
-            if (error) {
-                console.log(error)
-                return response.status(404).send({
-                    message: 'Entity not found.'
-                })
-            }
+    async delete (request, response) {
+        try {
+            let category = await Category.findOne({ _id: request.params.id })
+            category = await category.delete()
 
-            category.delete(function(savingError, category) {
-                if (savingError) {
-                    console.log(savingError)
-                    return response.status(422).send({
-                        message: 'Unprocessable entity.'
-                    })
-                }
-
-                return response.send({
-                    data: category
-                })
+            return response.send({
+                data: category
             })
-        })
+        } catch (e) {
+            return response.status(422).send({
+                message: 'Unprocessable entity.'
+            })
+        }
     },
 }
 

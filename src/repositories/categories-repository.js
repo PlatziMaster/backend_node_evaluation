@@ -4,6 +4,11 @@ const CategoriesRepository = {
     async all() {
         return await Category.find()
     },
+    async paginate(page = 1, filters = {}, recordsPerPage = 10) {
+        return await Category.find(filters)
+            .limit(recordsPerPage)
+            .skip(recordsPerPage * (page - 1))
+    },
     async find(id) {
         return await Category.findOne({ _id: id })
     },

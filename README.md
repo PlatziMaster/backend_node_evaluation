@@ -1,3 +1,6 @@
+# Probar proyecto desplegado en heroku:
+https://platzi-node-arrieta.herokuapp.com/api/categories
+
 # Prueba de Backend NodeJS
 Crear un CRUD para crear productos conectado a MongoDB.
 

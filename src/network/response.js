@@ -1,8 +1,6 @@
 exports.success = function(req,res,message,status) 
 {
-    res.status(status || 200).send({
-        body: message
-    });
+    res.status(status || 200).json(message)
 }
 
 exports.error = function(req,res,message,status,details) 
@@ -12,4 +10,9 @@ exports.error = function(req,res,message,status,details)
         error: message,
         body: ''
     });
+}
+
+exports.delete = function(req,res,bool,status)
+{
+    res.status(status).send(bool)
 }

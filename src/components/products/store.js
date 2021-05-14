@@ -1,12 +1,14 @@
 const Model = require('./model');
 
 async function getProducts(id) {
-    let filter = {};
     if(id != null){
-        filter = { _id: id };
+        const products = await Model.findOne({_id: id});
+        return products;
     }
-    const products = await Model.find(filter);
-    return products;
+    else{
+        const products = await Model.find({});
+        return products;
+    }
 }
 
 const addProduct = (product) => {
@@ -16,7 +18,8 @@ const addProduct = (product) => {
 
 async function updateProduct(id, product){
     const updatedProd = await Model.findByIdAndUpdate(id, product);
-    return updatedProd
+    const result = await Model.findOne({_id: id});
+    return result
 };
 
 const deleteProduct = (id) => {

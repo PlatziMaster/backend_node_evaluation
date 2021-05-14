@@ -2,25 +2,15 @@ const store = require('./store');
 
 const getProducts = (id) => store.getProducts(id);
 
-const addProduct = (name,price,description,categoryId,image) => {
+const addProduct = (product) => {
     return new Promise((resolve, reject) => {
-        if (!name || !price || !description || !categoryId || !image) {
-            console.error('[productsController] Datos incompletos');
-            return reject('Datos incompletos');
-        }
-        product = {"name":name, "price":price, "description":description, "categoryId":categoryId, "image":image}
-        store.addProduct(product);
-        resolve(product);
+        const result = store.addProduct(product);
+        resolve(result);
     });
 };
 
-const updateProduct = (id, name, price, description, categoryId, image) => {
+const updateProduct = (id, product) => {
     return new Promise((resolve, reject) => {
-        if (!id || !name || !price || !description || !categoryId || !image) {
-            console.error('[productsController] Datos incompletos');
-            return reject('Datos incompletos');
-        }
-        product = {"name":name, "price":price, "description":description, "categoryId":categoryId, "image":image}
         const result = store.updateProduct(id, product);
         resolve(result);
     });

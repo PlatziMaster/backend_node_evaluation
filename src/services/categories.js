@@ -4,7 +4,7 @@ const MongoLib = require('../lib/mongo');
 class CategoriesService{
 
     constructor(){
-        this.collection = 'category';
+        this.collection = 'categories';
         this.mongoDB = new MongoLib();
     }
     async getCategories(categories){
@@ -19,7 +19,7 @@ class CategoriesService{
     }
     async getProducts(categoryId){
         const query = categoryId && { "categoryId": categoryId };
-        const Category = await this.mongoDB.getAll("product",query);
+        const Category = await this.mongoDB.getAll("products",query);
         return Category || {};
     }
     

@@ -4,7 +4,7 @@ const MongoLib = require('../lib/mongo');
 class ProductService{
 
     constructor(){
-        this.collection = 'product';
+        this.collection = 'products';
         this.mongoDB = new MongoLib();
     }
     async getProducts(categories){

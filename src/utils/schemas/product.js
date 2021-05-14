@@ -11,17 +11,17 @@ const productImageSchema = joi.string().uri();
 const createProductSchema = {
     name: productNameSchema.required(),
     price: productPriceSchema.required(),
-    description: productDescriptionSchema.required(),
-    categoryId: productCategoryIdSchema.required(),
-    image: productImageSchema.required()
+    description: productDescriptionSchema,
+    categoryId: productCategoryIdSchema,
+    image: productImageSchema
 };
 
   const updateProductSchema = {
     name: productNameSchema.required(),
     price: productPriceSchema.required(),
-    description: productDescriptionSchema.required(),
-    categoryId: productCategoryIdSchema.required(),
-    image: productImageSchema.required()
+    description: productDescriptionSchema,
+    categoryId: productCategoryIdSchema,
+    image: productImageSchema
   };
 
 module.exports = {

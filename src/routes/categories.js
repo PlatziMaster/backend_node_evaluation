@@ -16,66 +16,55 @@ function categoriesApi(app){
     const router = express.Router();
     const categoriesService = new CategoriesService();
 
-    app.use('/api/category/',router);
+    //app.use('/api/categories/',router);
 
-    router.get("/", async function(req,res,next){
+    app.get("/api/categories/", async function(req,res,next){
       cacheResponse(res,A_MINUTE_IN_SECONDS);
      //const {  category } = req.query;
      try{
-        const categorys = await categoriesService.getCategories();
+        const categories = await categoriesService.getCategories();
 
-        res.status(200).json({
-            data: categorys,
-            message : "categories list"
-        });
+        res.status(200).json( categories);
+
      }catch(error){
         next(error);
      }   
     });
 
-    router.get("/:categoryId",validationHandler({ categoryId: categoryIdSchema }, 'params'), async function(req,res,next){
+    app.get("/api/categories/:categoryId",validationHandler({ categoryId: categoryIdSchema }, 'params'), async function(req,res,next){
        cacheResponse(res,A_MINUTE_IN_SECONDS);
        const { categoryId } = req.params;
       try{
          const category = await categoriesService.getCategory(categoryId);
-         res.status(200).json({
-             data: category,
-             message : "category Detail"
-         });
+         res.status(200).json( category);
       }catch(error){
          next(error);
       }   
      });
 
      
-    router.get("/:categoryId/products",validationHandler({ categoryId: categoryIdSchema }, 'params'), async function(req,res,next){
+    app.get("/api/categories/:categoryId/products",validationHandler({ categoryId: categoryIdSchema }, 'params'), async function(req,res,next){
       cacheResponse(res,A_MINUTE_IN_SECONDS);
       const { categoryId } = req.params;
      try{
         const category = await categoriesService.getProducts(categoryId);
-        res.status(200).json({
-            data: category,
-            message : "Products found in this Category"
-        });
+        res.status(200).json( category);
      }catch(error){
         next(error);
      }   
     });
 
-     router.post("/", validationHandler(createcategorySchema), async function(req,res,next){
+     app.post("/api/categories/", validationHandler(createcategorySchema), async function(req,res,next){
       const { body: category } = req;
      try{
         const categories = await categoriesService.createCategory(category);
-        res.status(201).json({
-            data: categories,
-            message : "category was created succesfully!"
-        });
+        res.status(201).json( categories);
      }catch(error){
         next(error);
      }   
     });
 
-    router.put("/:categoryId",
+    app.put("/api/categories/:categoryId",
     validationHandler({ categoryId: categoryIdSchema }, 'params'),
     validationHandler(updatecategorySchema),
      async function(req,res,next){
@@ -83,25 +72,19 @@ function categoriesApi(app){
       const { body: category } = req;
      try{
         const categories = await categoriesService.updateCategory(categoryId,category);
-        res.status(200).json({
-            data: categories,
-            message : "category was updated succesfully!"
-        });
+        res.status(200).json( categories);
      }catch(error){
         next(error);
      }   
     });
 
-    router.delete("/:categoryId",
+    app.delete("/api/categories/:categoryId",
     validationHandler({ categoryId: categoryIdSchema }, 'params'),
    async function(req,res,next){
       const { categoryId } = req.params;
      try{
-        const categories = await categoriesService.deleteCategory(categoryId);
-        res.status(200).json({
-            data: categories,
-            message : "category was deleted succesfully!"
-        });
+        const category = await categoriesService.deleteCategory(categoryId);
+        res.status(200).json( category.deletedCount>0 );
      }catch(error){
         next(error);
      }   

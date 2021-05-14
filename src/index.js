@@ -2,26 +2,6 @@ const { config } = require('./config');
 const createApp = require('./app');
 const app = createApp();
 
-const productsApi = require('./routes/products.js');
-const categoriesApi = require('./routes/categories.js');
-const { logErrors, errorHandler, wrapErrors} = require('./middleware/error-handlers.js')
-const notFoundHandler = require('./middleware/not-found-handler.js');
-
-productsApi(app)
-categoriesApi(app)
-  
-
- app.get('/', function(req, res) {
-  res.send('Back-End for Platzi Master 😃 by Ricardo Ruíz Velazco ');
-});
-
-app.use(notFoundHandler);
-
-app.use(logErrors)
-app.use(wrapErrors)
-app.use(errorHandler)
-
-
 app.listen(config.port, err => {
   console.log(`Listening http://localhost:${config.port}`);
   if (err) {

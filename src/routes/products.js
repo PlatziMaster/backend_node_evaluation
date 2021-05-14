@@ -13,54 +13,46 @@ const  cacheResponse = require('../utils/cacheResponse');
 const {A_MINUTE_IN_SECONDS} = require('../utils/time');
 
 function productsApi(app){
-    const router = express.Router();
     const productService = new ProductService();
 
-    app.use('/api/products/',router);
+    //app.use('/api/products',router);
 
-    router.get("/", async function(req,res,next){
+    app.get("/api/products", async function(req,res,next){
       cacheResponse(res,A_MINUTE_IN_SECONDS);
      //const {  category } = req.query;
      try{
         const products = await productService.getProducts();
 
-        res.status(200).json({
-            data: products,
-            message : "Products list"
-        });
+        res.status(200).json( products );
      }catch(error){
         next(error);
      }   
     });
 
-    router.get("/:productId",validationHandler({ productId: productIdSchema }, 'params'), async function(req,res,next){
+    app.get("/api/products/:productId",validationHandler({ productId: productIdSchema }, 'params'), async function(req,res,next){
       cacheResponse(res,A_MINUTE_IN_SECONDS);
        const { productId } = req.params;
       try{
          const product = await productService.getProduct(productId);
-         res.status(200).json({
-             data: product,
-             message : "Product Detail"
-         });
+         res.status(200).json( product );
       }catch(error){
          next(error);
       }   
      });
 
-     router.post("/", validationHandler(createProductSchema), async function(req,res,next){
+     app.post("/api/products", validationHandler(createProductSchema), async function(req,res,next){
       const { body: product } = req;
      try{
         const products = await productService.createProduct(product);
-        res.status(201).json({
-            data: products,
-            message : "Product was created succesfully!"
-        });
+        res.status(201).json(
+             products
+        );
      }catch(error){
         next(error);
      }   
     });
 
-    router.put("/:productId",
+    app.put("/api/products/:productId",
     validationHandler({ productId: productIdSchema }, 'params'),
     validationHandler(updateProductSchema),
      async function(req,res,next){
@@ -68,25 +60,19 @@ function productsApi(app){
       const { body: product } = req;
      try{
         const products = await productService.updateProduct(productId,product);
-        res.status(200).json({
-            data: products,
-            message : "Product was updated succesfully!"
-        });
+        res.status(200).json( products );
      }catch(error){
         next(error);
      }   
     });
 
-    router.delete("/:productId",
+    app.delete("/api/products/:productId",
     validationHandler({ productId: productIdSchema }, 'params'),
    async function(req,res,next){
       const { productId } = req.params;
      try{
-        const products = await productService.deleteProduct(productId);
-        res.status(200).json({
-            data: products,
-            message : "Product was deleted succesfully!"
-        });
+        const product = await productService.deleteProduct(productId);
+        res.status(200).json( product.deletedCount>0 );
      }catch(error){
         next(error);
      }   

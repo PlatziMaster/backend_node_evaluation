@@ -5,7 +5,7 @@ const USER = encodeURIComponent(config.dbUser);
 const PASSWORD = encodeURIComponent(config.dbPassword);
 const DB_NAME = config.dbName;
 
-const MONGO_URI = `mongodb+srv://${USER}:${PASSWORD}@${config.dbHost}:${config.dbPort}/${DB_NAME}?retryWrites=true&w=majority`;
+const MONGO_URI = `${config.dbConnection}://${USER}:${PASSWORD}@${config.dbHost}:${config.dbPort}/${DB_NAME}?retryWrites=true&w=majority`;
 
 class MongoLib {
     constructor() {
@@ -49,14 +49,14 @@ class MongoLib {
         return this.connect().then(
             db => {
                 return db.collection(collection).insertOne(data)
-            }).then(result => result.insertedId);
+            }).then(result => this.get(collection,result.insertedId));
     }
 
     update(collection, id, data) {
         return this.connect().then(
             db => {
                 return db.collection(collection).updateOne({ _id: ObjectId(id) }, { $set: data }, { upsert: true })
-            }).then(result => result.upsertedId || id);
+            }).then(result => this.get(collection,(result.upsertedId || id)) );
     }
     delete(collection, id) {
         return this.connect().then(

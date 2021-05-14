@@ -2,16 +2,18 @@ const Category = require('../models/category')
 const Product = require('../models/product')
 
 const CategoriesProductsController = {
-    index: function (request, response) {
-        Product.find({ categoryId: request.params.categoryId }, function (error, products) {
-            if (error) {
-                return response.status(404).send({
-                    message: 'Entity not found'
-                })
-            }
+    async index (request, response) {
+        try {
+            const products = await Product.find({ categoryId: request.params.categoryId })
 
             return response.send(products)
-        })
+        } catch (error) {
+            console.log(error)
+
+            return response.status(404).send({
+                message: 'Entity not found'
+            })
+        }
     }
 }
 

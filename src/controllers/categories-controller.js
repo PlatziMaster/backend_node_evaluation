@@ -34,7 +34,20 @@ const CategoriesController = {
             })
         })
     },
-    show: function (request, response) {},
+    show: function (request, response) {
+        Category.find({ _id: request.params.id }, function (error, category) {
+            if (error) {
+                console.log(error)
+                return response.status(404).send({
+                    message: 'Entity not found.'
+                })
+            }
+
+            return response.send({
+                data: category
+            })
+        })
+    },
     update: function (request, response) {},
     delete: function (request, response) {},
 }

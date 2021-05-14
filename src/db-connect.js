@@ -2,7 +2,7 @@ const mongoose = require('mongoose');
 const config = require('../src/config').config
 const USER = encodeURIComponent(config.dbUser)
 const PASSWORD = encodeURIComponent(config.dbPassword)
-const CONNECTION_URL = `${config.dbConnection}://${USER}:${PASSWORD}@${config.dbHost}:${config.dbPort}/${config.dbName}`
+const CONNECTION_URL = `${config.dbConnection}://${USER}:${PASSWORD}@${config.dbHost}/${config.dbName}`
 
 const connect = () => {
     return mongoose.connect(

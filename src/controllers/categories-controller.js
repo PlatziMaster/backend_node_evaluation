@@ -48,7 +48,32 @@ const CategoriesController = {
             })
         })
     },
-    update: function (request, response) {},
+    update: function (request, response) {
+        Category.findOne({ _id: request.params.id }, function (error, category) {
+            if (error) {
+                console.log(error)
+                return response.status(404).send({
+                    message: 'Entity not found.'
+                })
+            }
+
+            category.name = request.body.name
+            category.image = request.body.image
+
+            category.save(function(savingError, category) {
+                if (savingError) {
+                    console.log(savingError)
+                    return response.status(422).send({
+                        message: 'Unprocessable entity.'
+                    })
+                }
+
+                return response.send({
+                    data: category
+                })
+            })
+        })
+    },
     delete: function (request, response) {},
 }
 

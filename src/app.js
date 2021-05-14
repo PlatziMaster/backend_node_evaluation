@@ -16,6 +16,7 @@ function createApp() {
   app.get('/api/categories', CategoriesController.index);
   app.post('/api/categories', CategoriesController.store);
   app.get('/api/categories/:id', CategoriesController.show);
+  app.put('/api/categories/:id', CategoriesController.update);
 
   return app;
 }

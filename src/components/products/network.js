@@ -23,7 +23,7 @@ router.get('/:id',function(req,res){
 router.post('/',function(req,res){
     console.log("[productsNetwork] Endpoint para crear un producto.")
     controller.addProduct(req.body.name,req.body.price,req.body.description,req.body.categoryId,req.body.image)
-        .then(response.success(req,res,"Producto añadido correctamente",200))
+        .then(response.success(req,res,"Producto añadido correctamente",201))
         .catch(error => response.error(req,res,'Error al añadir un producto',500,error))
 });
 
@@ -31,7 +31,7 @@ router.post('/',function(req,res){
 router.put('/:id',function(req,res){
     console.log("[productsNetwork] Endpoint para modificar un producto.")
     controller.updateProduct(req.params.id, req.body.name, req.body.price, req.body.description, req.body.categoryId, req.body.image)
-        .then(response.success(req, res, `Producto ${req.params.id} modificado`, 201))
+        .then(response.success(req, res, `Producto ${req.params.id} modificado`, 200))
         .catch(error => response.error(req, res, `Error al modificar el producto ${req.params.id}`, 500, error))
 });
 

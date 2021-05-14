@@ -23,7 +23,7 @@ router.get('/:id',function(req,res){
 router.post('/',function(req,res){
     console.log("[categoriesNetwork] Endpoint para crear un categoría.")
     controller.addCategoria(req.body.name, req.body.image)
-        .then(response.success(req,res,"Categoría añadida correctamente",200))
+        .then(response.success(req,res,"Categoría añadida correctamente",201))
         .catch(error => response.error(req,res,'Error al añadir una categoría',500,error))
 });
 
@@ -31,7 +31,7 @@ router.post('/',function(req,res){
 router.put('/:id',function(req,res){
     console.log("[categoriesNetwork] Endpoint para modificar un categoría.")
     controller.updateCategoria(req.params.id, req.body.name, req.body.image)
-        .then(response.success(req, res, `Categoría ${req.params.id} modificada`, 201))
+        .then(response.success(req, res, `Categoría ${req.params.id} modificada`, 200))
         .catch(error => response.error(req, res, `Error al modificar la categoría ${req.params.id}`, 500, error))
 });
 
@@ -50,7 +50,7 @@ router.get('/:categoryId/products', (req, res) => {
     }
 
     controller.getProductosByCategoria(req.params.categoryId)
-        .then(products => response.success(req, res, products))
+        .then(products => response.success(req, res, products, 200))
         .catch(error => response.error(req, res, `Error al consultar productos por categoría`, 500, error))
 });
 

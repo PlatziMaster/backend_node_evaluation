@@ -1,7 +1,5 @@
 const express = require('express');
 const cors = require('cors');
-const mongoose = require('mongoose');
-const config = require('../src/config').config;
 const CategoriesController = require('./controllers/categories-controller');
 const ProductsController = require('./controllers/products-controller');
 const CategoriesProductsController = require('./controllers/categories-products-controller');
@@ -10,13 +8,6 @@ function createApp() {
   const app = express();
   app.use(cors());
   app.use(express.json());
-  const USER = encodeURIComponent(config.dbUser);
-  const PASSWORD = encodeURIComponent(config.dbPassword);
-  const MONGO_CONNECTION_URL = `${config.dbConnection}://${USER}:${PASSWORD}@${config.dbHost}:${config.dbPort}/${config.dbName}`
-  mongoose.connect(
-      MONGO_CONNECTION_URL,
-    {useNewUrlParser: true, useUnifiedTopology: true}
-  );
 
   app.get('/api/categories', CategoriesController.index);
   app.post('/api/categories', CategoriesController.store);

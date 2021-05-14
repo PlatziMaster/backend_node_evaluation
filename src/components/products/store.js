@@ -14,7 +14,18 @@ const addProduct = (product) => {
     return producto.save()
 };
 
+async function updateProduct(id, product){
+    const updatedProd = await Model.findByIdAndUpdate(id, product);
+    return updatedProd
+};
+
+const deleteProduct = (id) => {
+    return Model.findByIdAndDelete(id);
+};
+
 module.exports = {
     getProducts,
-    addProduct
+    addProduct,
+    updateProduct,
+    deleteProduct
 };

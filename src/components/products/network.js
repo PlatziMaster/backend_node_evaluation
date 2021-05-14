@@ -16,7 +16,7 @@ router.get('/:id',function(req,res){
     console.log("[network] Endpoint para retornar un producto.")
     controller.getProducts(req.params.id)
         .then(list => response.success(req,res,list,200))
-        .catch(error => response.error(req,res,'Producto no encontrado',400,error))
+        .catch(error => response.error(req,res,`Producto ${req.params.id} no encontrado`,400,error))
 });
 
 //Endpoint para crear un producto.
@@ -29,12 +29,18 @@ router.post('/',function(req,res){
 
 //Endpoint para modificar un producto.
 router.put('/:id',function(req,res){
-    response.success(req,res,'update product',200)
+    console.log("[network] Endpoint para modificar un producto.")
+    controller.updateProduct(req.params.id, req.body.name, req.body.price, req.body.description, req.body.categoryId, req.body.image)
+        .then(response.success(req, res, `Producto ${req.params.id} modificado`, 201))
+        .catch(error => response.error(req, res, `Error al modificar el producto ${req.params.id}`, 500, error))
 });
 
 //Endpoint para eliminar un producto.
 router.delete('/:id',function(req,res){
-    response.success(req,res,'delete product',200)
+    console.log("[network] Endpoint para eliminar un producto.")
+    controller.deleteProduct(req.params.id)
+        .then(() => response.success(req, res, `Producto ${req.params.id} eliminado`, 200))
+        .catch(error => response.error(req, res, `Error al eliminar el producto ${req.params.id}`, 500, error))
 });
 
 module.exports = router;

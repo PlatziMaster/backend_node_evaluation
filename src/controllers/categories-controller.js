@@ -69,8 +69,8 @@ const CategoriesController = {
     },
     async delete (request, response) {
         try {
-            let category = await Category.findOne({ _id: request.params.id })
-            category = await category.delete()
+            const category = await Category.findOne({ _id: request.params.id })
+            await category.delete()
 
             return response.send({
                 data: category

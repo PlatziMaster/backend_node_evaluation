@@ -4,6 +4,7 @@ const mongoose = require('mongoose');
 const config = require('../src/config').config;
 const CategoriesController = require('./controllers/categories-controller');
 const ProductsController = require('./controllers/products-controller');
+const CategoriesProductsController = require('./controllers/categories-products-controller');
 
 function createApp() {
   const app = express();
@@ -19,6 +20,8 @@ function createApp() {
   app.get('/api/categories/:id', CategoriesController.show);
   app.put('/api/categories/:id', CategoriesController.update);
   app.delete('/api/categories/:id', CategoriesController.delete);
+
+  app.get('/api/categories/:categoryId/products', CategoriesProductsController.index);
 
   app.get('/api/products', ProductsController.index);
   app.post('/api/products', ProductsController.store);

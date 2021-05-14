@@ -1,5 +1,7 @@
 const store = require('./store');
 
+const getProducts = (id) => store.getProducts(id);
+
 const addProduct = (name,price,description,categoryId,image) => {
     return new Promise((resolve, reject) => {
         if (!name || !price || !description || !categoryId || !image) {
@@ -13,5 +15,6 @@ const addProduct = (name,price,description,categoryId,image) => {
 };
 
 module.exports = { 
+    getProducts,
     addProduct
 }

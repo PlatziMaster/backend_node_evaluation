@@ -1,5 +1,13 @@
 const Model = require('./model');
-const db = require('mongoose');
+
+async function getProducts(id) {
+    let filter = {};
+    if(id != null){
+        filter = { _id: id };
+    }
+    const products = await Model.find(filter);
+    return products;
+}
 
 const addProduct = (product) => {
     const producto = new Model(product);
@@ -7,5 +15,6 @@ const addProduct = (product) => {
 };
 
 module.exports = {
+    getProducts,
     addProduct
 };

@@ -14,6 +14,7 @@ function createApp() {
   );
 
   app.get('/api/categories', CategoriesController.index);
+  app.post('/api/categories', CategoriesController.store);
 
   return app;
 }

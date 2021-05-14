@@ -4,14 +4,9 @@ const mongoose = require('mongoose');
 const { config } = require("../src/config");
 const { dbConnection, dbHost, dbName, dbPassword, dbPort, dbUser } = config
 
-const MONGO_URI = `${dbConnection}://${dbHost}:${dbPort}/${dbName}`;
+const MONGO_URI = process.env.MONGO_URI;
 
 mongoose.connect(MONGO_URI, {
-  auth: {
-    user: dbUser,
-    password: dbPassword
-  },
-  authSource: "admin",
   useNewUrlParser: true,
   useUnifiedTopology: true,
   useFindAndModify: false,

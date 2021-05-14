@@ -1,8 +1,8 @@
 const Product = require('../models/product')
 
 const ProductsRepository = {
-    async all() {
-        return await Product.find()
+    async all(filters = {}) {
+        return await Product.find(filters)
     },
     async find(id) {
         return await Product.findOne({ _id: id })

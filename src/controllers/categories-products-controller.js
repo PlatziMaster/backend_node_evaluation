@@ -1,10 +1,11 @@
-const Category = require('../models/category')
-const Product = require('../models/product')
+const ProductsRepository = require('../repositories/products-repository')
 
 const CategoriesProductsController = {
     async index (request, response) {
         try {
-            const products = await Product.find({ categoryId: request.params.categoryId })
+            const products = await ProductsRepository.all({
+                categoryId: request.params.categoryId
+            })
 
             return response.send(products)
         } catch (error) {

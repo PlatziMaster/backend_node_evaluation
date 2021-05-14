@@ -18,7 +18,7 @@ describe("Tests to categories", () => {
 
   beforeAll(async () => {
     app = createApp();
-    const port = 3001;
+    const port = 3002;
     server = app.listen(port);
     const client = new MongoClient(MONGO_URI, {
       useNewUrlParser: true,
@@ -30,7 +30,10 @@ describe("Tests to categories", () => {
 
   afterAll(async () => {
     server.close();
-    database.dropDatabase();
+    //we add this litte fix so in this way we don't have to delete the entire database (if we delete db in both sides, test is broken)
+    database.collection('products').deleteOne({ name: "Red"});
+    database.collection('products').deleteOne({ name: "Blue"});
+    database.collection('products').deleteOne({ name: "Leon"});
   });
 
   describe("POST /api/categories", () => {

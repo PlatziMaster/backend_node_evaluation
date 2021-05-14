@@ -3,16 +3,11 @@ const CategoryRepository = require('../repositories/categories-repository')
 
 const CategoriesController = {
     async index (request, response) {
-        const page = request.query.page || 1
-
         try {
-            const categories = await CategoryRepository.paginate(
-                page
-            )
+            const categories = await CategoryRepository.all()
 
             return response.send({
-                data: categories,
-                page
+                data: categories
             })
         } catch (error) {
             console.log(error)

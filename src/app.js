@@ -2,6 +2,7 @@ const express = require('express');
 const cors = require('cors');
 const mongoose = require('mongoose');
 const config = require('../src/config').config;
+const CategoriesController = require('./controllers/categories-controller');
 
 function createApp() {
   const app = express();
@@ -12,7 +13,8 @@ function createApp() {
     {useNewUrlParser: true, useUnifiedTopology: true}
   );
 
-  // ADD YOUR ROUTES
+  app.get('/api/categories', CategoriesController.index);
+
   return app;
 }
 

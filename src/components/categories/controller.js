@@ -38,9 +38,12 @@ const deleteCategoria = (id) => {
     });
 };
 
+const getProductosByCategoria = (id) => store.getProductosByCategoria(id);
+
 module.exports = { 
     getCategorias,
     addCategoria,
     updateCategoria,
-    deleteCategoria
+    deleteCategoria,
+    getProductosByCategoria
 }

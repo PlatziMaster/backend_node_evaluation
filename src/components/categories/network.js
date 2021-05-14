@@ -44,5 +44,14 @@ router.delete('/:id',function(req,res){
 });
 
 //Endpoint para retornar la lista de productos que pertenecen a una categoría.
+router.get('/:categoryId/products', (req, res) => {
+    if(req.params.categoryId == null){
+        error => response.error(req, res, `Favor de mandar "categoryId" para continuar`, 500, error)
+    }
+
+    controller.getProductosByCategoria(req.params.categoryId)
+        .then(products => response.success(req, res, products))
+        .catch(error => response.error(req, res, `Error al consultar productos por categoría`, 500, error))
+});
 
 module.exports = router;

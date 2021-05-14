@@ -16,21 +16,18 @@ function createApp() {
   app.use(cors(corsOptions));
   app.use(express.json());
 
+  app.get('/', function(req, res) {
+    res.send('Back-End Challenge for Platzi Master 😃 by Ricardo Ruíz Velazco ');
+  });
+
   productsApi(app)
   categoriesApi(app)
-
 
   app.use(notFoundHandler);
 
   app.use(logErrors)
   app.use(wrapErrors)
   app.use(errorHandler)
-
-
-
-  app.get('/', function(req, res) {
-    res.send('Back-End Challenge for Platzi Master 😃 by Ricardo Ruíz Velazco ');
-  });
 
   // ADD YOUR ROUTES
   return app;

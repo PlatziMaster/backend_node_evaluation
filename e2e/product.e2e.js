@@ -30,7 +30,7 @@ describe("Tests to products", () => {
 
   afterAll(async () => {
     server.close();
-    database.dropDatabase();
+    //database.dropDatabase();
   });
 
   describe("POST /api/products", () => {

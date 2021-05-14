@@ -16,7 +16,7 @@ function productsApi(app){
     const router = express.Router();
     const productService = new ProductService();
 
-    app.use('/json/api/products/',router);
+    app.use('/api/products/',router);
 
     router.get("/", async function(req,res,next){
       cacheResponse(res,A_MINUTE_IN_SECONDS);

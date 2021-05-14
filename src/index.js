@@ -12,7 +12,7 @@ categoriesApi(app)
   
 
  app.get('/', function(req, res) {
-  res.send('api Platzi!');
+  res.send('Back-End for Platzi Master 😃 by Ricardo Ruíz Velazco ');
 });
 
 app.use(notFoundHandler);

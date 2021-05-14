@@ -16,7 +16,7 @@ function categoriesApi(app){
     const router = express.Router();
     const categoriesService = new CategoriesService();
 
-    app.use('/json/api/category/',router);
+    app.use('/api/category/',router);
 
     router.get("/", async function(req,res,next){
       cacheResponse(res,A_MINUTE_IN_SECONDS);

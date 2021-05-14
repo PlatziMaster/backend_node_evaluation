@@ -1,10 +1,11 @@
 const express = require('express');
 const cors = require('cors');
+const { config } = require('./config');
 
 function createApp() { 
   const app = express();
 
-  const corsOptions = { origin: "http://example.com" };
+  const corsOptions = { origin: config.cors };
   
   app.use(cors(corsOptions));
   

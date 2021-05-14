@@ -30,7 +30,7 @@ describe("Tests to products", () => {
 
   afterAll(async () => {
     server.close();
-    database.dropDatabase();
+    // database.dropDatabase(); // This cause problems in another test (DELETE a Category)
   });
 
   describe("POST /api/products", () => {

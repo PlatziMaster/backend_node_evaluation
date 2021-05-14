@@ -18,7 +18,7 @@ describe("Tests to categories", () => {
 
   beforeAll(async () => {
     app = createApp();
-    const port = 3001;
+    const port = 3003;
     server = app.listen(port);
     const client = new MongoClient(MONGO_URI, {
       useNewUrlParser: true,

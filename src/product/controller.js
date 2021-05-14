@@ -27,8 +27,16 @@ async function edit({ params: { id }, body }, res) {
 
 async function deleteOne({ params: { id } }, res) {
   const result = await db.Product.findByIdAndDelete(id)
-  console.log(result)
-  res.status(200).json(result)
+  if (result) {
+    res.status(200).send(true)
+  } else {
+    res.status(400).send(false)
+  }
+}
+
+async function productsByCategory({ params: { id } }, res) {
+  const products = await db.Product.find({ categoryId: id })
+  res.status(200).json(products)
 }
 
 module.exports = {
@@ -36,5 +44,6 @@ module.exports = {
   getOne,
   create,
   edit,
-  deleteOne
+  deleteOne,
+  productsByCategory
 }

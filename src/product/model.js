@@ -10,16 +10,13 @@ const ProductSchema = new Schema({
     required: true
   },
   description: {
-    type: String,
-    required: true
+    type: String
   },
   image: {
-    type: String,
-    required: true
+    type: String
   },
   categoryId: {
-    type: Schema.Types.ObjectId,
-    ref: 'Category'
+    type: String
   }
 }, {
   timestamps: true

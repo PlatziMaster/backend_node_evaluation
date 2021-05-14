@@ -1,6 +1,16 @@
 version: '3.3'
 
 services:
+  app:
+    build:
+      context: .
+      dockerfile: ./compose/Dockerfile
+    volumes:
+      - ./:/app/
+    ports:
+      - 3000:3000
+    links:
+      - "mongo:mongo"
   mongo:
     image: mongo:4.4
     environment:
@@ -8,3 +18,8 @@ services:
       MONGO_INITDB_ROOT_PASSWORD: root
     ports:
       - 27017:27017
+    volumes:
+      - mongodb-data:/data/db
+
+volumes:
+  mongodb-data:

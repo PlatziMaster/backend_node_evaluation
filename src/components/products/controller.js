@@ -5,7 +5,7 @@ const getProducts = (id) => store.getProducts(id);
 const addProduct = (name,price,description,categoryId,image) => {
     return new Promise((resolve, reject) => {
         if (!name || !price || !description || !categoryId || !image) {
-            console.error('[productController] Datos incompletos');
+            console.error('[productsController] Datos incompletos');
             return reject('Datos incompletos');
         }
         product = {"name":name, "price":price, "description":description, "categoryId":categoryId, "image":image}
@@ -17,7 +17,7 @@ const addProduct = (name,price,description,categoryId,image) => {
 const updateProduct = (id, name, price, description, categoryId, image) => {
     return new Promise((resolve, reject) => {
         if (!id || !name || !price || !description || !categoryId || !image) {
-            console.error('[productController] Datos incompletos');
+            console.error('[productsController] Datos incompletos');
             return reject('Datos incompletos');
         }
         product = {"name":name, "price":price, "description":description, "categoryId":categoryId, "image":image}
@@ -29,7 +29,7 @@ const updateProduct = (id, name, price, description, categoryId, image) => {
 const deleteProduct = (id) => {
     return new Promise((resolve, reject) => {
         if (!id) {
-            console.error('[productController] No se envió id');
+            console.error('[productsController] No se envió id');
             return reject('No se envió id');
         }
         store.deleteProduct(id)

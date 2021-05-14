@@ -1,9 +1,10 @@
 const Category = require('../models/category')
+const CategoryRepository = require('../repositories/categories-repository')
 
 const CategoriesController = {
     async index (request, response) {
         try {
-            const categories = await Category.find()
+            const categories = await CategoryRepository.all()
 
             return response.send({
                 data: categories,
@@ -23,7 +24,7 @@ const CategoriesController = {
         })
 
         try {
-            category = await category.save()
+            category = await CategoryRepository.createOrUpdate(category)
 
             return response.status(201).send({
                 data: category
@@ -38,7 +39,7 @@ const CategoriesController = {
     },
     async show (request, response) {
         try {
-            const category = await Category.findOne({ _id: request.params.id })
+            const category = await CategoryRepository.find(request.params.id)
 
             return response.send({
                 data: category
@@ -51,12 +52,18 @@ const CategoriesController = {
     },
     async update (request, response) {
         try {
-            let category = await Category.findOne({ _id: request.params.id })
+            let category = await CategoryRepository.find(request.params.id)
+
+            if (!category) {
+                return response.status(404).send({
+                    message: 'Entity not found.'
+                })
+            }
 
             category.name = request.body.name
             category.image = request.body.image
 
-            category = await category.save()
+            category = await CategoryRepository.createOrUpdate(category)
 
             return response.send({
                 data: category
@@ -69,8 +76,15 @@ const CategoriesController = {
     },
     async delete (request, response) {
         try {
-            const category = await Category.findOne({ _id: request.params.id })
-            await category.delete()
+            const category = await CategoryRepository.find(request.params.id)
+
+            if (!category) {
+                return response.status(404).send({
+                    message: 'Entity not found.'
+                })
+            }
+
+            await CategoryRepository.delete(category)
 
             return response.send({
                 data: category

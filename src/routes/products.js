@@ -1,6 +1,14 @@
 const express = require('express');
 const ProductService = require('../services/products.js')
 
+const {
+   productIdSchema,
+   createProductSchema,
+   updateProductSchema
+ } = require('../utils/schemas/product.js');
+
+const validationHandler = require('../middleware/validation-handlers.js');
+
 function productsApi(app){
     const router = express.Router();
     const productService = new ProductService();
@@ -8,19 +16,20 @@ function productsApi(app){
     app.use('/json/api/products/',router);
 
     router.get("/", async function(req,res,next){
-     const {  category } = req.query;
+     //const {  category } = req.query;
      try{
-        const products = await productService.getProducts(category);
+        const products = await productService.getProducts();
+
         res.status(200).json({
             data: products,
             message : "Products list"
         });
-     }catch{
+     }catch(error){
         next(error);
      }   
     });
 
-    router.get("/:productId", async function(req,res,next){
+    router.get("/:productId",validationHandler({ productId: productIdSchema }, 'params'), async function(req,res,next){
        const { productId } = req.params;
       try{
          const product = await productService.getProduct(productId);
@@ -33,10 +42,10 @@ function productsApi(app){
       }   
      });
 
-     router.post("/", async function(req,res,next){
+     router.post("/", validationHandler(createProductSchema), async function(req,res,next){
       const { body: product } = req;
      try{
-        const products = await productService.createProduct({product});
+        const products = await productService.createProduct(product);
         res.status(201).json({
             data: products,
             message : "Product was created succesfully!"
@@ -46,7 +55,10 @@ function productsApi(app){
      }   
     });
 
-    router.put("/:productId", async function(req,res,next){
+    router.put("/:productId",
+    validationHandler({ productId: productIdSchema }, 'params'),
+    validationHandler(updateProductSchema),
+     async function(req,res,next){
       const { productId } = req.params;
       const { body: product } = req;
      try{
@@ -60,7 +72,9 @@ function productsApi(app){
      }   
     });
 
-    router.delete("/:productId", async function(req,res,next){
+    router.delete("/:productId",
+    validationHandler({ productId: productIdSchema }, 'params'),
+   async function(req,res,next){
       const { productId } = req.params;
      try{
         const products = await productService.deleteProduct(productId);

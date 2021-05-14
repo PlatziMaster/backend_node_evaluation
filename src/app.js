@@ -1,5 +1,6 @@
 const express = require('express');
 const cors = require('cors');
+const HomeController = require('./controllers/home-controller');
 const CategoriesController = require('./controllers/categories-controller');
 const ProductsController = require('./controllers/products-controller');
 const CategoriesProductsController = require('./controllers/categories-products-controller');
@@ -9,6 +10,7 @@ function createApp() {
   app.use(cors());
   app.use(express.json());
 
+  app.get('/', HomeController.index);
   app.get('/api/categories', CategoriesController.index);
   app.post('/api/categories', CategoriesController.store);
   app.get('/api/categories/:id', CategoriesController.show);

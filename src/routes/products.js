@@ -9,6 +9,9 @@ const {
 
 const validationHandler = require('../middleware/validation-handlers.js');
 
+const  cacheResponse = require('../utils/cacheResponse');
+const {A_MINUTE_IN_SECONDS} = require('../utils/time');
+
 function productsApi(app){
     const router = express.Router();
     const productService = new ProductService();
@@ -16,6 +19,7 @@ function productsApi(app){
     app.use('/json/api/products/',router);
 
     router.get("/", async function(req,res,next){
+      cacheResponse(res,A_MINUTE_IN_SECONDS);
      //const {  category } = req.query;
      try{
         const products = await productService.getProducts();
@@ -30,6 +34,7 @@ function productsApi(app){
     });
 
     router.get("/:productId",validationHandler({ productId: productIdSchema }, 'params'), async function(req,res,next){
+      cacheResponse(res,A_MINUTE_IN_SECONDS);
        const { productId } = req.params;
       try{
          const product = await productService.getProduct(productId);

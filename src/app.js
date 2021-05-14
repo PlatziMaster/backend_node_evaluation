@@ -3,7 +3,11 @@ const cors = require('cors');
 
 function createApp() { 
   const app = express();
-  app.use(cors());
+
+  const corsOptions = { origin: "http://example.com" };
+  
+  app.use(cors(corsOptions));
+  
   app.use(express.json());
 
   // ADD YOUR ROUTES

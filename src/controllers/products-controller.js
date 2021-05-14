@@ -1,22 +1,22 @@
 const Product = require('../models/product')
 
 const ProductsController = {
-    index: function (request, response) {
-        Product.find(function(error, products) {
-            if (error) {
-                console.log(error)
-                return response
-                    .status(404)
-                    .send({ message: 'Unable to retrieve products.' })
-            }
+    async index (request, response) {
+        try {
+            const products = await Product.find()
 
             return response.send({
                 data: products,
             })
-        })
+        } catch (error) {
+            console.log(error)
+            return response
+                .status(404)
+                .send({ message: 'Entity not found.' })
+        }
     },
-    store: function (request, response) {
-        const product = new Product({
+    async store (request, response) {
+        let product = new Product({
             name: request.body.name,
             price: request.body.price,
             description: request.body.description,
@@ -24,41 +24,38 @@ const ProductsController = {
             image: request.body.image,
         })
 
-        product.save(function(error, product) {
-            if (error) {
-                console.log(error)
-                return response.status(422).send({
-                    message: 'Something went wrong.'
-                })
-            }
+        try {
+            product = await product.save()
 
             return response.status(201).send({
                 data: product
             })
-        })
+        } catch (error) {
+            console.log(error)
+
+            return response.status(422).send({
+                message: 'Unprocessable entity.'
+            })
+        }
     },
-    show: function (request, response) {
-        Product.findOne({ _id: request.params.id }, function (error, product) {
-            if (error) {
-                console.log(error)
-                return response.status(404).send({
-                    message: 'Entity not found.'
-                })
-            }
+    async show (request, response) {
+        try {
+            const product = await Product.findOne({ _id: request.params.id })
 
             return response.send({
                 data: product
             })
-        })
+        } catch (error) {
+            console.log(error)
+
+            return response.status(404).send({
+                message: 'Entity not found.'
+            })
+        }
     },
-    update: function (request, response) {
-        Product.findOne({ _id: request.params.id }, function (error, product) {
-            if (error) {
-                console.log(error)
-                return response.status(404).send({
-                    message: 'Entity not found.'
-                })
-            }
+    async update (request, response) {
+        try {
+            let product = await Product.findOne({ _id: request.params.id })
 
             product.name = request.body.name
             product.price = request.body.price
@@ -66,42 +63,35 @@ const ProductsController = {
             product.categoryId = request.body.categoryId
             product.image = request.body.image
 
-            product.save(function(savingError, product) {
-                if (savingError) {
-                    console.log(savingError)
-                    return response.status(422).send({
-                        message: 'Unprocessable entity.'
-                    })
-                }
+            product = await product.save()
 
-                return response.send({
-                    data: product
-                })
+            return response.send({
+                data: product
             })
-        })
+        } catch (error) {
+            console.log(error)
+
+            return response.status(404).send({
+                message: 'Entity not found.'
+            })
+        }
     },
-    delete: function (request, response) {
-        Product.findOne({ _id: request.params.id }, function (error, product) {
-            if (error) {
-                console.log(error)
-                return response.status(404).send({
-                    message: 'Entity not found.'
-                })
-            }
+    async delete (request, response) {
+        try {
+            const product = await Product.findOne({ _id: request.params.id })
 
-            product.delete(function(savingError, product) {
-                if (savingError) {
-                    console.log(savingError)
-                    return response.status(422).send({
-                        message: 'Unprocessable entity.'
-                    })
-                }
+            await product.delete()
 
-                return response.send({
-                    data: product
-                })
+            return response.send({
+                data: product
             })
-        })
+        } catch (error) {
+            console.log(error)
+
+            return response.status(404).send({
+                message: 'Entity not found.'
+            })
+        }
     },
 }
 

@@ -1,11 +1,17 @@
+require('@babel/polyfill');
+
 const { config } = require('./config');
 const createApp = require('./app');
 
 const app = createApp();
 
-app.listen(config.port, err => {
-  if (err) {
-    console.error("Error: ", err);
-    return;
+async function main() {
+  try{
+    (await app).listen(config.port);
+    console.log(`Is connected in port ${config.port}`)
+  } catch(e){
+    console.error("Error es: ", e);
   }
-});
+}
+
+main();

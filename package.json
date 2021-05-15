@@ -10,6 +10,7 @@
     "mongodb": "^3.6.6"
   },
   "devDependencies": {
+    "@types/mongodb": "^3.6.12",
     "jest": "^26.6.3",
     "nodemon": "^1.19.4",
     "supertest": "^6.1.3"

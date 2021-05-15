@@ -22,10 +22,11 @@
   },
   "scripts": {
     "build": "babel src --out-dir dist",
-    "dev": "DEBUG=app:* nodemon src/index.js --babel-node",
-    "start": "NODE_ENV=production node src/index.js",
+    "dev":"DEBUG=app:* nodemon src/index.js --exec babel-node",
+    "start": "NODE_ENV=production babel-node src/index.js",
     "globalStart":"node dist/index.js",
     "test:e2e": "jest --forceExit --config ./e2e/jest-e2e.json"
+    
   },
   "repository": {
     "type": "git",

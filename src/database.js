@@ -1,16 +1,15 @@
-const MongoClient = require('mongodb').MongoClient
-const { config } = require('./config');
+import MongoClient from'mongodb'
+import { config } from './config'
 
-async function connect(){
+export async function connect(){
     try {
-        const client = await MongoClient.connect(config.dbHost, { useUnifiedTopology: true } )
+        const client = await MongoClient.connect(config.dbHost, { useUnifiedTopology: true }) 
+        const db = client.db('platzi-master')
         console.log(`Database is connected in MongoAtlas!`)
-        return client;
+        return db;
         
     } catch(e) {
         console.log(e)
     }
     
 }
-
-module.exports = {connect};

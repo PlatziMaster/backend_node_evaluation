@@ -1,9 +1,9 @@
-require('@babel/polyfill');
+import'@babel/polyfill'
 
-const { config } = require('./config');
-const createApp = require('./app');
+import { config } from './config'
+import createApp from'./app'
 
-const app = createApp();
+const app = createApp()
 
 async function main() {
   try{

@@ -2,7 +2,7 @@ import { Router } from 'express'
 const router = Router()
 import { ObjectID } from 'mongodb'
 import { connect } from '../database'
-
+import categoryController from '../controllers/category.controller'
 
 router.get('/', async (req, res) => {
     try{
@@ -13,19 +13,9 @@ router.get('/', async (req, res) => {
         console.log(`Error is: ${e}`)
     }
 })
-router.post('/', async (req, res) => {
-    try{
-        const db = await connect();
-        const category = {
-            name: req.body.name,
-            image: req.body.image
-        }
-        const result = await db.collection('categories').insertOne(category)
-        res.json(result.ops[0])
-    } catch(e) {
-        console.log(`Error creating is: ${e}`)
-    }
-})
+router.post('/',
+categoryController.newCategory)
+
 router.get('/:id', async (req, res) => {
     try {
         const { id } =  req.params

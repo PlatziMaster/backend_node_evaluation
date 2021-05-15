@@ -9,7 +9,8 @@
     "cors": "^2.8.5",
     "dotenv": "^8.2.0",
     "express": "^4.17.1",
-    "mongodb": "^3.6.6"
+    "mongodb": "^3.6.6",
+    "mongoose": "^5.12.9"
   },
   "devDependencies": {
     "@babel/cli": "^7.13.16",
@@ -22,11 +23,10 @@
   },
   "scripts": {
     "build": "babel src --out-dir dist",
-    "dev":"DEBUG=app:* nodemon src/index.js --exec babel-node",
+    "dev": "DEBUG=app:* nodemon src/index.js --exec babel-node",
     "start": "NODE_ENV=production babel-node src/index.js",
-    "globalStart":"node dist/index.js",
+    "globalStart": "node dist/index.js",
     "test:e2e": "jest --forceExit --config ./e2e/jest-e2e.json"
-    
   },
   "repository": {
     "type": "git",

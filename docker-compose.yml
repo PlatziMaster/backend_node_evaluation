@@ -1,25 +1,34 @@
 version: '3.3'
 
 services:
-  app:
-    build:
-      context: .
-      dockerfile: ./compose/Dockerfile
-    volumes:
-      - ./:/app/
-    ports:
-      - 3000:3000
-    links:
-      - "mongo:mongo"
-  mongo:
-    image: mongo:4.4
-    environment:
-      MONGO_INITDB_ROOT_USERNAME: root
-      MONGO_INITDB_ROOT_PASSWORD: root
-    ports:
-      - 27017:27017
-    volumes:
-      - mongodb-data:/data/db
+    app:
+        build:
+            context: .
+            dockerfile: ./compose/Dockerfile
+        volumes:
+            - ./:/app/
+            - nodejs-logs:/root/.npm/_logs/
+        ports:
+            - 3000:3000
+        links:
+            - mongo:mongo
+        environment:
+            MONGO_USER: root
+            MONGO_PASSWORD: root
+            MONGO_HOST: mongo
+            MONGO_DB_NAME: products
+            MONGO_PORT: 27017
+            MONGO_CONNECTION: mongodb
+    mongo:
+        image: mongo:4.4
+        environment:
+            MONGO_INITDB_ROOT_USERNAME: root
+            MONGO_INITDB_ROOT_PASSWORD: root
+        ports:
+            - 27017:27017
+        volumes:
+            - mongodb-data:/data/db
 
 volumes:
-  mongodb-data:
+    mongodb-data:
+    nodejs-logs:

@@ -5,7 +5,7 @@ const USER = encodeURIComponent(config.dbUser);
 const PASSWORD = encodeURIComponent(config.dbPassword);
 const HOST = config.dbHost;
 const DB_NAME = config.dbName;
-const MONGO_URI = `mongodb+srv://${USER}:${PASSWORD}@${HOST}/${DB_NAME}?ssl=falseretryWrites=true&w=majority`;
+const MONGO_URI = `mongodb+srv://${USER}:${PASSWORD}@${HOST}/${DB_NAME}?retryWrites=true&w=majority`;
 
 class MongoLib {
   constructor() {
@@ -22,20 +22,19 @@ class MongoLib {
         this.client.connect(err => {
           if (err) {
             reject(err);
+            console.log('A connection was successfully established to mongo error');
           }
           console.log('A connection was successfully established to mongo');
           resolve(this.client.db(this.dbName));
         });
       });
     }
+
     return MongoLib.connection;
   }
 
   getAll(collection, query) {
-    return this.connect().then((err,db) => {
-      if (err){
-        console.log(err)
-      }
+    return this.connect().then(db => {
       return db
         .collection(collection)
         .find(
@@ -69,7 +68,6 @@ class MongoLib {
   create(collection, data) {
     return this.connect()
       .then(db => {
-        console.log("enter create")
         return db
         .collection(collection)
         .insertOne(data);

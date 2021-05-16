@@ -25,16 +25,17 @@
     "build": "babel src --out-dir dist",
     "dev": "DEBUG=app:* nodemon src/index.js --exec babel-node",
     "start": "NODE_ENV=production babel-node src/index.js",
-    "globalStart":"node dist/index.js",
+    "globalStart": "node dist/index.js",
     "test:e2e": "jest --forceExit --detectOpenHandles --config ./e2e/jest-e2e.json"
-    
   },
   "repository": {
     "type": "git",
     "url": "git+https://github.com/platzi/escuelajs-reto-09.git"
   },
   "jest": {
-    "setupFilesAfterEnv": ["./e2e/superTests.js"]
+    "setupFilesAfterEnv": [
+      "./e2e/superTests.js"
+    ]
   },
   "keywords": [],
   "author": "",

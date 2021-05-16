@@ -2,7 +2,6 @@ import { Router } from 'express'
 const router = Router()
 import { ObjectID } from 'mongodb'
 import { connect } from '../database'
-import categoryController from '../controllers/category.controller'
 
 router.get('/', async (req, res) => {
     try{
@@ -24,7 +23,7 @@ router.get('/:id/products', async (req, res) => {
         const result = await db.collection('products').find({categoryId: id}).toArray()
         res.status(200).json({
             message: `List products category ${id}`,
-            result})
+            result})   
     } catch(e){
         res.status(500).json({
             message: e.message || 'Error listing products for category'

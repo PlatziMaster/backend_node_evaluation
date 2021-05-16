@@ -18,11 +18,7 @@ describe("Tests to categories", () => {
     app = createApp();
     const port = 3001;
     server = (await app).listen(port);
-    const client = new MongoClient(config.dbString, {
-      useNewUrlParser: true,
-      useUnifiedTopology: true,
-    });
-    await client.connect();
+    const client = await MongoClient.connect(config.dbString, { useUnifiedTopology: true }) 
     database = client.db(DB_NAME);
   });
 

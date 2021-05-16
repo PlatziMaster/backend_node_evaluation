@@ -7,7 +7,7 @@ export async function connect(){
         const client = await MongoClient.connect(config.dbString, { useUnifiedTopology: true }) 
         const db = client.db('platzi-master')
         console.log(`Database is connected in MongoAtlas!`)
-        return client;
+        return db;
         
     } catch(e) {
         console.log(e)

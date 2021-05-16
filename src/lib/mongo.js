@@ -19,7 +19,7 @@ class MongoLib {
   connect() {
     if (!MongoLib.connection) {
       MongoLib.connection = new Promise((resolve, reject) => {
-        this.client.connect(err => {
+        this.client.open(err => {
           if (err) {
             reject(err);
           }

@@ -36,6 +36,14 @@ class CategoryService{
         return categoryDeleted? true: false;
     }
 
+    async getProductsbyCategory({id}){
+        this.collection = "products";
+        const query = { name: true, price: true }
+        const products = await this.mongoDB.getSome(this.collection, id, query);
+        console.log(products)
+        return products || [];
+    }
+
 }
 
 module.exports = CategoryService

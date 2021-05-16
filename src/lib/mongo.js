@@ -43,6 +43,17 @@ class MongoLib {
     });
   }
 
+  getSome(collection, id, query) {
+    return this.connect().then(db => {
+      return db
+        .collection(collection)
+        .find(
+          { categoryId: id },
+          { projection: query })
+        .toArray();
+    });
+  }
+
   get(collection, id, query) {
     return this.connect().then(db => {
       return db

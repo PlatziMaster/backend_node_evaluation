@@ -28,12 +28,14 @@ class MongoLib {
         });
       });
     }
-    console.log("Exiting mongo connect")
     return MongoLib.connection;
   }
 
   getAll(collection, query) {
-    return this.connect().then(db => {
+    return this.connect().then((err,db) => {
+      if (err){
+        console.log(err)
+      }
       return db
         .collection(collection)
         .find(

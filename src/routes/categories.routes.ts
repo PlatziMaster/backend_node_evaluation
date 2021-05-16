@@ -19,7 +19,7 @@ categorieRouter.get('/:categoryId/products', validationHandler({ categoryId: idC
 categorieRouter.post('/', validationHandler(checkCategorySchema),ctrl.postCategory);
 
 //PUT update category
-categorieRouter.put('/:categoryId', validationHandler({ categoryId: idCategory }),ctrl.putCategory);
+categorieRouter.put('/:categoryId', validationHandler({ categoryId: idCategory }, 'params'),ctrl.putCategory);
 
 //DELETE category
 categorieRouter.delete('/:categoryId', validationHandler({ categoryId: idCategory }),ctrl.deleteCategory);

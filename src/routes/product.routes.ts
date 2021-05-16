@@ -15,7 +15,7 @@ productRouter.get('/:productId', validationHandler({ productId: idProduct }),ctr
 productRouter.post('/', validationHandler(checkProductSchema),ctrl.postProduct);
 
 //PUT update product
-productRouter.put('/:productId', validationHandler({ productId: idProduct }),ctrl.putProduct);
+productRouter.put('/:productId', validationHandler({ productId: idProduct }, 'params'),ctrl.putProduct);
 
 //DELETE product
 productRouter.delete('/:productId', validationHandler({ productId: idProduct }),ctrl.deleteProduct);

@@ -39,7 +39,6 @@ var __importDefault = (this && this.__importDefault) || function (mod) {
     return (mod && mod.__esModule) ? mod : { "default": mod };
 };
 Object.defineProperty(exports, "__esModule", { value: true });
-exports.MongoDB = void 0;
 var mongoose_1 = __importDefault(require("mongoose"));
 var config_1 = require("../config");
 var MongoDB = /** @class */ (function () {
@@ -57,7 +56,7 @@ var MongoDB = /** @class */ (function () {
                         _a.label = 1;
                     case 1:
                         _a.trys.push([1, 3, , 4]);
-                        return [4 /*yield*/, mongoose_1.default.connect("mongodb+srv://" + config_1.config.dbUser + ":" + config_1.config.dbPassword + config_1.config.dbHost + "/" + config_1.config.dbName, {
+                        return [4 /*yield*/, mongoose_1.default.connect(config_1.config.dbConnection + "//" + config_1.config.dbUser + ":" + config_1.config.dbPassword + config_1.config.dbHost + "/" + config_1.config.dbName + "?retryWrites=true&w=majority", {
                                 useNewUrlParser: true,
                                 useUnifiedTopology: true,
                                 useCreateIndex: true,
@@ -99,4 +98,4 @@ var MongoDB = /** @class */ (function () {
     };
     return MongoDB;
 }());
-exports.MongoDB = MongoDB;
+exports.default = MongoDB;

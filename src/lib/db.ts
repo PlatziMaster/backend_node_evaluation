@@ -14,7 +14,7 @@ export default class MongoDB {
   async connect(): Promise<void> {
     if ( mongoose.connection.readyState == 0 ) {
       try {
-        await mongoose.connect(`mongodb+srv://${config.dbUser}:${config.dbPassword}${config.dbHost}/${config.dbName}`, {
+        await mongoose.connect(`${config.dbConnection}//${config.dbUser}:${config.dbPassword}${config.dbHost}/${config.dbName}?retryWrites=true&w=majority`, {
           useNewUrlParser: true,
           useUnifiedTopology: true,
           useCreateIndex: true,

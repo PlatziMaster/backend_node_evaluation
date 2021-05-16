@@ -62,4 +62,4 @@ typings/
 
 
 # TipeScript build output
-.dist/
+dist/

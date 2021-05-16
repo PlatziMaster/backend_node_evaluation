@@ -1,8 +1,6 @@
 import { Schema, model } from "mongoose";
+import { toLower } from "../../helpers/toLower";
 
-function toLower(v: string): string {
-   return v.toLowerCase();
- }
 
 const productSchema = new Schema({
    name: {
@@ -16,20 +14,23 @@ const productSchema = new Schema({
    },
    description: {
       type: String,
-      set: toLower,
-      required: [true, 'description is required']
+      set: toLower
    },
    categoryId: {
-      type: [{
-         type: Schema.Types.ObjectId,
-         ref: 'Categorie'
-      }]
+      type: Schema.Types.ObjectId,
    },
    image: {
-      type: String,
-      required: [true, 'image is required']
+      type: String
    }
 });
+
+productSchema.methods.toJSON = function() {
+   const { __v, _id, ...rest } = this.toObject();
+
+   rest.id = _id;
+
+   return rest;
+}
 
 export const productModel = model( 'Product', productSchema );
 

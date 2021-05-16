@@ -2,6 +2,8 @@ import express, { Application } from 'express';
 import cors from 'cors'
 import { config } from './config';
 import MongoDB from './lib/db';
+import { productRouter } from './routes/product.routes';
+import { categorieRouter } from './routes/categories.routes';
 
 export default class CreateApp {
 
@@ -11,7 +13,7 @@ export default class CreateApp {
   private apiPath = {
     homeRoute: '/',
     products: '/api/products',
-    categories: '/api/categories/'
+    categories: '/api/categories'
   }
 
   constructor() {
@@ -26,6 +28,10 @@ export default class CreateApp {
     this.routes();
   }
 
+  get getApp() {
+    return this.app;
+  }
+
   middlewares() {
     //CORS
     this.app.use(cors());
@@ -36,8 +42,8 @@ export default class CreateApp {
   }
 
   routes() {
-    // this.app.use(this.apiPath.products, );
-    // this.app.use(this.apiPath.categories, );
+    this.app.use(this.apiPath.products, productRouter );
+    this.app.use(this.apiPath.categories, categorieRouter);
 
   }
 

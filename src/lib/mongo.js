@@ -9,7 +9,6 @@ const MONGO_URI = `mongodb+srv://${USER}:${PASSWORD}@${HOST}/${DB_NAME}?retryWri
 
 class MongoLib {
   constructor() {
-    console.log(MONGO_URI)
     this.client = new MongoClient(MONGO_URI, { 
       useNewUrlParser: true,
       useUnifiedTopology: true
@@ -23,7 +22,6 @@ class MongoLib {
         this.client.connect(err => {
           if (err) {
             reject(err);
-            console.log(err);
           }
           resolve(this.client.db(this.dbName));
         });

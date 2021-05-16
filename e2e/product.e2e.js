@@ -2,7 +2,7 @@ const request = require("supertest");
 const { MongoClient, ObjectId } = require("mongodb");
 
 const { config } = require("../src/config");
-const createApp = require("./../src/app");
+const createApp = require("../src/app");
 
 const USER = encodeURIComponent(config.dbUser);
 const PASSWORD = encodeURIComponent(config.dbPassword);

@@ -28,7 +28,7 @@ class MongoLib {
         });
       });
     }
-
+    console.log("Exiting mongo connect")
     return MongoLib.connection;
   }
 
@@ -67,6 +67,7 @@ class MongoLib {
   create(collection, data) {
     return this.connect()
       .then(db => {
+        console.log("enter create")
         return db
         .collection(collection)
         .insertOne(data);

@@ -25,7 +25,7 @@
   },
   "scripts": {
     "dev": "nodemon dist/index.js",
-    "start": "node src/index.js",
+    "start": "tsc && node src/index.js",
     "test:e2e": "jest --forceExit --config ./src/e2e/jest.e2e.json",
     "test": "jest"
   },

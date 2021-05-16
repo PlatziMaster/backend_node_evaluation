@@ -22,9 +22,8 @@ class MongoLib {
         this.client.connect(err => {
           if (err) {
             reject(err);
-            console.log('A connection was successfully established to mongo error');
+            console.log(err);
           }
-          console.log('A connection was successfully established to mongo');
           resolve(this.client.db(this.dbName));
         });
       });

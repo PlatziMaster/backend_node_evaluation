@@ -7,14 +7,14 @@ module.exports = {
         Product.findById(productId, (err, product) => {
             if(err) return res.status(500).send({message: err})
             if(!product) return res.status(404).send({message: "Product not found."})
-            res.status(200).send({product: product})
+            res.status(200).send(product)
         })
     },
 
     get_list: (req, res) => {
         Product.find({}, (err, products) => {
             if(err) return res.status(500).send({message: err})
-            res.status(200).send({results: products})
+            res.status(200).send(products)
         })
     },
 
@@ -25,7 +25,7 @@ module.exports = {
             if(!product) return res.status(404).send({message: "Product not found."})
             product.remove(err => {
                 if(err) return res.status(500).send({message: "There was a problem deleting this product."})
-                res.status(200).send({message: "Product deleted successfuly."})
+                res.status(200).send(true)
             })
         })
     },
@@ -45,9 +45,13 @@ module.exports = {
         product.price = req.body.price;
         product.categoryId = req.body.categoryId;
         product.description = req.body.description;
+        product.image = req.body.image;
         product.save((err, productStored) => {
-            if(err){ return res.status(500).send({message: err}) }
-            res.send({product: productStored});
+            if(err){ 
+                console.log(err)
+                return res.status(500).send({message: err}) 
+            }
+            res.status(201).send(productStored);
         })
     }
 

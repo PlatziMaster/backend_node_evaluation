@@ -17,7 +17,7 @@ mongoose.connect(`${config.dbConnection}://${config.dbHost}:${config.dbPort}/${c
         "auth": { "authSource": "admin" },
         "user": config.dbUser,
         "pass": config.dbPassword,
-        "useMongoClient": true
+        "u1seNewUrlParser": true,
     }, (err, res) => {
         if(err) throw err
         console.log('DB Connected.')

@@ -3,6 +3,7 @@ const { MongoClient, ObjectId } = require("mongodb");
 
 const { config } = require("../src/config");
 const createApp = require("./../src/app");
+const mongoose = require("mongoose")
 
 const USER = encodeURIComponent(config.dbUser);
 const PASSWORD = encodeURIComponent(config.dbPassword);
@@ -14,22 +15,25 @@ const collection = 'products';
 describe("Tests to products", () => {
   let app;
   let database;
-  let server;
 
   beforeAll(async () => {
     app = createApp();
-    const port = 3001;
-    server = app.listen(port);
     const client = new MongoClient(MONGO_URI, {
       useNewUrlParser: true,
       useUnifiedTopology: true,
     });
     await client.connect();
     database = client.db(DB_NAME);
+    mongoose.connect(`${config.dbConnection}://${config.dbHost}:${config.dbPort}/${config.dbName}`,  {
+        auth: { authSource: "admin" },
+        user: config.dbUser,
+        pass: config.dbPassword,
+        useNewUrlParser: true,
+        useUnifiedTopology: true,
+    }, (err, res) => {});
   });
 
   afterAll(async () => {
-    server.close();
     database.dropDatabase();
   });
 
@@ -124,5 +128,4 @@ describe("Tests to products", () => {
     });
   });
 
-  
 });

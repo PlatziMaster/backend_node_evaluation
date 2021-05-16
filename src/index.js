@@ -1,31 +1,8 @@
-//Importaciones de paquetes y clases
-const express = require('express');
-const cors = require('cors');
-const bodyParser = require('body-parser');
-const {config} = require('./config/index');
-const db = require('./db'); // Importación del archivo de conección
+const { config } = require('./config');
+const createApp = require('./app');
 
+const app = createApp();
 
-
-require("dotenv").config({ path: ".env" }); // Uso de la libreria dotenv para implemnatar el uso de variables de entorno
-db(process.env.DB_CONNECT);// conexion a la base de datos
-
-// Apartado de rutas de componentes (Categorias y productos)
-const router = require('./network/routes');
-
-
-//Apartado de uso de componentes
-const app = express();
-app.use(bodyParser.json());
-app.use(cors());
-
-// Pasarle servidor de expres a route para crear todas las rutas
-router(app);
-
-app.use('/', function (req, res) {
-    res.send('hola');
+app.listen(config.port, () => {
+  console.log(`La aplicación esta escuchando en el puerto http://localhost:${config.port}`);
 });
-
-// servidor 
-app.listen(config.port);
-console.log('La aplicación esta escuchando en el puerto http://localhost:3000');;

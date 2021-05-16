@@ -22,7 +22,6 @@ class ProductService{
 
     async createProduct({ product }){
         const products = await this.mongoDB.create(this.collection, product);
-        console.log("Exiting  create 2")
         return products || {};
     }
 

@@ -40,7 +40,6 @@ class CategoryService{
         this.collection = "products";
         const query = { name: true, price: true }
         const products = await this.mongoDB.getSome(this.collection, id, query);
-        console.log(products)
         return products || [];
     }
 

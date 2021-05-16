@@ -1,14 +1,12 @@
+require('@babel/polyfill')
 const request = require("supertest");
 const { MongoClient, ObjectId } = require("mongodb");
 
 const { config } = require("../src/config");
 const createApp = require("../src/app");
 
-const USER = encodeURIComponent(config.dbUser);
-const PASSWORD = encodeURIComponent(config.dbPassword);
 const DB_NAME = config.dbName;
 
-const MONGO_URI = `${config.dbConnection}://${USER}:${PASSWORD}@${config.dbHost}:${config.dbPort}?retryWrites=true&w=majority`;
 const collection = 'categories';
 
 describe("Tests to categories", () => {
@@ -19,8 +17,8 @@ describe("Tests to categories", () => {
   beforeAll(async () => {
     app = createApp();
     const port = 3001;
-    server = app.listen(port);
-    const client = new MongoClient(MONGO_URI, {
+    server = (await app).listen(port);
+    const client = new MongoClient(config.dbString, {
       useNewUrlParser: true,
       useUnifiedTopology: true,
     });

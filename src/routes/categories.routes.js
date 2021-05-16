@@ -8,11 +8,30 @@ router.get('/', async (req, res) => {
     try{
         const db = await connect();
         const result = await db.collection('categories').find({}).toArray()
-        res.json(result)
+        res.status(200).json({
+            message: `Categories find:`,
+            result})
     } catch(e) {
-        console.log(`Error is: ${e}`)
+        res.status(500).json({
+            message: e.message || 'Error listing categories'
+        })
     }
 })
+router.get('/:id/products', async (req, res) => {
+    try{
+        const { id } = req.params
+        const db = await connect()
+        const result = await db.collection('products').find({categoryId: id}).toArray()
+        res.status(200).json({
+            message: `List products category ${id}`,
+            result})
+    } catch(e){
+        res.status(500).json({
+            message: e.message || 'Error listing products for category'
+        })
+    }
+    
+  })
 router.post('/', async (req, res) => {
     try{
         const db = await connect();

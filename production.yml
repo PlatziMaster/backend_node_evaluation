@@ -5,6 +5,7 @@ services:
         build:
             context: .
             dockerfile: ./compose/Dockerfile
+        command: npm run start
         volumes:
             - ./:/app/
             - nodejs-logs:/root/.npm/_logs/

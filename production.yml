@@ -9,14 +9,16 @@ services:
             - ./:/app/
             - nodejs-logs:/root/.npm/_logs/
         network_mode: host 
-        
+        env_file:
+            - .env
+        depends_on:
+            - mongo
     mongo:
         image: mongo:4.4
-        environment:
-            MONGO_INITDB_ROOT_USERNAME: root
-            MONGO_INITDB_ROOT_PASSWORD: root
         ports:
             - 27017:27017
+        env_file:
+            - .env
         volumes:
             - mongodb-data:/data/db
 

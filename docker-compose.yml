@@ -8,7 +8,6 @@ services:
         volumes:
             - ./:/app/
             - nodejs-logs:/root/.npm/_logs/
-        network_mode: host 
         links:
             - mongo:mongo
         ports:

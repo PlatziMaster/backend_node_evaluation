@@ -2,6 +2,7 @@
 const express = require('express');
 const cors = require('cors');
 const bodyParser = require('body-parser');
+const {config} = require('./config/index');
 const db = require('./db'); // Importación del archivo de conección
 
 
@@ -26,5 +27,5 @@ app.use('/', function (req, res) {
 });
 
 // servidor 
-app.listen(3000);
-console.log('La aplicación esta escuchando en el puero http://localhost:3000');;
+app.listen(config.port);
+console.log('La aplicación esta escuchando en el puerto http://localhost:3000');;

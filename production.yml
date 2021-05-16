@@ -9,6 +9,7 @@ services:
         volumes:
             - ./:/app/
             - nodejs-logs:/root/.npm/_logs/
+        restart: always
         network_mode: host 
         env_file:
             - .env
@@ -16,6 +17,7 @@ services:
             - mongo
     mongo:
         image: mongo:4.4
+        restart: always
         ports:
             - 27017:27017
         env_file:

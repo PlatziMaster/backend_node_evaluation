@@ -4,10 +4,12 @@
   "description": "Reto 9 Octubre 26: Curso de Backend con Node",
   "main": "index.js",
   "dependencies": {
+    "body-parser": "^1.19.0",
     "cors": "^2.8.5",
     "dotenv": "^8.2.0",
     "express": "^4.17.1",
-    "mongodb": "^3.6.6"
+    "mongodb": "^3.6.6",
+    "mongoose": "^5.12.9"
   },
   "devDependencies": {
     "jest": "^26.6.3",
@@ -17,7 +19,7 @@
   "scripts": {
     "dev": "DEBUG=app:* nodemon src/index.js",
     "start": "NODE_ENV=production node src/index.js",
-    "test:e2e": "jest --forceExit --config ./e2e/jest-e2e.json"
+    "test:e2e": "jest --forceExit --runInBand --config ./e2e/jest-e2e.json"
   },
   "repository": {
     "type": "git",

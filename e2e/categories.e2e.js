@@ -7,6 +7,7 @@ const createApp = require("../src/app");
 const USER = encodeURIComponent(config.dbUser);
 const PASSWORD = encodeURIComponent(config.dbPassword);
 const DB_NAME = config.dbName;
+mongoose = require('mongoose')
 
 const MONGO_URI = `${config.dbConnection}://${USER}:${PASSWORD}@${config.dbHost}:${config.dbPort}?retryWrites=true&w=majority`;
 const collection = 'categories';
@@ -14,22 +15,26 @@ const collection = 'categories';
 describe("Tests to categories", () => {
   let app;
   let database;
-  let server;
 
   beforeAll(async () => {
     app = createApp();
-    const port = 3001;
-    server = app.listen(port);
     const client = new MongoClient(MONGO_URI, {
       useNewUrlParser: true,
       useUnifiedTopology: true,
     });
     await client.connect();
     database = client.db(DB_NAME);
+    // Connection with mongo DB and express initialization.
+    mongoose.connect(`${config.dbConnection}://${config.dbHost}:${config.dbPort}/${config.dbName}`,  {
+        auth: { authSource: "admin" },
+        user: config.dbUser,
+        pass: config.dbPassword,
+        useNewUrlParser: true,
+        useUnifiedTopology: true,
+    }, (err, res) => {});
   });
 
   afterAll(async () => {
-    server.close();
     database.dropDatabase();
   });
 
@@ -132,7 +137,7 @@ describe("Tests to categories", () => {
         .catch((err) => done(err));
     });
   });
-
+  
   describe("DELETE /api/categories/{id}", () => {
     it("should delete a category", async (done) => {
       const categories = await database.collection(collection).find().toArray();
@@ -149,5 +154,4 @@ describe("Tests to categories", () => {
     });
   });
 
-  
 });

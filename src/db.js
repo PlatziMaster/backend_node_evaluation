@@ -9,7 +9,7 @@ const DB_NAME = encodeURIComponent(config.dbName);
 const DB_HOST = encodeURIComponent(config.dbHost);
 
 // Creación de una URL de conexión
-const MONGO_URI = `mongodb+srv://${USER}:${PASSWORD}@${DB_HOST}/${DB_NAME}?retryWrites=true&w=majority`;
+const MONGO_URI = `mongodb+srv://db_user_app:tBMpnPDcFcJn2eIZ@cluster0.xjown.mongodb.net/platzi-store?retryWrites=true&w=majority`;
 
 // Indicarle a mongoose que utilice promesas para responder
 db.Promise = global.Promise;

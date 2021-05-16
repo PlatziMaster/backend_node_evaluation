@@ -48,7 +48,7 @@ export default class CreateApp {
   }
 
   listenPort() {
-    this.app.listen(this.port, err => {
+    this.app.listen(this.port, (err: any) => {
       if (err) {
         console.error("Error: ", err);
         return err;

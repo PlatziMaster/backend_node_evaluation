@@ -8,8 +8,8 @@ const USER = encodeURIComponent(config.dbUser);
 const PASSWORD = encodeURIComponent(config.dbPassword);
 const DB_NAME = config.dbName;
 
-const MONGO_URI = `${config.dbConnection}://${USER}:${PASSWORD}@${config.dbHost}:${config.dbPort}?retryWrites=true&w=majority`;
-const collection = 'products';
+const MONGO_URI = `${config.dbConnection}://${USER}:${PASSWORD}@${config.dbHost}?retryWrites=true&w=majority`;
+const collection = "products";
 
 describe("Tests to products", () => {
   let app;
@@ -44,7 +44,9 @@ describe("Tests to products", () => {
         .send(newProduct)
         .expect(201)
         .then(async ({ body }) => {
-          const rta = await database.collection(collection).findOne({ _id: ObjectId(body._id) });
+          const rta = await database
+            .collection(collection)
+            .findOne({ _id: ObjectId(body._id) });
           expect(body.name).toBe(rta.name);
           expect(body.price).toBe(rta.price);
           done();
@@ -61,7 +63,9 @@ describe("Tests to products", () => {
         .then(async ({ body }) => {
           expect(body.length).toBe(1);
           const product = body[0];
-          const rta = await database.collection(collection).findOne({ _id: ObjectId(product._id) });
+          const rta = await database
+            .collection(collection)
+            .findOne({ _id: ObjectId(product._id) });
           expect(product.name).toBe(rta.name);
           expect(product.price).toBe(rta.price);
           done();
@@ -123,6 +127,4 @@ describe("Tests to products", () => {
         .catch((err) => done(err));
     });
   });
-
-  
 });

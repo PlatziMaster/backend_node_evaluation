@@ -2,7 +2,7 @@ import { Router } from 'express'
 const router = Router()
 import { ObjectID } from 'mongodb'
 import { connect } from '../database'
-
+import categoryController from '../controllers/category.controller'
 
 router.get('/', async (req, res) => {
     try{

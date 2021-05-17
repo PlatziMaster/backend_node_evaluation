@@ -1,3 +1,7 @@
+# Repuesta
+Después de varios días de aprendizaje solo pude lograr este avance.
+Aprendí muchas cosas de las cuales no sabía. Espero si soy elegido aprender más de estos temas para intentarlo de nuevo en un corto plazo. He aprendido bastante de los cursos de platzi.
+
 # Prueba de Backend NodeJS
 Crear un CRUD para crear productos conectado a MongoDB.
 

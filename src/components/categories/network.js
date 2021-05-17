@@ -9,6 +9,7 @@ router.get('/', list);
 router.get('/:id', listCategorie);
 router.post('/', insertCategorie);
 router.put('/:id', alterCategorie);
+router.get('/:id/products', searchProduct);
 router.delete('/:id', deleteCategorie);
 
 function list(req,res, next){
@@ -19,7 +20,12 @@ function list(req,res, next){
             }).catch(next);
             
 }
-
+function searchProduct(req, res, next){
+      controller.searchProduct({id: req.params.id})
+            .then((data => {
+                  response.success(req, res, data, 200)
+            })).catch(next)
+}
 function listCategorie(req, res, next){
       controller.listCategorie(req.params.id)
             .then(categorie =>{

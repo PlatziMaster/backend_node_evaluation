@@ -19,13 +19,16 @@ module.exports = function (injecterStore){
       async function insertCategorie(data,id){
             let result
             if(id){
-                  console.log("entre a actualizar")
                   result = await injecterStore.update(TABLE, data._id, data);
             }else{
                   data._id = nanoid();
-                  console.log(`entre a crear`)
                   result = await injecterStore.create(TABLE, data);
             }
+            return result;
+      }
+      async function searchProduct({id}){
+            const query = id && {categoryId: {cat: id}};
+            const result = await injecterStore.listAll("products",query);
             return result;
       }
       return {
@@ -33,5 +36,6 @@ module.exports = function (injecterStore){
             listCategorie,
             deleteCategorie,
             insertCategorie,
+            searchProduct
       }
 }

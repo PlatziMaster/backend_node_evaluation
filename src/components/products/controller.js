@@ -11,8 +11,13 @@ module.exports = function (injecterStore){
             const result = await injecterStore.list(TABLE,id);
             return result;
       }
+      async function deleteProduct(id){
+            const result = await injecterStore.delete(TABLE,id);
+            return result;
+      }
       return {
             list,
             listProduct,
+            deleteProduct,
       }
 }

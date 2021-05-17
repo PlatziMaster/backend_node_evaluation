@@ -7,7 +7,7 @@ const router = express.Router();
 
 router.get('/', list);
 router.get('/:id', listProduct);
-
+router.delete('/:id', deleteProduct);
 
 function list(req,res, next){
       
@@ -25,6 +25,11 @@ function listProduct(req, res, next){
             }).catch(next)
 }
 
-      
+function deleteProduct(req, res, next){
+      controller.deleteProduct(req.params.id)
+            .then(product =>{
+                  response.success(req, res, product, 200);
+            }).catch(next)
+}     
 
 module.exports = router

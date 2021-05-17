@@ -60,6 +60,9 @@ npm run test:e2e
 
 ## Enviar solución de reto
 Debes de crear un "Fork" de este proyecto, revolverlo desde tu cuenta personal.
-
+esta propuesta de solucion fue hecha por
+Jorge Luis Martinez Hernandez
+correo usado en platzi s_k_ap3@hotmail.com
+id platzi: SoyLuis
 ### Licencia
 La licencia [MIT](https://opensource.org/licenses/MIT).

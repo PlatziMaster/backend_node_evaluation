@@ -5,7 +5,7 @@ import IndexRoutes from './routes/index.routes'
 import CategoriesRoutes from './routes/categories.routes'
 import ProductsRoutes from './routes/products.routes'
 
-export async function createApp() { 
+async function createApp() { 
   // SETTINGS
   const app = express();
   app.use(cors());

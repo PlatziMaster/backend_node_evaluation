@@ -1,21 +1,11 @@
-// import MongoClient from'mongodb'
-import mongoose from 'mongoose'
+import MongoClient from'mongodb'
 
 import { config } from './config'
 
 export async function connect(){
     try {
-
-        /*const client = await MongoClient.connect(config.dbHost,
-            {
-                useUnifiedTopology: true,
-                useNewUrlParser: true
-            })*/
-        const db = await mongoose.createConnection(config.dbHost, {
-            useUnifiedTopology: true,
-            useNewUrlParser: true,
-            useFindAndModify: false
-        })
+        const client = await MongoClient.connect(config.dbString, { useUnifiedTopology: true }) 
+        const db = client.db('platzi-master')
         console.log(`Database is connected in MongoAtlas!`)
         return db;
         

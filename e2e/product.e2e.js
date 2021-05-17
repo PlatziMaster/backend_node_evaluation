@@ -1,3 +1,4 @@
+require('@babel/polyfill')
 const request = require("supertest");
 const { MongoClient, ObjectId } = require("mongodb");
 

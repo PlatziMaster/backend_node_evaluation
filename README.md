@@ -1,6 +1,14 @@
 # Prueba de Backend NodeJS
 Crear un CRUD para crear productos conectado a MongoDB.
 
+## Presentación 
+
+Soy Yonathan Gutiérrez Rodríguez, me interesa entrar al programa y formarme como un buen desarrollador además de demostrar lo que puedo aportar a la región en cuanto a talento se trata, me siento emocionado por esta oportunidad ya que creo en la premisa de Platzi y una región con mayores estándares de vida para sus pobladores…
+
+## Arquitectura
+
+<img src="https://live.staticflickr.com/65535/51184362209_51b82f629e_k.jpg" alt="nodeplatzi">
+
 ### Instalación
 ```
 npm install
@@ -42,24 +50,6 @@ Una Categoría debe tener los siguientes atributos:
 - [ ] PUT `/api/categories/{id}/` Endpoint para modificar un categoría.
 - [ ] DELETE `/api/categories/{id}/` Endpoint para eliminar un categoría.
 - [ ] GET `/api/categories/{id}/products` Endpoint para retornar la lista de productos que pertenecen a una categoría.
-
-## Instrucciones
-
-1. Utilizando el archivo `.env-example` realiza la configuración para tu archivo `.env`.
-2. Proponer una arquitectura la aplicación.
-3. Verificar que la conexión de tu aplicación a MongoDBAtlas funcione.
-4. Realizar el deploy de tu aplicación.
-
-### Correr pruebas en local
-```
-npm run test:e2e
-```
-1. Debes tener mongoDB en local corriendo para hacer las pruebas.
-2. Y poner las variables de ambiente en el archivo `.env`.
-
-
-## Enviar solución de reto
-Debes de crear un "Fork" de este proyecto, revolverlo desde tu cuenta personal.
 
 ### Licencia
 La licencia [MIT](https://opensource.org/licenses/MIT).

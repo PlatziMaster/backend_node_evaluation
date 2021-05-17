@@ -2,6 +2,7 @@ const express = require("express");
 const cors = require("cors");
 
 const ProductService = require("./services/products");
+const CategoryService = require("./services/categories");
 const response = require("./response");
 
 function createApp() {
@@ -10,6 +11,7 @@ function createApp() {
   app.use(express.json());
 
   const productService = new ProductService();
+  const categoryService = new CategoryService();
 
   // PRODUCT ROUTES
   app.post("/api/products/", async function (req, res, next) {
@@ -22,28 +24,28 @@ function createApp() {
     }
   });
 
-  app.put("/api/products/:id", async function (req, res, next) {
+  app.put("/api/products/:productId", async function (req, res, next) {
     const { productId } = req.params;
     const { body: product } = req;
     try {
-      const updatedProductId = await productsService.updateProduct({
+      const updatedProductId = await productService.updateProduct({
         productId,
         product,
       });
-      const message = `El producto id ${updatedProductId} fue actualizado`;
+      const message = `El producto fue actualizado`;
       response.success(req, res, message, 200);
     } catch (err) {
       next(err);
     }
   });
 
-  app.delete("/api/products/:id", async function (req, res) {
+  app.delete("/api/products/:productId", async function (req, res, next) {
     const { productId } = req.params;
     try {
-      const deletedProductId = await productsService.deleteProduct({
+      const deletedProductId = await productService.deleteProduct({
         productId,
       });
-      const message = `El producto id ${deletedProductId} fue eliminado`;
+      const message = `El producto fue eliminado`;
       response.success(req, res, message, 200);
     } catch (err) {
       next(err);
@@ -59,7 +61,7 @@ function createApp() {
     }
   });
 
-  app.get("/api/products/:id", async function (req, res, next) {
+  app.get("/api/products/:productId", async function (req, res, next) {
     const { productId } = req.params;
     try {
       const product = await productService.getProduct({ productId });
@@ -70,28 +72,61 @@ function createApp() {
   });
 
   // CATEGORY ROUTES
-  app.get("/api/categories", function (req, res) {
-    res.send("GET request to the homepage");
+  app.post("/api/categories/", async function (req, res, next) {
+    const { body: category } = req;
+    try {
+      const createdCategory = await categoryService.createCategory({ category });
+      response.success(req, res, createdCategory, 201);
+    } catch (err) {
+      next(err);
+    }
   });
 
-  app.get("/api/categories/:id", function (req, res) {
-    res.send("GET request to the homepage");
+  app.put("/api/categories/:categoryId", async function (req, res, next) {
+    const { categoryId } = req.params;
+    const { body: category } = req;
+    try {
+      const updatedCategoryId = await categoryService.updateCategory({
+        categoryId,
+        category,
+      });
+      const message = `La categoría fue actualizada`;
+      response.success(req, res, message, 200);
+    } catch (err) {
+      next(err);
+    }
   });
 
-  app.post("/api/categories/", function (req, res) {
-    res.send("POST request to the homepage");
+  app.delete("/api/categories/:categoryId", async function (req, res, next) {
+    const { categoryId } = req.params;
+    try {
+      const deletedCategoryId = await categoryService.deleteCategory({
+        categoryId,
+      });
+      const message = `La categoría fue eliminada`;
+      response.success(req, res, message, 200);
+    } catch (err) {
+      next(err);
+    }
   });
 
-  app.put("/api/categories/:id", function (req, res) {
-    res.send("PUT request to the homepage");
+  app.get("/api/categories", async function (req, res, next) {
+    try {
+      const categories = await categoryService.getCategories();
+      response.success(req, res, categories, 200);
+    } catch (err) {
+      next(err);
+    }
   });
 
-  app.delete("/api/categories/:id", function (req, res) {
-    res.send("DELETE request to the homepage");
-  });
-
-  app.get("/api/categories/:id/products", function (req, res) {
-    res.send("GET request to the homepage");
+  app.get("/api/categories/:categoryId", async function (req, res) {
+    const { categoryId } = req.params;
+    try {
+      const category = await categoryService.getCategory({ categoryId });
+      response.success(req, res, category, 200);
+    } catch (err) {
+      next(err);
+    }
   });
 
   return app;

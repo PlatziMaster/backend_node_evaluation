@@ -34,7 +34,7 @@ class MongoDB{
       }
       list(collection, id){
             return this.connect().then(db => {
-                  return db.collection(collection).findOne({ _id: ObjectId(id)});
+                  return db.collection(collection).findOne({ _id : id});
             })
       }
       create(collection, data){
@@ -44,7 +44,7 @@ class MongoDB{
       }
       update(collection, id, data){
             return this.connect().then(db => {
-                  return db.collection(collection).updateOne({ _id:Object(id) },{ $set: data}, { upsert: true})
+                  return db.collection(collection).updateOne({ _id: id },{ $set: data}, { upsert: true})
             }).then(result => result.upsertedId || id);
       }
       delete(collection, id){

@@ -7,6 +7,8 @@ const router = express.Router();
 
 router.get('/', list);
 router.get('/:id', listProduct);
+router.post('/', insertProduct);
+router.put('/:id', alterProduct);
 router.delete('/:id', deleteProduct);
 
 function list(req,res, next){
@@ -23,6 +25,20 @@ function listProduct(req, res, next){
             .then(product =>{
                   response.success(req, res, product, 200);
             }).catch(next)
+}
+
+function insertProduct(req, res, next){
+      controller.insertProduct(req.body,null)
+            .then((data => {
+                  response.success(req, res, data, 201)
+            })).catch(next)
+}
+
+function alterProduct(req, res, next){
+      controller.insertProduct(req.body,req.params.id)
+            .then((data => {
+                  response.success(req, res, data, 202)
+            })).catch(next)
 }
 
 function deleteProduct(req, res, next){

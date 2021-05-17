@@ -1,17 +1,15 @@
-"use strict";
+require("dotenv").config();
 
-require('dotenv').config();
-
-var config = {
-  dev: process.env.NODE_ENV !== 'production',
+const config = {
+  dev: process.env.NODE_ENV !== "production",
   port: process.env.PORT || 3000,
   dbUser: process.env.MONGO_USER,
   dbPassword: process.env.MONGO_PASSWORD,
   dbHost: process.env.MONGO_HOST,
   dbName: process.env.MONGO_DB_NAME,
   dbPort: process.env.MONGO_PORT,
-  dbConnection: process.env.MONGO_CONNECTION
+  dbConnection: process.env.MONGO_CONNECTION,
 };
 module.exports = {
-  config: config
+  config: config,
 };

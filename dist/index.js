@@ -1,17 +1,18 @@
 "use strict";
 
+require("@babel/polyfill");
+
+var _config = require("./config");
+
+var _app = _interopRequireDefault(require("./app"));
+
+function _interopRequireDefault(obj) { return obj && obj.__esModule ? obj : { "default": obj }; }
+
 function asyncGeneratorStep(gen, resolve, reject, _next, _throw, key, arg) { try { var info = gen[key](arg); var value = info.value; } catch (error) { reject(error); return; } if (info.done) { resolve(value); } else { Promise.resolve(value).then(_next, _throw); } }
 
 function _asyncToGenerator(fn) { return function () { var self = this, args = arguments; return new Promise(function (resolve, reject) { var gen = fn.apply(self, args); function _next(value) { asyncGeneratorStep(gen, resolve, reject, _next, _throw, "next", value); } function _throw(err) { asyncGeneratorStep(gen, resolve, reject, _next, _throw, "throw", err); } _next(undefined); }); }; }
 
-require('@babel/polyfill');
-
-var _require = require('./config'),
-    config = _require.config;
-
-var createApp = require('./app');
-
-var app = createApp();
+var app = (0, _app["default"])();
 
 function main() {
   return _main.apply(this, arguments);
@@ -28,9 +29,9 @@ function _main() {
             return app;
 
           case 3:
-            _context.sent.listen(config.port);
+            _context.sent.listen(_config.config.port);
 
-            console.log("Is connected in port ".concat(config.port));
+            console.log("Is connected in port ".concat(_config.config.port));
             _context.next = 10;
             break;
 

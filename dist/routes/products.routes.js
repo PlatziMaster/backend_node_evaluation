@@ -1,10 +1,15 @@
 "use strict";
 
-var _require = require('express'),
-    Router = _require.Router;
+Object.defineProperty(exports, "__esModule", {
+  value: true
+});
+exports["default"] = void 0;
 
-var router = Router();
+var _express = require("express");
+
+var router = (0, _express.Router)();
 router.get('/', function (req, res) {
   res.send('Products');
 });
-module.exports = router;
+var _default = router;
+exports["default"] = _default;

@@ -4,7 +4,7 @@ const controller = require('./index')
 const response = require("../../network/response");
 
 const router = express.Router();
-
+//este archivo gestiona las peticiones que se queden hacer a /api/products
 router.get('/', list);
 router.get('/:id', listProduct);
 router.post('/', insertProduct);

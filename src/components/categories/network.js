@@ -4,7 +4,7 @@ const controller = require('./index')
 const response = require("../../network/response");
 
 const router = express.Router();
-
+//este archivo gestiona las rutas para las categorias hechas a /api/categories
 router.get('/', list);
 router.get('/:id', listCategorie);
 router.post('/', insertCategorie);

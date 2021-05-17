@@ -9,7 +9,7 @@ const config = {
   dbName: process.env.MONGO_DB_NAME,
   dbPort: process.env.MONGO_PORT,
   dbConnection: process.env.MONGO_CONNECTION,
-  dbString: process.env.MONGO_STRING
 };
-
-module.exports = { config };
+module.exports = {
+  config: config,
+};

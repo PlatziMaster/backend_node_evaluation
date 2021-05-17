@@ -1,13 +1,9 @@
 const express = require('express');
-const cors = require('cors');
+const app = require('./config/index.js');
+const ProductService = require('./services/index');
+const { config } = require('./config/index');
+const createApp = require('./routes/index');
+createApp(app);
 
-function createApp() { 
-  const app = express();
-  app.use(cors());
-  app.use(express.json());
 
-  // ADD YOUR ROUTES
-  return app;
-}
 
-module.exports = createApp;

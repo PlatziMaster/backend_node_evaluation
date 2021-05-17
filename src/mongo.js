@@ -5,11 +5,14 @@ const USER = config.dbUser;
 const PASSWORD = config.dbPassword;
 const DBNAME = config.dbName;
 
-const MONGO_CONNECTION = `mongodb+srv://${USER}:${PASSWORD}@${config.dbHost}:${config.dbPort}/${DBNAME}?retryWrites=true&w=majority`;
+const MONGO_CONNECTION = `mongodb+srv://${USER}:${PASSWORD}@${config.dbHost}/${DBNAME}?retryWrites=true&w=majority`;
 
 class MongoLib {
   constructor() {
-    this.client = new MongoClient(MONGO_CONNECTION, { useNewUrlParser: true });
+    this.client = new MongoClient(MONGO_CONNECTION, {
+      useNewUrlParser: true,
+      useUnifiedTopology: true,
+    });
     this.dbName = DBNAME;
   }
 
@@ -29,9 +32,9 @@ class MongoLib {
     return MongoLib.connection;
   }
 
-  getAll(collection, query) {
+  getAll(collection) {
     return this.connect().then((db) => {
-      return db.collection(collection).find(query).toArray();
+      return db.collection(collection).find().toArray();
     });
   }
 

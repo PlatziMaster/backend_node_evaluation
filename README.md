@@ -29,19 +29,19 @@ Una Categoría debe tener los siguientes atributos:
 ## Requerimientos
 
 ### CRUD de productos
-- [ ] GET `/api/products/` Endpoint para retornar la lista de productos.
-- [ ] GET `/api/products/{id}/` Endpoint para retornar un producto.
-- [ ] POST `/api/products/` Endpoint para crear un producto.
-- [ ] PUT `/api/products/{id}/` Endpoint para modificar un producto.
-- [ ] DELETE `/api/products/{id}/` Endpoint para eliminar un producto.
+- [X] GET `/api/products/` Endpoint para retornar la lista de productos.
+- [X] GET `/api/products/{id}/` Endpoint para retornar un producto.
+- [X] POST `/api/products/` Endpoint para crear un producto.
+- [X] PUT `/api/products/{id}/` Endpoint para modificar un producto.
+- [X] DELETE `/api/products/{id}/` Endpoint para eliminar un producto.
 
 ### CRUD de categorías
-- [ ] GET `/api/categories/` Endpoint para retornar la lista de categorías.
-- [ ] GET `/api/categories/{id}/` Endpoint para retornar un categoría.
-- [ ] POST `/api/categories/` Endpoint para crear un categoría.
-- [ ] PUT `/api/categories/{id}/` Endpoint para modificar un categoría.
-- [ ] DELETE `/api/categories/{id}/` Endpoint para eliminar un categoría.
-- [ ] GET `/api/categories/{id}/products` Endpoint para retornar la lista de productos que pertenecen a una categoría.
+- [X] GET `/api/categories/` Endpoint para retornar la lista de categorías.
+- [X] GET `/api/categories/{id}/` Endpoint para retornar un categoría.
+- [X] POST `/api/categories/` Endpoint para crear un categoría.
+- [X] PUT `/api/categories/{id}/` Endpoint para modificar un categoría.
+- [X] DELETE `/api/categories/{id}/` Endpoint para eliminar un categoría.
+- [X] GET `/api/categories/{id}/products` Endpoint para retornar la lista de productos que pertenecen a una categoría.
 
 ## Instrucciones
 
@@ -60,6 +60,9 @@ npm run test:e2e
 
 ## Enviar solución de reto
 Debes de crear un "Fork" de este proyecto, revolverlo desde tu cuenta personal.
-
+esta propuesta de solucion fue hecha por
+Jorge Luis Martinez Hernandez
+correo usado en platzi s_k_ap3@hotmail.com
+id platzi: SoyLuis
 ### Licencia
 La licencia [MIT](https://opensource.org/licenses/MIT).

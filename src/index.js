@@ -8,4 +8,7 @@ app.listen(config.port, err => {
     console.error("Error: ", err);
     return;
   }
+  else{
+    console.log(`Inicio Correcto, app escuchando en el puerto ${config.port}`);
+  }
 });

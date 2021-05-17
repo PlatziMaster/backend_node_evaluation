@@ -3,7 +3,6 @@
   "version": "1.0.0",
   "description": "Reto 9 Octubre 26: Curso de Backend con Node",
   "main": "index.js",
-  "type": "module",
   "dependencies": {
     "@babel/polyfill": "^7.12.1",
     "cors": "^2.8.5",

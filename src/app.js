@@ -1,5 +1,6 @@
 const express = require('express');
 const cors = require('cors');
+const router = require("./network/routes");
 
 function createApp() { 
   const app = express();
@@ -7,6 +8,7 @@ function createApp() {
   app.use(express.json());
 
   // ADD YOUR ROUTES
+  router(app);
   return app;
 }
 

@@ -1,0 +1,140 @@
+{
+    "name": "Resident Evil 4",
+    "price": 22.00,
+    "description":"Resident Evil 4 for PS4",
+    "categoryId": "Videogame",
+    "Image": ""
+},
+{
+    "name": "Super Mario 3d All Stars",
+    "price": 59.00,
+    "description":"Super Mario 3d All Stars for Nintendo Switch",
+    "categoryId": "Videogame",
+    "Image": ""
+},
+{
+    "name": "Ghost of Tushima",
+    "price": 55.00,
+    "description":"Ghost of Tushima for PS4",
+    "categoryId": "Videogame",
+    "Image": ""
+},
+{
+    "name": "New Pokémon Snap",
+    "price": 60.00,
+    "description":"New Pokémon Snap for Nintendo Switch",
+    "categoryId": "Videogame",
+    "Image": ""
+},
+{
+    "name": "Monster Hunter Rise",
+    "price": 60.00,
+    "description":"Monster Hunter Rise for Nintendo Switch",
+    "categoryId": "Videogame",
+    "Image": ""
+},
+{
+    "name": "Yearbook",
+    "price": 18.00,
+    "description":"by Seth Rogen",
+    "categoryId": "Book",
+    "Image": ""
+},
+{
+    "name": "The Very Hungry Caterpillar",
+    "price": 1.00,
+    "description":"by Eric Carle",
+    "categoryId": "Book",
+    "Image": ""
+},
+{
+    "name": "Ariadne: A Novel",
+    "price": 20.00,
+    "description":"by Jennifer Saint",
+    "categoryId": "Book",
+    "Image": ""
+},
+{
+    "name": "Atomic Habits",
+    "price": 11.00,
+    "description":"by James Clear",
+    "categoryId": "Book",
+    "Image": ""
+},
+{
+    "name": "The Premonition: A pandemic Story",
+    "price": 18.00,
+    "description":"by Michael Lewis",
+    "categoryId": "Book",
+    "Image": ""
+},
+{
+    "name": "Tacos al Pastor, order",
+    "price": 20.00,
+    "description":"An amazing order of tacos al pastor",
+    "categoryId": "Food",
+    "Image": ""
+},
+{
+    "name": "Hawaiian Pizza",
+    "price": 15.00,
+    "description":"An amazing Hawaiian Pizza",
+    "categoryId": "Food",
+    "Image": ""
+},
+{
+    "name": "Texas Hamburguer",
+    "price": 10.00,
+    "description":"An amazing Texas Hamburguer",
+    "categoryId": "Food",
+    "Image": ""
+},
+{
+    "name": "Horchata Water 1 Liter",
+    "price": 8.00,
+    "description":"An amazing Horchata Water",
+    "categoryId": "Food",
+    "Image": ""
+},
+{
+    "name": "Pepsi Can",
+    "price": 5.00,
+    "description":"An amazing Pepsi Can",
+    "categoryId": "Food",
+    "Image": ""
+},
+{
+    "name": "One Plus 9",
+    "price": 700.00,
+    "description":"Smart Phone: One Plus 9",
+    "categoryId": "Smartphone",
+    "Image": ""
+},
+{
+    "name": "Iphone 12 Pro Max",
+    "price": 1400.00,
+    "description":"Smart Phone: IPhone 12 Pro Max",
+    "categoryId": "Smartphone",
+    "Image": ""
+},
+{
+    "name": "Samsung Galaxy s21",
+    "price": 1200.00,
+    "description":"Smart Phone: Samsung Galaxy S21",
+    "categoryId": "Smartphone",
+    "Image": ""
+},
+{
+    "name": "One Plus 8",
+    "price": 600.00,
+    "description":"Smart Phone: One Plus 8",
+    "categoryId": "Smartphone",
+    "Image": ""
+},
+{
+    "name": "One Plus 7",
+    "price": 500.00,
+    "description":"Smart Phone: One Plus 7",
+    "categoryId": "Smartphone",
+    "Image": ""
+}

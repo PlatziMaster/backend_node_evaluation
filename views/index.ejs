@@ -1,0 +1,45 @@
+<!-- index.ejs -->
+<!DOCTYPE html>
+<html lang="en">
+  <head>
+    <meta charset="UTF-8" />
+    <title>Tienda en Línea</title>
+  </head>
+
+  <body>
+    <h1>Solución al reto de platzi master backend</h1>
+    <button id="reset">Reset</button>
+    <div>
+        <h2>Productos</h2>
+        <% for(var i = 0; i < products.length; i++) {%>
+            <br>
+            <br>
+           <div>
+               <span>Name: <%= products[i].name %></span>
+               <br>
+               <span>Price: <%= products[i].price %></span>
+               <br>
+               <span>Description: <%= products[i].description%>
+               </span>
+               <br>
+               <span>Category: <%= products[i].categoryId%>
+               </span>
+               <br>
+               <span>Image:<%= products[i].Image %>
+               </span>
+               <br>
+           </div>
+       <% } %>
+    </div>
+    <div>
+        <button id="AgregarProducto">Agregar Producto</button>
+    </div>
+    <div>
+        <button id="EliminarProducto">Eliminar Producto</button>
+    </div>
+    <div>
+        <h2>Categorias</h2>
+        
+    </div>
+  </body>
+</html>

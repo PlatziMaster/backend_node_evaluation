@@ -1,13 +1,10 @@
 const controller = {};
-const CategoryService = require("./category.service");
+const CategoryService = require("./../services/category.service");
 const categoryService = new CategoryService();
 controller.getAll = async (req, res) => {
   try {
     const categories = await categoryService.getAll();
-    return res.status(200).json({
-      data: categories,
-      message: "Categories Listed",
-    });
+    return res.status(200).json(categories);
   } catch (error) {
     console.log(error);
   }
@@ -15,11 +12,8 @@ controller.getAll = async (req, res) => {
 controller.getById = async (req, res) => {
   const { id } = req.params;
   try {
-    const category = await categoryService.getById({ id });
-    return res.status(200).json({
-      data: category,
-      message: "category reatrived",
-    });
+    const category = await categoryService.getById(id);
+    return res.status(200).json(category);
   } catch (error) {
     console.log(error);
   }
@@ -41,10 +35,7 @@ controller.updateCategory = async (req, res) => {
       id,
       category,
     });
-    return res.status(200).json({
-      data: updateCategoryId,
-      message: "category updated",
-    });
+    return res.status(200).json(updateCategoryId);
   } catch (error) {
     console.log(error);
   }
@@ -53,10 +44,7 @@ controller.deleteCategory = async (req, res) => {
   const { id } = req.params;
   try {
     const deleteCategoryId = await categoryService.deleteCategory({ id });
-    return res.status(200).json({
-      data: deleteCategoryId,
-      message: "Category deleted",
-    });
+    return res.status(200).json(true);
   } catch (error) {
     console.log(error);
   }
@@ -64,13 +52,8 @@ controller.deleteCategory = async (req, res) => {
 controller.productsByCategory = async (req, res) => {
   const { id } = req.params;
   try {
-    const productsByCategory = await categoryService.getProductsByCategory({
-      id,
-    });
-    return res.status(200).json({
-      data: productsByCategory,
-      message: "Products by category Listed",
-    });
+    const productsByCategory = await categoryService.getProductsByCategory(id);
+    return res.status(200).json(productsByCategory);
   } catch (error) {
     console.log(error);
   }

@@ -29,9 +29,10 @@ class MongoLib {
     }
     return MongoLib.connection;
   }
-  getAll(collection) {
+  getAll(collection, query) {
+    
     return this.connect().then((db) => {
-      return db.collection(collection).find().toArray();
+      return db.collection(collection).find(query).toArray();
     });
   }
 
@@ -48,13 +49,14 @@ class MongoLib {
       .then(() => data);
   }
   update(collection, data, id) {
-    return this.connect()
-      .then((db) => {
-        return db
-          .collection(collection)
-          .updateOne({ _id: ObjectId(id) }, { $set: data }, { upsert: true });
-      })
-      .then((result) => result.upsertedId || id);
+    return this.connect().then((db) => {
+      db.collection(collection).updateOne(
+        { _id: ObjectId(id) },
+        { $set: data },
+        { upsert: true }
+      );
+      return db.collection(collection).findOne({ _id: ObjectId(id) });
+    });
   }
   delete(collection, id) {
     return this.connect()

@@ -1,12 +1,12 @@
-const MongoLib = require("../../lib/mongo");
+const MongoLib = require("../lib/mongo");
 
 class ProductService {
   constructor() {
     this.collection = "products";
     this.mongoDB = new MongoLib();
   }
-  async getAll({ tags }) {
-    const query = tags && { tags: { $in: tags } };
+  async getAll(query) {
+    query = query || {};
     const products = await this.mongoDB.getAll(this.collection, query);
     return products || [];
   }
@@ -19,10 +19,10 @@ class ProductService {
     return createProductId;
   }
   async updateProduct({ id, product }) {
-    const updatedProductId = await this.mongoDB.update(
+    const update = await this.mongoDB.update(this.collection, product, id);
+    const updatedProductId = await this.mongoDB.get(
       this.collection,
-      product,
-      id
+      update._id
     );
     return updatedProductId;
   }

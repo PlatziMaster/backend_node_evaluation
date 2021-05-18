@@ -1,5 +1,5 @@
 //Declaration of variables
-const { ObjectId } = require('mongodb')
+const { object_id } = require('mongodb')
 const mongo_client = require('../../db/mongo')
 const collection = "categories"
 const collection_products = "products"
@@ -17,12 +17,12 @@ const controller = {
         } )
     },
     show: async (req, res) => {
-        const { categoryId } = reg.params
+        const { category_id } = reg.params
         await mongo_client.connect()
         const database = mongo_client.db( db_name )
         const categories = database.collection( collection )
 
-        categories.findOne({ _id: ObjectId( categoryId ) }, (err, category) => {
+        categories.findOne({ _id: object_id( category_id ) }, (err, category) => {
             res.status(200).json(category)
         })
     },
@@ -36,35 +36,35 @@ const controller = {
         })
     },
     update: async (req, res) => {
-        const { categoryId } = req.params
+        const { category_id } = req.params
         await mongo_client.connect()
         const database = mongo_client.db( db_name )
         const categories = database.collection( collection )
 
-        categories.updateOne({ _id: ObjectId(categoryId) }, { $set: { ...req.body } })
-        categories.findOne({ _id: ObjectId( categoryId ) }, (err, category) => {
+        categories.updateOne({ _id: object_id(category_id) }, { $set: { ...req.body } })
+        categories.findOne({ _id: object_id( category_id ) }, (err, category) => {
             res.status(200).json(category)
         })
     },
     destroy: async (req, res) => {
-        const { categoryId } = req.params
+        const { category_id } = req.params
         await mongo_client.connect()
         const database = mongo_client.db( db_name )
         const categories = database.collection( collection )
 
-        categories.deleteOne({ _id: ObjectId(categoryId) }, (err, categories) => {
+        categories.deleteOne({ _id: object_id(category_id) }, (err, categories) => {
             if( categories.deletedCount === 1 ){
                 res.status(200).json(true)
             }
         })
     },
     list_products: async (req, res) => {
-        const { categoryId } = req.params
+        const { category_id } = req.params
         await mongo_client.connect()
         const database = mongo_client.db( db_name )
         const products = database.collection( collection_products )
 
-        products.find({ categoryId: categoryId }).toArray( (err, products) => {
+        products.find({ category_id: category_id }).toArray( (err, products) => {
             res.status(200).json(products)
         })
     }

@@ -19,7 +19,7 @@ controller.getById = async (req, res) => {
     const product = await productsService.getById({ id });
     return res.status(200).json({
       data: product,
-      message: "Video reatrived",
+      message: "Product reatrived",
     });
   } catch (error) {
     console.log(error);

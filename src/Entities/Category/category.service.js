@@ -4,9 +4,8 @@ class CategoryService {
     this.collection = "categories";
     this.mongoDB = new MongoLib();
   }
-  async getAll({ tags }) {
-    const query = tags && { tags: { $in: tags } };
-    const categories = await this.mongoDB.getAll(this.collection, query);
+  async getAll() {
+    const categories = await this.mongoDB.getAll(this.collection);
     return categories || [];
   }
   async getById({ id }) {
@@ -14,7 +13,6 @@ class CategoryService {
     return category || {};
   }
   async createCategory({ category }) {
-    console.log({ category });
     const createCategoryId = await this.mongoDB.create(
       this.collection,
       category
@@ -32,6 +30,11 @@ class CategoryService {
   async deleteCategory({ id }) {
     const deleteCategoryId = await this.mongoDB.delete(this.collection, id);
     return deleteCategoryId;
+  }
+  async getProductsByCategory({ id }) {
+    const query = { categoryId: id };
+    const productsByCategory = await this.mongoDB.getAll("products", query);
+    return productsByCategory || [];
   }
 }
 module.exports = CategoryService;

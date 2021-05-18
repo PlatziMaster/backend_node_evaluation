@@ -2,9 +2,8 @@ const controller = {};
 const CategoryService = require("./category.service");
 const categoryService = new CategoryService();
 controller.getAll = async (req, res) => {
-  const { tags } = req.query;
   try {
-    const categories = await categoryService.getAll({ tags });
+    const categories = await categoryService.getAll();
     return res.status(200).json({
       data: categories,
       message: "Categories Listed",
@@ -29,10 +28,7 @@ controller.createCategory = async (req, res) => {
   const { body: category } = req;
   try {
     const createCategory = await categoryService.createCategory({ category });
-    return res.status(201).json({
-      data: createCategory,
-      message: "category Created",
-    });
+    return res.status(201).json(createCategory);
   } catch (error) {
     console.log(error);
   }
@@ -60,6 +56,20 @@ controller.deleteCategory = async (req, res) => {
     return res.status(200).json({
       data: deleteCategoryId,
       message: "Category deleted",
+    });
+  } catch (error) {
+    console.log(error);
+  }
+};
+controller.productsByCategory = async (req, res) => {
+  const { id } = req.params;
+  try {
+    const productsByCategory = await categoryService.getProductsByCategory({
+      id,
+    });
+    return res.status(200).json({
+      data: productsByCategory,
+      message: "Products by category Listed",
     });
   } catch (error) {
     console.log(error);

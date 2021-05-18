@@ -2,7 +2,7 @@ const MongoLib = require("../../lib/mongo");
 
 class ProductService {
   constructor() {
-    this.collection = "product";
+    this.collection = "products";
     this.mongoDB = new MongoLib();
   }
   async getAll({ tags }) {
@@ -18,11 +18,11 @@ class ProductService {
     const createProductId = await this.mongoDB.create(this.collection, product);
     return createProductId;
   }
-  async updateProduct({ productId, product }) {
+  async updateProduct({ id, product }) {
     const updatedProductId = await this.mongoDB.update(
       this.collection,
       product,
-      productId
+      id
     );
     return updatedProductId;
   }

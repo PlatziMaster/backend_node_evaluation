@@ -5,12 +5,13 @@ const USER = encodeURIComponent(config.dbUser);
 const PASSWORD = encodeURIComponent(config.dbPassword);
 const DB_NAME = config.dbName;
 
-const MONGO_URI = `${config.dbConnection}://${USER}:${PASSWORD}@${config.dbHost}:${config.dbPort}/${config.dbName}?retryWrites=true&w=majority`;
+const MONGO_URI = `${config.dbConnection}://${USER}:${PASSWORD}@${config.dbHost}/${config.dbName}?retryWrites=true&w=majority`;
 
 class MongoLib {
   constructor() {
     this.client = new MongoClient(MONGO_URI, {
       useNewUrlParser: true,
+      useUnifiedTopology: true,
     });
     this.dbName = DB_NAME;
   }
@@ -28,11 +29,12 @@ class MongoLib {
     }
     return MongoLib.connection;
   }
-  getAll(collection, query) {
+  getAll(collection) {
     return this.connect().then((db) => {
-      return db.collection(collection).find(query).toArray();
+      return db.collection(collection).find().toArray();
     });
   }
+
   get(collection, id) {
     return this.connect().then((db) => {
       return db.collection(collection).findOne({ _id: ObjectId(id) });
@@ -43,7 +45,7 @@ class MongoLib {
       .then((db) => {
         return db.collection(collection).insertOne(data);
       })
-      .then((result) => result.insertedId);
+      .then(() => data);
   }
   update(collection, data, id) {
     return this.connect()

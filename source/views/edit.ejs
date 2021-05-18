@@ -1,0 +1,31 @@
+<%- include ("partials/_header") %>
+
+<div class="container">
+    <div class="row">
+        <div class="col-md-5 offset-md-3">
+            <div class="card">
+                <div class="card-body">
+                    <form action="/edit/<%= productt._id%>" method="POST">
+                        <div class="form-group">
+                            <input type="number" name="categoryID" placeholder="insert a category ID" class="form-control" value="<%= productt.categoryID %>">
+                        </div>
+                        <div class="form-group">
+                            <input type="text" name="name" placeholder="insert a product name" class="form-control" value="<%= productt.name %>">
+                        </div>
+                        <div class="form-group">
+                            <input type="number" name="price" placeholder="insert a product price" class="form-control" value="<%= productt.price%>">
+                        </div>
+                        <div class="form-group">
+                            <textarea name="description" cols="80" placeholder="insert a product description" class="form-control"><%= productt.description%></textarea>
+                        </div>
+                        <div class="d-grid gap-2">
+                            <button type="submit" class="btn btn-primary">Add</button>
+                        </div>
+                    </form>
+                </div>
+            </div>
+        </div>
+    </div>
+</div>
+
+<%- include ("partials/_footer") %>

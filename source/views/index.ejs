@@ -1,0 +1,120 @@
+<%- include ("partials/_header") %>
+
+    <div class="container">
+        <div class="row">
+            <!--Form-->
+            <div class="col-md-5">
+                <div class="card">
+                    <div class="card-body">
+                        <form action="/add" method="POST">
+                            <div class="form-group">
+                                <input type="number" name="categoryID" placeholder="insert a category ID" class="form-control">
+                            </div>
+                            <div class="form-group">
+                                <input type="text" name="name" placeholder="insert a product name" class="form-control">
+                            </div>
+                            <div class="form-group">
+                                <input type="number" name="price" placeholder="insert a product price" class="form-control">
+                            </div>
+                            <div class="form-group">
+                                <textarea name="description" cols="80" placeholder="insert a product description" class="form-control"></textarea>
+                            </div>
+                            <div class="d-grid gap-2">
+                                <button type="submit" class="btn btn-primary">Add</button>
+                            </div>
+                        </form>
+                    </div>
+                </div>
+            </div>
+            <!--List-->
+            <div class="col-md-7">
+                <table class="table table-bordered table-hover">
+                    <thead>
+                        <tr>
+                            <th>ProductID</th>
+                            <th>CategoryID</th>
+                            <th>Name</th>
+                            <th>Price</th>
+                            <th>Description</th>
+                            <th>Operation</th>
+                        </tr>
+                    </thead>
+                    <tbody>
+                        <% for(var i=0; i < products.length; i++) { %>
+                            <tr>
+                                <td>
+                                    <%= i +1 %>
+                                </td>
+                                <td>
+                                    <%= products[i].categoryID %>
+                                </td>
+                                <td>
+                                    <%= products[i].name %>
+                                </td>
+                                <td>
+                                    <%= products[i].price %>
+                                </td>
+                                <td>
+                                    <%= products[i].description %>
+                                </td>
+                                <td>
+                                    <a href="/edit/<%= products[i]._id %>" class="btn btn-dark">Edit</a>
+                                    <a href="/delete/<%= products[i]._id %>" class="btn btn-danger">Delete</a>
+                                </td>
+                            </tr>
+                       <% } %>
+                    </tbody>
+                </table>
+            </div>
+        </div>
+    </div>
+
+    <div class="container">
+        <div class="row">
+            <!--Form-->
+            <div class="col-md-5">
+                <div class="card">
+                    <div class="card-body">
+                        <form action="/addd" method="POST">
+                            <div class="form-group">
+                                <input type="text" name="name" placeholder="insert a category name" class="form-control">
+                            </div>
+                            <div class="d-grid gap-2">
+                                <button type="submit" class="btn btn-primary">Add</button>
+                            </div>
+                        </form>
+                    </div>
+                </div>
+            </div>
+            <!--List-->
+            <div class="col-md-7">
+                <table class="table table-bordered table-hover">
+                    <thead>
+                        <tr>
+                            <th>CategoryID</th>
+                            <th>Name</th>
+                            <th>Operation</th>
+                        </tr>
+                    </thead>
+                    <tbody>
+                        <% for(var i=0; i < categories.length; i++) { %>
+                            <tr>
+                                <td>
+                                    <%= i + 1 %>
+                                </td>
+                                <td>
+                                    <%= categories[i].name %>
+                                </td>
+                                <td>
+                                    <a href="/editt/<%= categories[i]._id %>" class="btn btn-dark">Edit</a>
+                                    <a href="/delete/<%= categories[i]._id %>" class="btn btn-danger">Delete</a>
+                                </td>
+                            </tr>
+                       <% } %>
+                    </tbody>
+                </table>
+            </div>
+        </div>
+    </div>
+
+<%- include ("partials/_footer") %>

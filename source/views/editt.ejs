@@ -1,0 +1,23 @@
+<%- include ("partials/_header") %>
+
+<div class="container">
+    <div class="row">
+        <div class="col-md-5 offset-md-3">
+            <div class="card">
+                <div class="card-body">
+                    <form action="/editt/<%= categori._id%>" method="POST">
+                        <div class="form-group">
+                            <input type="text" name="name" placeholder="insert a category name" class="form-control" value="<%= categori.name %>">
+                        </div>
+                        <div class="d-grid gap-2">
+                            <button type="submit" class="btn btn-primary">Add</button>
+                        </div>
+                    </form>
+                </div>
+            </div>
+        </div>
+    </div>
+</div>
+
+
+<%- include ("partials/_footer") %>

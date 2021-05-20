@@ -64,7 +64,7 @@ Debes de crear un "Fork" de este proyecto, revolverlo desde tu cuenta personal.
 ### Licencia
 La licencia [MIT](https://opensource.org/licenses/MIT).
 
-### Prueba echa por
+### Prueba hecha por
 LUIS ALBERTO RUIZ SARMIENTO
 - [Link a Categorías](https://platzi-evaluation-lars.herokuapp.com/api/categories)
 - [Link a Productos](https://platzi-evaluation-lars.herokuapp.com/api/products)

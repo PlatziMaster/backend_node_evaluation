@@ -15,7 +15,7 @@ router.get('/', async (req, res) => {
 
 router.post('/', async (req, res) => {
   if (!req.body.name) {
-    responses.error(req, res, 'Name is required', null, 400);
+    return responses.error(req, res, 'Name is required', null, 400);
   }
   try {
     const newCategory = await store.addCategory(req.body.name);
@@ -27,7 +27,7 @@ router.post('/', async (req, res) => {
 
 router.put('/:id', async (req, res) => {
   if (!req.body.name) {
-    responses.error(req, res, 'Name is required', null, 400);
+    return responses.error(req, res, 'Name is required', null, 400);
   }
   try {
     await store.updateCategory(req.params.id, req.body.name);

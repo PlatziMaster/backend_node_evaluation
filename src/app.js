@@ -10,6 +10,8 @@ function createApp() {
   app.use(cors());
   app.use(express.json());
   
+  app.use(express.static(__dirname + '/public'))
+
   connectDB(config.dbURL);
   setRoutes(app);
 

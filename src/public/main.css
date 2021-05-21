@@ -1,0 +1,53 @@
+#categoriesContainer {
+  max-width: 750px;
+  margin: 50px auto;
+  display: flex;
+  justify-content: space-between;
+  flex-wrap: wrap;
+}
+
+#existingCategoriesContainer {
+  width: 320px;
+}
+
+#newCategoryContainer {
+  width: 265px;
+}
+
+#messageCategoriesEmpty {
+  margin: 20px;
+  padding: 10px 20px;
+  text-align: center;
+  text-transform: lowercase;
+  font-weight: bolder;
+  font-variant: small-caps;
+  color: gray;
+}
+
+#messageCategoriesEmpty.hide {
+  display: none;
+}
+
+#categoriesList {
+  list-style: none;
+  margin: 0;
+  padding: 0;
+}
+
+#errorMessage {
+  margin-top: 100px;
+  text-align: center;
+  font-weight: bolder;
+  font-size: large;
+  color: rgb(189, 0, 0);
+}
+
+h2, h4 {
+  text-align: center;
+}
+
+button {
+  padding: 3px 10px;
+  margin: 5px 0;
+  margin-left: 10px;
+}

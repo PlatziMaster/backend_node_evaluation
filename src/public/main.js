@@ -40,16 +40,17 @@ function createCategoryElement(category) {
   input.disabled = true; // Disable and css as normal text when editing element off.
   input.value = category.name;
 
-  const button = d.createElement('button');
-  button.innerText = 'Edit';
+  const buttonEdit = d.createElement('button');
+  buttonEdit.innerText = 'Edit';
 
-  button.addEventListener('click', () => {
-    if (button.innerText === 'Edit') {
-      button.innerText = 'Save';
+  buttonEdit.addEventListener('click', () => {
+    if (buttonEdit.innerText === 'Edit') {
+      buttonEdit.innerText = 'Save';
+      buttonDelete.innerText = 'Cancel';
       input.disabled = false;
       return;
     }
-    if (button.innerText === 'Save') {
+    if (buttonEdit.innerText === 'Save') {
       if (input.value.trim()) {
         const categoryEdited = {
           name: input.value,
@@ -62,8 +63,32 @@ function createCategoryElement(category) {
     }
   });
 
+  const buttonDelete = d.createElement('button');
+  buttonDelete.innerText = 'Delete';
+
+  buttonDelete.addEventListener('click', () => {
+    if (buttonDelete.innerText === 'Delete') {
+      deleteCategory(category._id)
+      .then(() => refreshCategoriesList())
+      .catch(e => {
+        console.log('Promise got the error:', e);
+        displayError('Error deleting Category');
+      });
+      return;
+    }
+    if (buttonDelete.innerText === 'Cancel') {
+      // Button also acts as 'Cancel Editing'.
+      input.value = category.name;
+      input.disabled = true;
+      buttonDelete.innerText = 'Delete';
+      buttonEdit.innerText = 'Edit';
+      return;
+    }
+  });
+
   catItem.append( input );
-  catItem.append( button );
+  catItem.append( buttonEdit );
+  catItem.append( buttonDelete );
 
   return catItem;
 }
@@ -105,6 +130,23 @@ async function createNewCategory(name) {
   }
 }
 
+async function deleteCategory(categoryId) {
+  const tm = setTimeout(() => {
+    displayError('There appears to be an error comunicating with API.');
+  }, 3000);
+  try {
+    console.log('About to try deletion');
+    await fetch(`/api/category/${categoryId}`, { method: 'DELETE' });
+    console.log('Deletion tried');
+    clearTimeout(tm);
+    return;
+  } catch (e) {
+    clearTimeout(tm);
+    console.log('Error catched', e);
+    throw e;
+  }
+}
+
 // Returns a Categories array.
 async function getCategories() {
   const tm = setTimeout(() => {
@@ -135,6 +177,7 @@ async function updateCategory(category) {
       body: JSON.stringify(category)
     });
     clearTimeout(tm);
+    return;
   } catch (e) {
     clearTimeout(tm);
     throw e;

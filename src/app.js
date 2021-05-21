@@ -1,9 +1,9 @@
 const express = require('express');
 const cors = require('cors');
 
-const { config } = require('./config');
-const connectDB = require('./network/db');
-const setRoutes = require('./network/routes');
+const { config } = require('./api/config');
+const connectDB = require('./api/network/db');
+const setRoutes = require('./api/network/routes');
 
 function createApp() { 
   const app = express();
@@ -14,9 +14,6 @@ function createApp() {
 
   connectDB(config.dbURL);
   setRoutes(app);
-
-  // app.set("views", path.join(__dirname, "views"));
-  // app.set("view engine", "ejs");
 
   return app;
 }

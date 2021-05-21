@@ -1,5 +1,5 @@
-const { config } = require('./config');
 const createApp = require('./app');
+const { config } = require('./api/config');
 
 const app = createApp();
 

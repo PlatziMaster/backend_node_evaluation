@@ -4,19 +4,27 @@
   <meta charset="UTF-8">
   <meta http-equiv="X-UA-Compatible" content="IE=edge">
   <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <link rel="stylesheet" href="./main.css">
   <title>The Products</title>
 </head>
 <body>
 
-  <div>
-    <h4>Existing Categories</h4>
-    <ul id="categoriesList"></ul>
-  </div>
+  <h2>Categories</h2>
 
-  <div>
-    <h4>Create New Category</h4>
-    <input id="newCategoryNameInput"/>
-    <button disabled id="newCategoryButton">Create</button>
+  <div id="categoriesContainer">
+
+    <div id="existingCategoriesContainer">
+      <h4>Existing</h4>
+      <ul id="categoriesList"></ul>
+      <p id="messageCategoriesEmpty">No Categories</p>
+    </div>
+    
+    <div id="newCategoryContainer">
+      <h4>Create New</h4>
+      <input id="newCategoryNameInput"/>
+      <button disabled id="newCategoryButton">Create</button>
+    </div>
+    
   </div>
 
   <p id="errorMessage"></p>

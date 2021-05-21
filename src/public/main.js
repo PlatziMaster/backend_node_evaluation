@@ -71,7 +71,6 @@ function createCategoryElement(category) {
       deleteCategory(category._id)
       .then(() => refreshCategoriesList())
       .catch(e => {
-        console.log('Promise got the error:', e);
         displayError('Error deleting Category');
       });
       return;
@@ -95,15 +94,19 @@ function createCategoryElement(category) {
 
 async function refreshCategoriesList() {
   const catsListElement = d.getElementById('categoriesList');
+  const messageCategoriesEmpty = d.getElementById('messageCategoriesEmpty');
   getCategories()
   .then(cats => {
     if (cats && cats.length > 0) {
+      messageCategoriesEmpty.className = 'hide';
       catsListElement.innerHTML = ''; // Empty list.
   
       cats.forEach(c => {
         catsListElement.appendChild( createCategoryElement(c) );
       });
   
+    } else {
+      messageCategoriesEmpty.className = '';
     }
   })
   .catch(e => displayError('Error fetching categories.'));

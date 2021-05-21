@@ -5,8 +5,8 @@ const addCategory = async catName => {
     const newCat = new CategoryModel({ name: catName});
     await newCat.save();
     return newCat;
-  } catch (err) {
-    throw new Error('[category store]', err);
+  } catch (e) {
+    throw new Error('[category store]', e);
   }
 }
 
@@ -15,7 +15,7 @@ const getCategories = async () => {
     const categories = await CategoryModel.find();
     return categories;
   } catch (e) {
-    throw new Error('[category store]', err);
+    throw new Error('[category store]', e);
   }
 }
 
@@ -26,7 +26,7 @@ const updateCategory = async (id, newName) => {
     const catUpdated = await category.save();
     return catUpdated;
   } catch (e) {
-    throw new Error('[category store]', err);
+    throw new Error('[category store]', e);
   }
 }
 
@@ -35,7 +35,7 @@ const deleteCategory = async (id) => {
     const category = await CategoryModel.findById(id);
     category.delete();
   } catch (e) {
-    throw new Error('[category store]', err);
+    throw new Error('[category store]', e);
   }
 }
 

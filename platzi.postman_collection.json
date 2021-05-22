@@ -1,0 +1,204 @@
+{
+	"info": {
+		"_postman_id": "66f5d3f4-e55a-4668-81e7-538753045f65",
+		"name": "platzi",
+		"schema": "https://schema.getpostman.com/json/collection/v2.0.0/collection.json"
+	},
+	"item": [
+		{
+			"name": "get products",
+			"request": {
+				"method": "GET",
+				"header": [],
+				"url": "localhost:3000/api/products"
+			},
+			"response": []
+		},
+		{
+			"name": "get products id",
+			"request": {
+				"method": "GET",
+				"header": [],
+				"url": "localhost:3000/api/products/2"
+			},
+			"response": []
+		},
+		{
+			"name": "post products",
+			"request": {
+				"method": "POST",
+				"header": [],
+				"body": {
+					"mode": "urlencoded",
+					"urlencoded": [
+						{
+							"key": "name",
+							"value": "queso",
+							"type": "text"
+						},
+						{
+							"key": "price",
+							"value": "10",
+							"type": "text"
+						},
+						{
+							"key": "description",
+							"value": "manchego",
+							"type": "text"
+						},
+						{
+							"key": "img",
+							"value": "asdasdasd",
+							"type": "text"
+						},
+						{
+							"key": "category_id",
+							"value": "1",
+							"type": "text"
+						}
+					]
+				},
+				"url": "localhost:3000/api/products"
+			},
+			"response": []
+		},
+		{
+			"name": "put products id",
+			"request": {
+				"method": "PUT",
+				"header": [],
+				"body": {
+					"mode": "urlencoded",
+					"urlencoded": [
+						{
+							"key": "name",
+							"value": "leche",
+							"type": "text"
+						},
+						{
+							"key": "price",
+							"value": "10",
+							"type": "text"
+						},
+						{
+							"key": "description",
+							"value": "leche ligh",
+							"type": "text"
+						},
+						{
+							"key": "img",
+							"value": "asdasdasd",
+							"type": "text"
+						},
+						{
+							"key": "category_id",
+							"value": "1",
+							"type": "text"
+						},
+						{
+							"key": "",
+							"value": "",
+							"type": "text",
+							"disabled": true
+						}
+					]
+				},
+				"url": "localhost:3000/api/products/1"
+			},
+			"response": []
+		},
+		{
+			"name": "delete products id",
+			"request": {
+				"method": "DELETE",
+				"header": [],
+				"url": "localhost:3000/api/products/2"
+			},
+			"response": []
+		},
+		{
+			"name": "get categories",
+			"request": {
+				"method": "GET",
+				"header": [],
+				"url": "localhost:3000/api/categories"
+			},
+			"response": []
+		},
+		{
+			"name": "get categories id",
+			"request": {
+				"method": "GET",
+				"header": [],
+				"url": "localhost:3000/api/categories/1"
+			},
+			"response": []
+		},
+		{
+			"name": "post categories",
+			"request": {
+				"method": "POST",
+				"header": [],
+				"body": {
+					"mode": "urlencoded",
+					"urlencoded": [
+						{
+							"key": "name",
+							"value": "electronicos",
+							"type": "text"
+						},
+						{
+							"key": "img",
+							"value": "asdasd",
+							"type": "text"
+						}
+					]
+				},
+				"url": "localhost:3000/api/categories"
+			},
+			"response": []
+		},
+		{
+			"name": "put categories id",
+			"request": {
+				"method": "PUT",
+				"header": [],
+				"body": {
+					"mode": "urlencoded",
+					"urlencoded": [
+						{
+							"key": "name",
+							"value": "electronicos2",
+							"type": "text"
+						},
+						{
+							"key": "img",
+							"value": "asdasdasd",
+							"type": "text"
+						}
+					]
+				},
+				"url": "localhost:3000/api/categories/2"
+			},
+			"response": []
+		},
+		{
+			"name": "delete categories id",
+			"request": {
+				"method": "DELETE",
+				"header": [],
+				"url": "localhost:3000/api/categories/2"
+			},
+			"response": []
+		},
+		{
+			"name": "get categories id products",
+			"request": {
+				"method": "GET",
+				"header": [],
+				"url": "localhost:3000/api/categories/1/products"
+			},
+			"response": []
+		}
+	]
+}

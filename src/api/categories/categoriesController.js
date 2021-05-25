@@ -9,13 +9,13 @@ const {
 
 
 async function getCategories() {
-    return await getDocs("categories");
-}
+    return await getDocs("categories")
+};
 
 async function getCategoryById(req) {
     const { id } = req.params;
     return await getDocById("categories", id);
-}
+};
 
 async function createCategory(req) {
     const fields = req.body;
@@ -25,7 +25,7 @@ async function createCategory(req) {
     } catch(e) {
         throw new Error(e);
     }
-}
+};
 
 async function updateCategory(req) {
     const { id } = req.params;
@@ -35,7 +35,7 @@ async function updateCategory(req) {
     } catch(e) {
         throw new Error(e);
     }
-}
+};
 
 async function deleteCategory(req) {
     const { id } = req.params;
@@ -44,7 +44,7 @@ async function deleteCategory(req) {
     } catch(e) {
         throw new Error(e);
     }
-}
+};
 
 async function getProductsFromCategory(req) {
     const { id } = req.params;

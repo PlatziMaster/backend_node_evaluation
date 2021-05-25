@@ -77,11 +77,11 @@ async function deleteDoc(collection, id) {
     }
 }
 
-async function getGroupedDocs(collection, groupBy) {
+async function getDocsFromGroup(collection, group) {
     try {
         const client = new mongoMain();
         const db = await client.dbConnect();
-        const docs = await db.collection(collection).find(groupBy).toArray();
+        const docs = await db.collection(collection).find(group).toArray();
         client.dbDisconnect();
         return docs;
     } catch(e) {
@@ -95,5 +95,5 @@ module.exports = {
     createDoc,
     updateDoc,
     deleteDoc,
-    getGroupedDocs
+    getDocsFromGroup
 };

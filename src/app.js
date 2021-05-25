@@ -1,5 +1,6 @@
 const express = require('express');
 const cors = require('cors');
+const categoriesRouter = require('./api/categories/categoriesRouter');
 
 function createApp() { 
   const app = express();
@@ -7,6 +8,7 @@ function createApp() {
   app.use(express.json());
 
   // ADD YOUR ROUTES
+  app.use("/api/categories", categoriesRouter);
   return app;
 }
 

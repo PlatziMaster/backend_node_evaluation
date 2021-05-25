@@ -1,0 +1,311 @@
+{
+    "info": {
+        "_postman_id": "582a6d73-020c-49da-8398-dda286c84785",
+        "name": "Platzi-Master",
+        "schema": "https://schema.getpostman.com/json/collection/v2.0.0/collection.json"
+    },
+    "item": [
+        {
+            "name": "Productos",
+            "item": [
+                {
+                    "name": "Consultar productos por _id",
+                    "request": {
+                        "method": "GET",
+                        "header": [],
+                        "url": {
+                            "raw": "http://127.0.0.1:3000/products?id=5c76c5605f627d4121047b20",
+                            "protocol": "http",
+                            "host": [
+                                "127",
+                                "0",
+                                "0",
+                                "1"
+                            ],
+                            "port": "3000",
+                            "path": [
+                                "products"
+                            ],
+                            "query": [
+                                {
+                                    "key": "id",
+                                    "value": "5c76c5605f627d4121047b20"
+                                }
+                            ]
+                        }
+                    },
+                    "response": []
+                },
+                {
+                    "name": "Consultar productos",
+                    "request": {
+                        "method": "GET",
+                        "header": [],
+                        "url": {
+                            "raw": "http://127.0.0.1:3000/products?limit=5&skip=0",
+                            "protocol": "http",
+                            "host": [
+                                "127",
+                                "0",
+                                "0",
+                                "1"
+                            ],
+                            "port": "3000",
+                            "path": [
+                                "products"
+                            ],
+                            "query": [
+                                {
+                                    "key": "limit",
+                                    "value": "5"
+                                },
+                                {
+                                    "key": "skip",
+                                    "value": "0"
+                                }
+                            ]
+                        }
+                    },
+                    "response": []
+                },
+                {
+                    "name": "Crear productos",
+                    "request": {
+                        "method": "POST",
+                        "header": [
+                            {
+                                "key": "Content-Type",
+                                "name": "Content-Type",
+                                "value": "application/json",
+                                "type": "text"
+                            }
+                        ],
+                        "body": {
+                            "mode": "raw",
+                            "raw": "{\n\t\"nombre\"}"
+                        },
+                        "url": "http://127.0.0.1:3000/products"
+                    },
+                    "response": []
+                },
+                {
+                    "name": "Actualizar productos",
+                    "request": {
+                        "method": "PUT",
+                        "header": [
+                            {
+                                "key": "Content-Type",
+                                "name": "Content-Type",
+                                "type": "text",
+                                "value": "application/json"
+                            }
+                        ],
+                        "body": {
+                            "mode": "raw",
+                            "raw": "{\n\t\"_id\": \"5c75fbc55f627d40a6c8e6ca\",\n\t\"nombre\": \"price\",\n\t\"descripcion\": \"Productos\", \n\t\"categoryID\", \n\t\"image\"\n}"
+                        },
+                        "url": "http://127.0.0.1:3000/products"
+                    },
+                    "response": []
+                },
+                {
+                    "name": "Borrar productos",
+                    "request": {
+                        "method": "DELETE",
+                        "header": [],
+                        "url": {
+                            "raw": "http://127.0.0.1:3000/products?id=5c75fbc55f627d40a6c8e6ca",
+                            "protocol": "http",
+                            "host": [
+                                "127",
+                                "0",
+                                "0",
+                                "1"
+                            ],
+                            "port": "3000",
+                            "path": [
+                                "products"
+                            ],
+                            "query": [
+                                {
+                                    "key": "id",
+                                    "value": "5c75fbc55f627d40a6c8e6ca"
+                                }
+                            ]
+                        }
+                    },
+                    "response": []
+                },
+                
+        {
+            "name": "Categorias",
+            "item": [
+              {
+                "name": "Consultar categoria por _id",
+                "request": {
+                    "method": "GET",
+                    "header": [],
+                    "url": {
+                        "raw": "http://127.0.0.1:3000/categories?id=5c771ac15f627d3abff87f57",
+                        "protocol": "http",
+                        "host": [
+                            "127",
+                            "0",
+                            "0",
+                            "1"
+                        ],
+                        "port": "3000",
+                        "path": [
+                            "categories"
+                        ],
+                        "query": [
+                            {
+                                "key": "id",
+                                "value": "5c771ac15f627d3abff87f57"
+                            }
+                        ]
+                    }
+                },
+                "response": []
+            },
+                {
+                    "name": "Consultar categoria por nombre",
+                    "request": {
+                        "method": "GET",
+                        "header": [],
+                        "url": {
+                            "raw": "http://127.0.0.1:3000/categories?id=5c771ac15f627d3abff87f57",
+                            "protocol": "http",
+                            "host": [
+                                "127",
+                                "0",
+                                "0",
+                                "1"
+                            ],
+                            "port": "3000",
+                            "path": [
+                                "categories"
+                            ],
+                            "query": [
+                                {
+                                    "key": "id",
+                                    "value": "5c771ac15f627d3abff87f57"
+                                }
+                            ]
+                        }
+                    },
+                    "response": []
+                },
+                {
+                    "name": "Crear categorias",
+                    "request": {
+                        "method": "POST",
+                        "header": [
+                            {
+                                "key": "Content-Type",
+                                "name": "Content-Type",
+                                "type": "text",
+                                "value": "application/json"
+                            }
+                        ],
+                        "body": {
+                            "mode": "raw",
+                            "raw": "{\n\t\"nombre\": \"categoria\",\n\t\"imagen\": \"img\",\t\n}"
+                        },
+                        "url": "http://127.0.0.1:3000/categories"
+                    },
+                    "response": []
+                },
+                {
+                    "name": "Actualizar categorias",
+                    "request": {
+                        "method": "PUT",
+                        "header": [
+                            {
+                                "key": "Content-Type",
+                                "name": "Content-Type",
+                                "type": "text",
+                                "value": "application/json"
+                            }
+                        ],
+                        "body": {
+                            "mode": "raw",
+                            "raw": "{\n\t\"nombre\": \"categoria\",\n\t\"imagen\": \"img\",\t\n}"
+                           },
+                        "url": "http://127.0.0.1:3000/categories"
+                    },
+                    "response": []
+                },
+                {
+                    "name": "Borrar categorias",
+                    "request": {
+                        "method": "DELETE",
+                        "header": [
+                            {
+                                "key": "Content-Type",
+                                "name": "Content-Type",
+                                "type": "text",
+                                "value": "application/json"
+                            }
+                        ],
+                        "body": {
+                            "mode": "raw",
+                            "raw": "{\n\t\"nombre\": \"categoria\",\n\t\"imagen\":\"img\",\t\n}"
+                      },
+                        "url": {
+                            "raw": "http://127.0.0.1:3000/categories?id=5c76c3765f627d3eb75a46c5",
+                            "protocol": "http",
+                            "host": [
+                                "127",
+                                "0",
+                                "0",
+                                "1"
+                            ],
+                            "port": "3000",
+                            "path": [
+                                "categories"
+                            ],
+                            "query": [
+                                {
+                                    "key": "id",
+                                    "value": "5c76c3765f627d3eb75a46c5"
+                                }
+                            ]
+                        }
+                    },
+                    "response": []
+                },
+                {
+                  "name": "Consultar productos por _id",
+                  "request": {
+                      "method": "GET",
+                      "header": [],
+                      "url": {
+                          "raw": "http://127.0.0.1:3000/products?id=5c76c5605f627d4121047b20",
+                          "protocol": "http",
+                          "host": [
+                              "127",
+                              "0",
+                              "0",
+                              "1"
+                          ],
+                          "port": "3000",
+                          "path": [
+                              "products"
+                          ],
+                          "query": [
+                              {
+                                  "key": "id",
+                                  "value": "5c76c5605f627d4121047b20"
+                              }
+                          ]
+                      }
+                  },
+                  "response": []
+              }
+            ]
+        }
+    ]
+  }
+ ]
+}

@@ -1,14 +1,7 @@
 version: '3.3'
 
 services:
-  node:
-    image: datacelisd/backend_node_ev:test
+  app:
+    image: datacelisd/backend_node_ev:prod
     ports:
       - 3000:3000
-  mongo:
-    image: mongo:4.4
-    environment:
-      MONGO_INITDB_ROOT_USERNAME: root
-      MONGO_INITDB_ROOT_PASSWORD: root
-    ports:
-      - 27017:27017

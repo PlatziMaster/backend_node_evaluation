@@ -1,6 +1,10 @@
 version: '3.3'
 
 services:
+  node:
+    image: datacelisd/backend_node_ev:test
+    ports:
+      - 3000:3000
   mongo:
     image: mongo:4.4
     environment:

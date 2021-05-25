@@ -55,11 +55,11 @@ typings/
 .yarn-integrity
 
 # dotenv environment variables file
-.env
+#.env
 
 # next.js build output
 .next
 
 # Docker related
-#Dockerfile
-#docker-compose*.yml
+Dockerfile
+docker-compose*.yml

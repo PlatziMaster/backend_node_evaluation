@@ -6,7 +6,8 @@ const {
     createCategory,
     updateCategory,
     deleteCategory,
-    getProductsFromCategory} = require('./categoriesController');
+    getProductsFromCategory
+} = require('./categoriesController');
 
 router.get('/', async function(req, res, next) {
     try {

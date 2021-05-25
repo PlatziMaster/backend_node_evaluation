@@ -19,8 +19,8 @@ async function getProductById(req) {
 async function createProduct(req) {
     const fields = req.body;
     try {
-        const category = await createDoc("products", fields);
-        return category;
+        const product = await createDoc("products", fields);
+        return product;
     } catch(e) {
         throw new Error(e);
     }

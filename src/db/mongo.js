@@ -15,7 +15,7 @@ class MongoMain{
         })
     };
 
-    async connect() {
+    async dbConnect() {
         try {
             const connection = await this.client.connect();
             return connection.db(DB_NAME);
@@ -24,7 +24,7 @@ class MongoMain{
         }
     };
 
-    async close() {
+    async dbDisconnect() {
         try {
             this.client.close();
         } catch(e) {

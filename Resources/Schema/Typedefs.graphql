@@ -1,0 +1,104 @@
+
+
+type Query {
+
+
+    "Verifica si el servidor reponde"
+    _: Boolean!
+
+    getProduct (ID: ObjectID!): Producto
+    getProducts (Query: QueryInput!): [ Producto ]
+
+    getCategory (ID: ObjectID!): Categoria
+    getCategories (Query: QueryInput!): [ Categoria ]
+
+}
+
+
+type Mutation {
+
+
+    "Verifica si las modificaciones responden"
+    _: Boolean!
+
+    createProduct (Producto: ProductInput!): Producto
+    updateProduct (ID: ObjectID! Producto: ProductOptionalInput!): Producto
+    deleteProduct (ID: ObjectID!): Producto
+
+    createCategory (Categoria: CategoryInput!): Categoria
+    updateCategory (ID: ObjectID! Categoria: CategoryInput!): Categoria
+    deleteCategory (ID: ObjectID!): Categoria
+
+
+}
+
+
+scalar ObjectID scalar Timestamp scalar Date scalar BigInt scalar NonEmptyString scalar EmailAddress scalar PositiveInt scalar PositiveFloat
+
+
+input QueryInput {
+
+    Limit: PositiveInt!
+    OffSet: PositiveInt
+
+}
+
+
+type Producto {
+
+    id: ObjectID!
+    Name: NonEmptyString!
+    Price: PositiveFloat!
+    Description: NonEmptyString
+    CategoryID: Categoria
+    Image: NonEmptyString!
+
+}
+
+
+input ProductInput {
+
+    Name: NonEmptyString!
+    Price: PositiveFloat!
+    Description: NonEmptyString
+    CategoryID: ObjectID!
+    Image: NonEmptyString!
+
+}
+
+
+input ProductOptionalInput {
+
+    Name: NonEmptyString
+    Price: PositiveFloat
+    Description: NonEmptyString
+    CategoryID: ObjectID
+    Image: NonEmptyString
+
+}
+
+
+type Categoria {
+
+    id: ObjectID!
+    Name: NonEmptyString!
+    Image: NonEmptyString!
+
+}
+
+
+input CategoryInput {
+
+    Name: NonEmptyString!
+    Image: NonEmptyString!
+
+}
+
+
+input CategoryOptionalInput {
+
+    Name: NonEmptyString
+    Image: NonEmptyString
+
+}
+

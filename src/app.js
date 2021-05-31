@@ -7,6 +7,12 @@ function createApp() {
   app.use(express.json());
 
   // ADD YOUR ROUTES
+  const category = require('./routes/category');
+  app.use(category);
+
+  const product = require('./routes/product');
+  app.use(product);
+
   return app;
 }
 

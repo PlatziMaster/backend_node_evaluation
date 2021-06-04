@@ -1,10 +1,10 @@
 const Category = require("../models/category.model.js");
 const Product = require("../models/product.model.js");
+const mongoose = require("mongoose");
 
 // Create and Save a new Category
 exports.create = (req, res) => {
   // Validate request
-  //console.log(req.body.name)
   if (!req.body) {
     return res.status(400).send({
       message: "Category content can not be empty",
@@ -108,7 +108,7 @@ exports.delete = (req, res) => {
           message: "Category not found with id " + req.params.categoryId,
         });
       }
-      res.send(true);
+      res.status(200).send(true);
     })
     .catch((err) => {
       if (err.kind === "ObjectId" || err.name === "NotFound") {
@@ -124,7 +124,9 @@ exports.delete = (req, res) => {
 
 // Find all products by categoryId
 exports.getProductsByCategoryId = (req, res) => {
-  Product.find({ categoryId: req.params.categoryId })
+  var id = mongoose.Types.ObjectId(req.params.categoryId);
+
+  Product.find({ categoryId: id })
     .then((products) => {
       if (!products) {
         return res.status(404).send({
@@ -132,7 +134,7 @@ exports.getProductsByCategoryId = (req, res) => {
             "Producst not found with category id " + req.params.categoryId,
         });
       }
-      res.send(products);
+      res.status(200).send(products);
     })
     .catch((err) => {
       res.status(500).send({

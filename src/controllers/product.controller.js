@@ -3,7 +3,6 @@ const Product = require("../models/product.model.js");
 // Create and Save a new Product
 exports.create = (req, res) => {
   // Validate request
-  //console.log(req.body)
   if (!req.body) {
     return res.status(400).send({
       message: "Product content can not be empty",

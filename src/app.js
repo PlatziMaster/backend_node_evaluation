@@ -7,6 +7,8 @@ function createApp() {
   app.use(express.json());
 
   // ADD YOUR ROUTES
+  const routes = require('./router')
+  app.use(routes)
   return app;
 }
 

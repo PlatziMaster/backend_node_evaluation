@@ -107,10 +107,44 @@ const remove = async (req, res) => {
     return res.status(status_code).json(response)
 }
 
+const find_by_category = async (req, res) => {
+    const { paginate, page, per_page } = get_paginate_params(req)
+    let pageOptions = {
+        paginate
+    }
+
+    if(paginate) {
+        pageOptions.page = page
+        pageOptions.per_page = per_page
+    }
+
+    const categoryId = req.params.id
+
+    try {
+        products = await ProductService.filter_by_attr('categoryId', categoryId, paginate, page, per_page)
+        response = {
+            data: products,
+            pageOptions: pageOptions
+        }
+        status_code = 200
+    }
+    catch(error) {
+        console.error(error)
+        status_code = 422
+        response = {
+            error: true,
+            message: 'Cant\'t proccess the request'
+        }
+    }
+
+    return res.status(status_code).json(response)
+}
+
 module.exports = {
     index,
     find,
     store,
     update,
-    remove
+    remove,
+    find_by_category
 }

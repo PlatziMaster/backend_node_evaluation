@@ -39,9 +39,21 @@ const updateValidator =[
     },
 ]
 
+const categoryValidator = [
+    param('id').not().isEmpty(),
+    (req, res, next) => {
+        console.log(req.params)
+        const errors = validationResult(req);
+        if (!errors.isEmpty())
+          return res.status(422).json({errors: errors.array()});
+        next();
+    },
+]
+
 module.exports = {
     createValidator,
     findValidator,
-    updateValidator
+    updateValidator,
+    categoryValidator
 }
 

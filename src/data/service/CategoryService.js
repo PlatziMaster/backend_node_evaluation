@@ -34,6 +34,18 @@ const update = async (id, updatedObject) => {
     return await Category.findById(id)
 }
 
+const filter_by_attr = async (attr_name, attr_value, paginated = false, page = 1, per_page = 10) => {
+    let filter_obj = { }
+    filter_obj[attr_name] = attr_value
+    return paginated ? 
+        Product.find({ ...filter_obj })
+                .sort({_id: -1})
+                .limit(per_page)
+                .skip((page - 1) * per_page) :
+        
+        Product.find({ ...filter_obj })
+}
+
 const remove = async (id) => {
     return await Category.findByIdAndDelete(id)
 }
@@ -43,5 +55,6 @@ module.exports = {
     find,
     store,
     update,
-    remove
+    remove,
+    filter_by_attr
 }

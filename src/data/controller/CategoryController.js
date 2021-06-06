@@ -107,15 +107,10 @@ const remove = async (req, res) => {
     return res.status(status_code).json(response)
 }
 
-const find_by_products = async (req, res) => {
-
-}
-
 module.exports = {
     index,
     find,
     store,
     update,
-    remove,
-    find_by_products
+    remove
 }

@@ -2,7 +2,7 @@ const mongoose = require('mongoose');
 const { config } = require('.');
 
 const MONGO_URI = (config.dev !== 'production') ?
-                  'mongodb://root:root@127.0.0.1:27017' : 
+                  "mongodb://root:root@127.0.0.1:27017" : 
                   `${config.dbConnection}://${config.dbUser}:${config.dbPassword}@${config.dbHost}/${config.dbName}?retryWrites=true&w=majority`;
 
 mongoose.connect(MONGO_URI, { 

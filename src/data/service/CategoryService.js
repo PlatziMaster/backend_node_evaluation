@@ -14,26 +14,23 @@ const find = async (id) => {
     return await Category.findById(id)
 }
 
-const store = async (category_obj) => {
-    const category = new Category({
-        name: category_obj.name,
-        image: category_obj.image
-    })
+const store = async (input_obj) => {
+    const category = new Category({ ...input_obj })
     return await category.save()
 }
 
-const update = async (id, updatedCategory) => {
+const update = async (id, updatedObject) => {
     const category = await Category.findById(id)
 
     if(category === null) {
         return null
     }
-    let inputCategory = {
-        name: (updatedCategory.name) ? updatedCategory.name : category.name,
-        image: (updatedCategory.image) ? updatedCategory.image : category.image,
+    let inputParams = {
+        name: (updatedObject.name) ? updatedObject.name : category.name,
+        image: (updatedObject.image) ? updatedObject.image : category.image,
     }
 
-    await Category.findByIdAndUpdate(id, inputCategory)
+    await Category.findByIdAndUpdate(id, inputParams)
     return await Category.findById(id)
 }
 

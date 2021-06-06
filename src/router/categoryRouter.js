@@ -10,4 +10,6 @@ router.route('/').post(createValidator, CategoryController.store)
 router.route('/:id').put(updateValidator, CategoryController.update);
 router.route('/:id').delete(findValidator, CategoryController.remove)
 
+router.route('/:id/products').get(findValidator, CategoryController.find_by_products)
+
 module.exports = router

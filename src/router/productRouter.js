@@ -2,7 +2,7 @@ const { Router } = require('express')
 const { findValidator, createValidator, updateValidator } = require('../data/middleware/productValidator')
 const router = Router()
 
-const ProductController = require('../data/controller/CategoryController')
+const ProductController = require('../data/controller/ProductController')
 
 router.get('/', ProductController.index)
 router.route('/:id').get(findValidator, ProductController.find)

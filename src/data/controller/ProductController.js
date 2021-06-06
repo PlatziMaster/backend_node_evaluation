@@ -1,4 +1,4 @@
-const CategoryService = require('../service/CategoryService')
+const ProductService = require('../service/ProductService')
 const get_paginate_params = require('../middleware/query_pagination')
 
 const index = async (req, res) => {
@@ -13,9 +13,9 @@ const index = async (req, res) => {
     }
 
     try {
-        categories = await CategoryService.get(paginate, page, per_page)
+        products = await ProductService.get(paginate, page, per_page)
         response = {
-            data: categories,
+            data: products,
             pageOptions: pageOptions
         }
         status_code = 200
@@ -34,7 +34,7 @@ const index = async (req, res) => {
 
 const find = async (req, res) => {
     try {
-        response = await CategoryService.find(req.params.id)
+        response = await ProductService.find(req.params.id)
         status_code = 200
     }
     catch(error) {
@@ -52,7 +52,7 @@ const find = async (req, res) => {
 const store = async (req, res) => {
     try {
         inputParams = req.body
-        response = await CategoryService.store(inputParams)
+        response = await ProductService.store(inputParams)
         status_code = 200
     }
     catch(error) {
@@ -71,7 +71,7 @@ const update = async (req, res) => {
     try {
         const id = req.params.id
         const inputParams = req.body
-        response = await CategoryService.update(id, inputParams)
+        response = await ProductService.update(id, inputParams)
         status_code = 200
     }
     catch(error) {
@@ -88,7 +88,7 @@ const update = async (req, res) => {
 
 const remove = async (req, res) => {
     try {
-        await CategoryService.remove(req.params.id)
+        await ProductService.remove(req.params.id)
         response = {
             error: false,
             message: 'success'
@@ -107,15 +107,10 @@ const remove = async (req, res) => {
     return res.status(status_code).json(response)
 }
 
-const find_by_products = async (req, res) => {
-
-}
-
 module.exports = {
     index,
     find,
     store,
     update,
-    remove,
-    find_by_products
+    remove
 }

@@ -8,30 +8,43 @@ const get = async (paginated = false, page = 1, per_page = 10) => {
                 .skip((page - 1) * per_page) :
         
         Product.find({})
-        .sort({_id: -1})
 }
 
 const find = async (id) => {
     return await Product.findById(id)
 }
 
-const store = async (Product_obj) => {
-    const Product = new Product({
-        name: Product_obj.name,
-        image: Product_obj.image
-    })
-    return await Product.save()
+const store = async (input_obj) => {
+    const product = new Product({ ...input_obj })
+    return await product.save()
 }
 
-// TODO: Update
+const update = async (id, updatedObject) => {
+    const product = await Product.findById(id)
+
+    if(product === null) {
+        return null
+    }
+    let inputParams = {
+        name: (updatedObject.name) ? updatedObject.name : product.name,
+        image: (updatedObject.image) ? updatedObject.image : product.image,
+        price: (updatedObject.price) ? updatedObject.price : product.price,
+        description: (updatedObject.description) ? updatedObject.description : product.description,
+        categoryId: (updatedObject.categoryId) ? updatedObject.categoryId : product.categoryId
+    }
+
+    await Product.findByIdAndUpdate(id, inputParams)
+    return await Product.findById(id)
+}
 
 const remove = async (id) => {
     return await Product.findByIdAndDelete(id)
 }
 
 module.exports = {
-    all,
+    get,
     find,
     store,
+    update,
     remove
 }

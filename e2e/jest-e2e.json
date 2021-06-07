@@ -2,5 +2,6 @@
   "moduleFileExtensions": ["js"],
   "rootDir": ".",
   "testEnvironment": "node",
-  "testRegex": ".e2e.js$"
+  "testRegex": ".e2e.js$",
+  "testTimeout": 60000
 }

@@ -1,6 +1,10 @@
 # TERMINADA PRUEBA DE BACKEND
-La aplicación está funcional y pendiente al deploy
+La aplicación está funcional
+
+Deploy: https://backend-platzimaster.herokuapp.com/
+
 Los test automáticos tienen problemas al incorporar interfaces gráficas
+No realicé el API REST. Pendiente de modificación
 
 
 # Prueba de Backend NodeJS

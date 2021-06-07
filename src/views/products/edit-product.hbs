@@ -1,0 +1,75 @@
+<div class="col-md-5 mx-auto">
+    <div class="card text-center border-success">
+        <div class="card-header bg-success text-white">
+            <h1 class="display-6 fw-bold">Editar Producto</h1>
+        </div>
+        <div class="card-body text-start p-4">
+            <form action="/api/products/{{product._id}}?_method=PUT" method="POST">
+                <input type="hidden" name="_method" value="PUT">
+                <!--NOMBRE-->
+                <div class="form-group">
+                    <div class="row mb-3 ">
+                        <label class="col-sm-3 col-form-label col-form-label">Nombre</label>
+                        <div class="col-sm-9">
+                            <input type="text" name="name" class="form-control form-control" value="{{product.name}}"
+                                autofocus required>
+                        </div>
+                    </div>
+                </div>
+                <!--PRECIO-->
+                <div class="form-group">
+                    <div class="row mb-3">
+                        <label class="col-sm-3 col-form-label col-form-label">Precio</label>
+                        <div class="col-sm-9">
+                            <input type="number" name="price" class="form-control form-control"
+                                value="{{product.price}}" required>
+                        </div>
+                    </div>
+                </div>
+                <!--CATEGORIA-->
+                <div class="form-group">
+                    <div class="row mb-3 ">
+                        <label class="col-sm-3 col-form-label col-form-label">Categoria</label>
+                        <div class="mb-3 col-sm-9">
+                            <select name="categoryId" class="form-select form-select"
+                                aria-label=".form-select-sm example" required>
+                                <option value="sincategoria" selected>Sin Categoria</option>
+                                {{#each all_categories}}
+                                <option value={{_id}}>{{name}}</option>
+                                {{/each}}
+
+                                <!--
+
+                                -->
+                            </select>
+                        </div>
+                    </div>
+                </div>
+                <div class="form-group">
+
+                </div>
+                <!--DESCRIPCIÓN-->
+                <div class="form-group">
+                    <div class="row mb-3 col-sm-10 mx-auto">
+                        <textarea name="description" placeholder="Descripción"
+                            class="form-control">{{product.description}}</textarea>
+                    </div>
+                </div>
+                <!--IMAGEN URL-->
+                <div class="form-group">
+                    <div class="row mb-3 col-sm-10 mx-auto">
+                        <input name="image" placeholder="URL imagen" class="form-control"
+                            value="{{product.image}}"></input>
+                    </div>
+                </div>
+                <!--BOTÓN-->
+                <div class="form-group d-grid gap-2 col-6 mx-auto">
+                    <button type="submit" class="btn btn-success btn-lg">EDITAR</button>
+                </div>
+
+            </form>
+        </div>
+
+
+    </div>
+</div>

@@ -1,0 +1,27 @@
+<h1 class="text-center text-white fs-3 fw-bold">LISTA DE PRODUCTOS DE LA CATEGORIA</h1>
+
+<hr class="my-4" style="color: #ffff" size="6" />
+
+<div class="row row-cols-1 row-cols-md-4 pt-2">
+    {{#each proForCat}}
+    <div class="col mb-4">
+        <div class="card h-100 shadow ">
+            <div class="card-header fs-5 text-white border-light text-center" style="background-color: #087e8b">
+                {{name}}
+            </div>
+            <div class="card-body" style="background-color: #f1faee">
+                <h5 class="card-title ms-1">
+                    $ {{price}}
+                </h5>
+                <p class="card-text ms-3">{{categoryId}}</p>
+                <div class="d-grid gap-2 col-12 mx-auto">
+                    <a class="btn btn-primary border-light" style="background-color: #c81d25"
+                        href="/api/products/{{_id}}" role="button">VER PRODUCTO</a>
+
+                </div>
+            </div>
+
+        </div>
+    </div>
+    {{/each}}
+</div>

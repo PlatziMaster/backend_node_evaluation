@@ -5,10 +5,9 @@ const mongoose = require('mongoose')
 //const MONGO_URI = `mongodb://${config.dbHost}/${config.dbName}`
 
 // Create URI Mongodb - Atlas
-const MONGO_URI =  `mongodb+srv://${config.dbUser}${config.dbPassword}${config.dbHost}${config.dbName}${config.dbConnection}`
+const MONGO_URI = `${config.dbConnection}://${config.dbUser}:${config.dbPassword}@${config.dbHost}?retryWrites=true&w=majority`
 
-console.log(MONGO_URI)
-// Connect whit de db
+// Connect with de db
 mongoose.connect(MONGO_URI, {
     useUnifiedTopology: true,
     useNewUrlParser: true,

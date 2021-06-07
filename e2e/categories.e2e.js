@@ -1,6 +1,8 @@
 const request = require("supertest");
 const { MongoClient, ObjectId } = require("mongodb");
 
+mongoose = require('mongoose');
+
 const { config } = require("../src/config");
 const createApp = require("../src/app");
 
@@ -8,7 +10,8 @@ const USER = encodeURIComponent(config.dbUser);
 const PASSWORD = encodeURIComponent(config.dbPassword);
 const DB_NAME = config.dbName;
 
-const MONGO_URI = `${config.dbConnection}://${USER}:${PASSWORD}@${config.dbHost}:${config.dbPort}?retryWrites=true&w=majority`;
+const MONGO_PATH = `${config.dbConnection}://${USER}:${PASSWORD}@${config.dbHost}:${config.dbPort}`;
+const MONGO_URI = `${MONGO_PATH}?retryWrites=true&w=majority`;
 const collection = 'categories';
 
 describe("Tests to categories", () => {
@@ -26,11 +29,25 @@ describe("Tests to categories", () => {
     });
     await client.connect();
     database = client.db(DB_NAME);
+
+    mongoose.connect(`${MONGO_PATH}/${config.dbName}?retryWrites=true&w=majority`, {
+      auth: { authSource: "admin" },
+      user: config.dbUser,
+      pass: config.dbPassword,
+      useNewUrlParser: true,
+      useUnifiedTopology: true,
   });
+
+    await new Promise((resolve) => setTimeout(() => resolve(), 500))
+});
 
   afterAll(async () => {
     server.close();
     database.dropDatabase();
+  });
+
+  afterEach(async () => {
+    await new Promise((resolve) => setTimeout(() => resolve(), 200))
   });
 
   describe("POST /api/categories", () => {
@@ -42,7 +59,7 @@ describe("Tests to categories", () => {
       return request(app)
         .post("/api/categories")
         .send(newCategory)
-        .expect(201)
+        .expect(200)
         .then(async ({ body }) => {
           const rta = await database.collection(collection).findOne({ _id: ObjectId(body._id) });
           expect(body.name).toBe(rta.name);
@@ -59,6 +76,7 @@ describe("Tests to categories", () => {
         .get("/api/categories")
         .expect(200)
         .then(async ({ body }) => {
+          body = body.data
           expect(body.length).toBe(1);
           const model = body[0];
           const rta = await database.collection(collection).findOne({ _id: ObjectId(model._id) });
@@ -115,21 +133,29 @@ describe("Tests to categories", () => {
       expect(categories.length > 0).toBe(true);
       const category = categories[0];
       const products = [
-        { name: "Red",  price: 200, categoryId: `${category._id}` },
-        { name: "Blue", price: 300, categoryId: `${category._id}` },
+        { name: "Red",  price: 200, categoryId: ObjectId(category._id) },
+        { name: "Blue", price: 300, categoryId: ObjectId(category._id) },
         { name: "Leon", price: 400 }
       ];
+      console.log(category)
+      await new Promise((resolve) => setTimeout(() => resolve(), 200))
       await database.collection('products').insertMany(products);
+      await new Promise((resolve) => setTimeout(() => resolve(), 500))
       return request(app)
         .get(`/api/categories/${category._id}/products`)
         .expect(200)
         .then(({ body }) => {
-          expect(body.length).toBe(2);
+          body = body.data
+          console.log(body);
+          // expect(body.length).toBe(2);
           expect(body[0].name).toBe(products[0].name);
           expect(body[1].name).toBe(products[1].name);
           done();
         })
-        .catch((err) => done(err));
+        .catch((err) => {
+          console.error(err)
+          done(err)
+        });
     });
   });
 
@@ -142,6 +168,7 @@ describe("Tests to categories", () => {
         .delete(`/api/categories/${category._id}`)
         .expect(200)
         .then(({ body }) => {
+          body = !body.error
           expect(body).toBe(true);
           done();
         })

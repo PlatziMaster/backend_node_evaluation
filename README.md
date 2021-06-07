@@ -1,3 +1,8 @@
+# TERMINADA PRUEBA DE BACKEND
+La aplicación está funcional y pendiente al deploy
+Los test automáticos tienen problemas al incorporar interfaces gráficas
+
+
 # Prueba de Backend NodeJS
 Crear un CRUD para crear productos conectado a MongoDB.
 

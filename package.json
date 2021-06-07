@@ -19,7 +19,8 @@
   },
   "scripts": {
     "dev": "nodemon src/index.js",
-    "start": "NODE_ENV=production node src/index.js",
+    "start": "node src/index.js",
+    "start-2": "NODE_ENV=production node src/index.js",
     "test:e2e": "jest --forceExit --config ./e2e/jest-e2e.json"
   },
   "repository": {

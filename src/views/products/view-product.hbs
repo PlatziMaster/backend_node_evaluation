@@ -19,7 +19,7 @@
             <div class="row">
                 <div class="col">
                     <!-- EDIT BTN -->
-                    <form action="/api/products/edit/{{product._id}}" method="POST">
+                    <form action="/products/edit/{{product._id}}" method="GET">
                         <div class="d-grid gap-2">
                             <button class="btn btn-primary btn-success" type="submit">Editar</button>
                         </div>
@@ -28,7 +28,7 @@
 
                 <div class="col">
                     <!-- DELETE BTN -->
-                    <form action="/api/products/{{product._id}}?_method=DELETE" method="POST">
+                    <form action="/products/{{product._id}}?_method=DELETE" method="POST">
                         <input type="hidden" name="_method" value="DELETE">
                         <div class="d-grid gap-2">
                             <button class="btn btn-primary btn-danger" type="submit">Borrar</button>

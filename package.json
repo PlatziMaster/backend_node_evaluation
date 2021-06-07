@@ -10,7 +10,8 @@
     "express-handlebars": "^5.3.2",
     "method-override": "^3.0.0",
     "mongodb": "^3.6.6",
-    "mongoose": "^5.12.13"
+    "mongoose": "^5.12.13",
+    "morgan": "^1.10.0"
   },
   "devDependencies": {
     "jest": "^26.6.3",

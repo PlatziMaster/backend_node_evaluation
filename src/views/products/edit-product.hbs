@@ -4,7 +4,7 @@
             <h1 class="display-6 fw-bold">Editar Producto</h1>
         </div>
         <div class="card-body text-start p-4">
-            <form action="/api/products/{{product._id}}?_method=PUT" method="POST">
+            <form action="/products/{{product._id}}?_method=PUT" method="POST">
                 <input type="hidden" name="_method" value="PUT">
                 <!--NOMBRE-->
                 <div class="form-group">

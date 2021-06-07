@@ -3,17 +3,19 @@ const exphbs = require('express-handlebars');
 const path = require('path');
 const methodOverride = require('method-override')
 const cors = require('cors');
+const morgan = require('morgan')
 
 
 function createApp() {
+  
   // Initializations
   const app = express()
   app.use(cors());
-  app.use(express.json());
+
 
   // Settings
 
-  // Config views and laouts - partials
+    // Config views and laouts - partials
   app.set('views', path.join(__dirname, 'views'))
   app.engine('.hbs', exphbs({
     defaultLayout: 'main',
@@ -23,16 +25,18 @@ function createApp() {
   }))
   app.set('view engine', '.hbs')
 
-  // Middlewares
-  app.use(express.urlencoded({ extended: false }))
-  app.use(methodOverride('_method'))
+    // Middlewares
+  app.use(express.urlencoded({ extended: false }))  // Formularios
+  app.use(methodOverride('_method'))                // Enviar métodos desde formularios
+  app.use(express.json());                          // Interpretar JSON
+  app.use(morgan('dev'))                            // Ver peticiones por consola
 
-  // Routes
+    // Routes
   app.use(require('./routes/index.routes'))
   app.use(require('./routes/products.routes'))
   app.use(require('./routes/categories.routes'))
 
-  // Static Files
+    // Static Files
   app.use(express.static(path.join(__dirname, 'public')))
 
   return app;

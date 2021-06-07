@@ -1,9 +1,14 @@
 const { config } = require('./config');
 const mongoose = require('mongoose')
 
-// Create URI of db
-const MONGO_URI = `mongodb://${config.dbHost}/${config.dbName}`
+// Create URI of db LOCAL
+//const MONGO_URI = `mongodb://${config.dbHost}/${config.dbName}`
 
+// Create URI Mongodb - Atlas
+//const MONGO_URI = 'mongodb+srv://root:toor@cluster0.n4h57.mongodb.net/master?retryWrites=true&w=majority'
+const MONGO_URI =  `mongodb+srv://${config.dbUser}${config.dbPassword}${config.dbHost}${config.dbName}${config.dbConnection}`
+
+console.log(MONGO_URI)
 // Connect whit de db
 mongoose.connect(MONGO_URI, {
     useUnifiedTopology: true,

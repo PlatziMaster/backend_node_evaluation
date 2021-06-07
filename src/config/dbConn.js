@@ -5,6 +5,9 @@ const MONGO_URI = (config.dev !== 'production') ?
                   "mongodb://root:root@127.0.0.1:27017" : 
                   `${config.dbConnection}://${config.dbUser}:${config.dbPassword}@${config.dbHost}/${config.dbName}?retryWrites=true&w=majority`;
 
+
+console.log(config)
+console.log(MONGO_URI)
 mongoose.connect(MONGO_URI, { 
     useNewUrlParser: true, 
     useUnifiedTopology: true 

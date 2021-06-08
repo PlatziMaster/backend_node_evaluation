@@ -17,7 +17,7 @@ const {
 } = require('../controllers/products.controller')
 
 // New Product Form -GET
-router.get('/api/products/new', renderProductsAdd)
+router.get('/products/new', renderProductsAdd)
 
 // Create New Product -POST
 router.post('/products/', createNewProduct)

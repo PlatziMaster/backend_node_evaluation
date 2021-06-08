@@ -2,39 +2,59 @@ const { Router } = require('express')
 const router = Router()
 
 const {
-    renderCategoriesAdd, 
+    renderCategoriesAdd,
     renderAllCategories,
     renderViewCategory,
     createNewCategory,
     renderEditCategory,
     updateCategory,
     deleteCategory,
-    allProductsForCategory
+    allProductsForCategory,
+    apiRenderAllCategories,
+    apiCreateNewCategory,
+    apiRenderViewCategory,
+    apiUpdateCategory,
+    apiDeleteCategory,
+    apiAllProductsForCategory
 } = require('../controllers/categories.controller')
 
 // All Categories -GET
-router.get('/api/categories/', renderAllCategories)
+router.get('/categories/', renderAllCategories)
+// All Categories -GET -API
+router.get('/api/categories/', apiRenderAllCategories)
+
 
 // New category Form -GET
-router.get('/api/categories/new', renderCategoriesAdd)
+router.get('/categories/new', renderCategoriesAdd)
+
 
 // Create New Category -POST
-router.post('/api/categories/', createNewCategory)
+router.post('/categories/', createNewCategory)
+// Create New Category -POST
+router.post('/api/categories/', apiCreateNewCategory)
 
 // Edit Category Form -GET
-router.get('/api/categories/edit/:id', renderEditCategory)
+router.get('/categories/edit/:id', renderEditCategory)
 
 // View Category -GET
-router.get('/api/categories/:id', renderViewCategory)
+router.get('/categories/:id', renderViewCategory)
+// View Category -GET -API
+router.get('/api/categories/:id', apiRenderViewCategory)
 
 // Update Category -PUT
-router.put('/api/categories/:id', updateCategory)
+router.put('/categories/:id', updateCategory)
+// Update Category -PUT -API
+router.put('/api/categories/:id', apiUpdateCategory)
 
 // Delete Category -DELETE
-router.delete('/api/categories/:id', deleteCategory)
+router.delete('/categories/:id', deleteCategory)
+// Delete Category -DELETE -API
+router.delete('/api/categories/:id', apiDeleteCategory)
 
 // All Products For Category -GET
-router.get('/api/categories/:id/products', allProductsForCategory)
+router.get('/categories/:id/products', allProductsForCategory)
+// All Products For Category -GET -API
+router.get('/api/categories/:id/products', apiAllProductsForCategory)
 
 module.exports = router
 

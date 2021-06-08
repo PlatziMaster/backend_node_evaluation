@@ -1,0 +1,39 @@
+<h1 class="text-center text-white fs-3 fw-bold">LISTA DE CATEGORIAS</h1>
+
+<hr class="my-4" style="color: #ffff" size="6" />
+
+<div class="row row-cols-1 row-cols-md-3 pt-2">
+    <div class="col mb-4">
+        <div class="card h-100 shadow ">
+            <div class="card-header text-white bg-dark fw-bold fs-3 text-center " style="background-color: #087e8b">
+                Sin Categoria
+            </div>
+            <div class="card-body" style="background-color: #f1faee">
+                <!-- VIEW BTN -->
+                <form action="/categories/sincategoria/products" method="GET">
+                    <div class="d-grid gap-2">
+                        <button class="btn btn-warning btn-lg fw-bold" type="submit">VER PRODUCTOS</button>
+                    </div>
+                </form>
+            </div>
+        </div>
+    </div>
+
+    {{#each all_categories}}
+    <div class="col mb-4">
+        <div class="card h-100 shadow ">
+            <div class="card-header text-white bg-dark fw-bold fs-3 text-center " style="background-color: #087e8b">
+                {{name}}
+            </div>
+            <div class="card-body" style="background-color: #f1faee">
+                <!-- VIEW BTN -->
+                <form action="/categories/{{_id}}" method="GET">
+                    <div class="d-grid gap-2">
+                        <button class="btn btn-primary btn-lg" type="submit">Ver Mas</button>
+                    </div>
+                </form>
+            </div>
+        </div>
+    </div>
+    {{/each}}
+</div>

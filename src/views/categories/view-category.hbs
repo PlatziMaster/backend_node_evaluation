@@ -1,0 +1,45 @@
+<div class="card mx-auto col-md-4 border-dark shadow-lg">
+
+    <!-- NAME -->
+    <div class="card-header text-white bg-dark fw-bold fs-3 text-center ">{{category.name}}</div>
+
+    <div class="card-body">
+
+        <!-- BOTONES -->
+        <div class="container">
+
+            <div class="row">
+                <div class="col">
+                    <!-- PRODUCTS FOR CATEGORY -->
+                    <form action="/categories/{{category._id}}/products" method="GET">
+                        <div class="d-grid gap-2 mb-3">
+                            <button class="btn btn-warning fw-bold" type="submit">VER PRODUCTOS</button>
+                        </div>
+                    </form>
+                </div>
+            </div>
+
+            <div class="row">
+
+                <div class="col">
+                    <!-- EDIT BTN -->
+                    <form action="/categories/edit/{{category._id}}" method="GET">
+                        <div class="d-grid gap-2">
+                            <button class="btn btn-success" type="submit">Editar</button>
+                        </div>
+                    </form>
+                </div>
+
+                <div class="col">
+                    <!-- DELETE BTN -->
+                    <form action="/categories/{{category._id}}?_method=DELETE" method="POST">
+                        <input type="hidden" name="_method" value="DELETE">
+                        <div class="d-grid gap-2">
+                            <button class="btn btn-danger" type="submit">Borrar</button>
+                        </div>
+                    </form>
+                </div>
+            </div>
+        </div>
+
+    </div>

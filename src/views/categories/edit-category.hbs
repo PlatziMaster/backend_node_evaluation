@@ -1,0 +1,37 @@
+<div class="col-md-5 mx-auto">
+    <div class="card text-center border-success">
+        <div class="card-header bg-success text-white">
+            <h1 class="display-6 fw-bold">Editar Categoría</h1>
+        </div>
+        <div class="card-body text-start p-4">
+            <form action="/categories/{{category._id}}?_method=PUT" method="POST">
+                <input type="hidden" name="_method" value="PUT">
+                <!--NOMBRE-->
+                <div class="form-group">
+                    <div class="row mb-3 ">
+                        <label class="col-sm-3 col-form-label col-form-label">Nombre</label>
+                        <div class="col-sm-9">
+                            <input type="text" name="name" class="form-control form-control" value="{{category.name}}"
+                                autofocus required>
+                        </div>
+                    </div>
+                </div>
+                
+                <!--IMAGEN URL-->
+                <div class="form-group">
+                    <div class="row mb-3 col-sm-10 mx-auto">
+                        <input name="image" placeholder="URL imagen" class="form-control"
+                            value="{{category.image}}"></input>
+                    </div>
+                </div>
+                <!--BOTÓN-->
+                <div class="form-group d-grid gap-2 col-6 mx-auto">
+                    <button type="submit" class="btn btn-success btn-lg">EDITAR</button>
+                </div>
+
+            </form>
+        </div>
+
+
+    </div>
+</div>

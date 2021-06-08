@@ -1,3 +1,12 @@
+# TERMINADA PRUEBA DE BACKEND
+La aplicación está funcional
+
+Deploy: https://backend-platzimaster.herokuapp.com/
+
+Los test automáticos tienen problemas al incorporar interfaces gráficas
+Actualización: Terminada API res
+
+
 # Prueba de Backend NodeJS
 Crear un CRUD para crear productos conectado a MongoDB.
 

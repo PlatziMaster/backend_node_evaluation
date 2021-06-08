@@ -1,0 +1,34 @@
+<div class="col-md-5 mx-auto">
+    <div class="card text-center border-primary">
+        <div class="card-header bg-primary text-white">
+            <h1 class="display-6 fw-bold">Nueva Categoria</h1>
+        </div>
+        <div class="card-body text-start p-4">
+            <form action="/categories/" method="POST">
+                <!--NOMBRE-->
+                <div class="form-group">
+                    <div class="row mb-3 ">
+                        <label class="col-sm-3 col-form-label col-form-label fw-bold">Nombre</label>
+                        <div class="col-sm-9">
+                            <input type="text" name="name" class="form-control form-control" autofocus required>
+                        </div>
+                    </div>
+                </div>
+                
+                <!--IMAGEN URL-->
+                <div class="form-group">
+                    <div class="row mb-3 col-sm-10 mx-auto">
+                        <input name="image" placeholder="URL imagen" class="form-control"></input>
+                    </div>
+                </div>
+                <!--BOTÓN-->
+                <div class="form-group d-grid gap-2 col-6 mx-auto">
+                    <button type="submit" class="btn btn-primary btn-lg">AGREGAR</button>
+                </div>
+
+            </form>
+        </div>
+
+
+    </div>
+</div>

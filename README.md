@@ -4,7 +4,7 @@ La aplicación está funcional
 Deploy: https://backend-platzimaster.herokuapp.com/
 
 Los test automáticos tienen problemas al incorporar interfaces gráficas
-No realicé el API REST. Pendiente de modificación
+Actualización: Terminada API res
 
 
 # Prueba de Backend NodeJS

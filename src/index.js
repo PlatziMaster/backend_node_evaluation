@@ -9,3 +9,8 @@ app.listen(config.port, err => {
     return;
   }
 });
+
+//adaptar para cada endpoint
+app.get('/api/categories', (req, res) => {
+  res.send('Successful response.');
+  });

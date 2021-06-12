@@ -1,11 +1,11 @@
 const express = require('express');
 const mongoose = require('mongoose');
-const { MONGO_URI } = require('../config');
+const { MONGO_URI } = require('./config');
 
 
 //Routes
-const productsRoutes = require('../routes/api/products_controller');
-const categoriesRoutes = require('../routes/api/categories_controller');
+const productsRoutes = require('./routes/api/products_controller');
+const categoriesRoutes = require('./routes/api/categories_controller');
 
 const app = express();
 
@@ -21,8 +21,8 @@ mongoose.connect(MONGO_URI, {
     .then(() => console.log('***MongoDBAtlas conectado!'))
     .catch(err => console.log(err));
 //User routes 
-app.use('./api/products', productsRoutes);
-app.use('./api/categories', categoriesRoutes);
+app.use('/api/products', productsRoutes);
+app.use('/api/categories', categoriesRoutes);
 
 const PORT = process.env.PORT;
 

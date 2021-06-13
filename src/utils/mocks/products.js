@@ -1,4 +1,4 @@
-[
+const productsMock = [
   {
     categoryId: 1,
     image: "http://dummyimage.com/100x100.png/cc0000/ffffff",
@@ -70,3 +70,5 @@
     description: "Nanto-shi",
   },
 ];
+
+module.exports = {productsMock};

@@ -75,9 +75,6 @@ function categoriesApi(app) {
       next(err);
     }
   });
-
-
-
 }
 
 module.exports = categoriesApi;

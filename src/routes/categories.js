@@ -42,17 +42,18 @@ function categoriesApi(app) {
   });
 
   router.post("/", async function (req, res, next) {
-    console.log(req.body);
+    
     const { body: category } = req;
 
-    console.log( { body: category } )
+    //console.log(req.body);
+    //console.log( { body: category } )
     try {
       //const createdCategoryId = await Promise.resolve(categoriesMock[0].categoryId);
       const createdCategoryId = await categoriesService.createCategory({category});
 
       res.status(201).json({
         data: createdCategoryId,
-        message: "Categorie created",
+        message: "Category created",
       });
     } catch (err) {
       console.log("something happened");
@@ -61,7 +62,7 @@ function categoriesApi(app) {
   });
 
   router.put("/:categoryId", async function (req, res, next) {
-    const { body: category } = req.body;
+    const { body: category } = req;
     const { categoryId } = req.params;
     try {
       //const updatedCategoryId = await Promise.resolve(categoriesMock[0].categoryId);
@@ -72,7 +73,7 @@ function categoriesApi(app) {
 
       res.status(200).json({
         data: updatedCategoryId,
-        message: "Categorie updated",
+        message: "Category updated",
       });
     } catch (err) {
       console.log("something happened");
@@ -93,7 +94,7 @@ function categoriesApi(app) {
 
       res.status(200).json({
         data: deletedCategoryId,
-        message: "Movie Deleted",
+        message: "Category deleted",
       });
     } catch (err) {
       console.log("something happened");

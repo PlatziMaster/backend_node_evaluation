@@ -24,14 +24,15 @@ class CategoriesService {
 
   async createCategory({ category }) {
     //const createdMovieId = await Promise.resolve(categoriesMock[0].categoryId);
-
     const createdCategoryId = await this.mongoDB.create(this.collection, category);
-    console.log("creando categoria")
+    //console.log("creando categoria")
     return createdCategoryId || [];
   }
 
   async updateCategory({ categoryId, category } = {}) {
     // const updatedCategory = await Promise.resolve(categoriesMock[0].categoryId);
+    //console.log("updateando categoria")
+    //console.log(categoryId,category)
     const updatedCategory = await this.mongoDB.update(
       this.collection,
       categoryId,

@@ -40,7 +40,7 @@ class MongoLib {
   }
 
   getAll(collection, query) {
-    console.log(this.connect(db => {console.log(db)}))
+    //console.log(this.connect(db => {console.log(db)}))
     return this.connect().then((db) => {
       return db.collection(collection).find(query).toArray();
     });
@@ -53,7 +53,7 @@ class MongoLib {
   }
 
   create(collection, data) {
-    console.log(data)
+    //console.log(data)
     return this.connect()
       .then((db) => {
         return db.collection(collection).insertOne(data);
@@ -62,6 +62,7 @@ class MongoLib {
   }
 
   update(collection, id, data) {
+    //console.log(collection,id,data)
     return this.connect()
       .then((db) => {
         return db

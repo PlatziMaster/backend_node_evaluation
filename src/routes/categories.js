@@ -42,12 +42,13 @@ function categoriesApi(app) {
   });
 
   router.post("/", async function (req, res, next) {
-    const { body: category } = req.body;
+    console.log(req.body);
+    const { body: category } = req;
+
+    console.log( { body: category } )
     try {
       //const createdCategoryId = await Promise.resolve(categoriesMock[0].categoryId);
-      const createdCategoryId = await categoriesService.createCategory({
-        category,
-      });
+      const createdCategoryId = await categoriesService.createCategory({category});
 
       res.status(201).json({
         data: createdCategoryId,

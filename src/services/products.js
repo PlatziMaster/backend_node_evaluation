@@ -6,8 +6,8 @@ class ProductsService {
     this.mongoDB = new MongoLib();
   }
 
-  async getProducts({name}) {
-    const query = name && { name: {$in:name}}
+  async getProducts({ name }) {
+    const query = name && { name: { $in: name } };
     const products = await this.mongoDB.getAll(this.collection, query);
     return products || [];
   }
@@ -22,15 +22,15 @@ class ProductsService {
 
   async createProduct({ product }) {
     //const createdMovieId = await Promise.resolve(productsMock[0].productId);
-    const createdProductId = await this.mongoDB.create(this.collection, product);
-    //console.log("creando categoria")
+    const createdProductId = await this.mongoDB.create(
+      this.collection,
+      product
+    );
     return createdProductId || [];
   }
 
   async updateProduct({ productId, product } = {}) {
     // const updatedProduct = await Promise.resolve(productsMock[0].productId);
-    //console.log("updateando categoria")
-    //console.log(productId,product)
     const updatedProduct = await this.mongoDB.update(
       this.collection,
       productId,

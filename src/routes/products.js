@@ -42,14 +42,13 @@ function productsApi(app) {
   });
 
   router.post("/", async function (req, res, next) {
-    
     const { body: product } = req;
 
     //console.log(req.body);
     //console.log( { body: product } )
     try {
       //const createdProductId = await Promise.resolve(productsMock[0].productId);
-      const createdProductId = await productsService.createProduct({product});
+      const createdProductId = await productsService.createProduct({ product });
 
       res.status(201).json({
         data: createdProductId,
@@ -88,9 +87,9 @@ function productsApi(app) {
       // const deletedProductId = await Promise.resolve(
       //   productsMock[0].productId
       // );
-      const deletedProductId = await productsService.deleteProduct(
-        {productId}
-      );
+      const deletedProductId = await productsService.deleteProduct({
+        productId,
+      });
 
       res.status(200).json({
         data: deletedProductId,

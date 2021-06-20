@@ -1,5 +1,0 @@
-{
-    "name": "prodcat",
-    "version": 2,
-    "routes": [{ "src": "src/(.*)", "dest": "/index.js" }]
-  }

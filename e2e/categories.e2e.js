@@ -9,6 +9,7 @@ const PASSWORD = encodeURIComponent(config.dbPassword);
 const DB_NAME = config.dbName;
 
 const MONGO_URI = `${config.dbConnection}://${USER}:${PASSWORD}@${config.dbHost}:${config.dbPort}?retryWrites=true&w=majority`;
+console.log(MONGO_URI)
 const collection = 'categories';
 
 describe("Tests to categories", () => {
@@ -17,6 +18,9 @@ describe("Tests to categories", () => {
   let server;
 
   beforeAll(async () => {
+    console.log("Prueba de MONGODB")
+    console.log(MONGO_URI)
+
     app = createApp();
     const port = 3001;
     server = app.listen(port);

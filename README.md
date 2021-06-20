@@ -1,13 +1,15 @@
 # Prueba de Backend NodeJS
 Crear un CRUD para crear productos conectado a MongoDB.
 
+#### Platzi Master 2021
+
 ### Instalación
-```
+```bash
 npm install
 ```
 
 ### Ejecución
-```
+```bash
 npm run start
 ```
 

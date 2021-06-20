@@ -1,6 +1,7 @@
 const { config } = require('./config');
 const createApp = require('./app');
 const categoriesApi = require('./routes/categories');
+const productsApi = require('./routes/products');
 
 const app = createApp();
 
@@ -14,8 +15,9 @@ app.listen(config.port, err => {
 });
 
 
-
+// API's
 categoriesApi(app);
+productsApi(app);
 
 //test root directory
 

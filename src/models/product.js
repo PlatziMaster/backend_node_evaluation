@@ -8,9 +8,4 @@ const productSchema = new Schema({
     categoryId: Number
 });
 
-const categorySchema = new Schema({
-    name: String,
-});
-
 module.exports =  mongoose.model('product', productSchema);
-module.exports =  mongoose.model('category', categorySchema);

@@ -40,6 +40,12 @@ function getProduct(filterProduct){
   });
 }
 
+function getProdByCat(filterCategory){
+  return new Promise((resolve, reject)=>{
+    resolve(store.listCat(filterCategory));
+  });
+}
+
 function updateProduct(id,price){
   return new Promise((resolve, reject)=>{
     if(!id){
@@ -67,7 +73,8 @@ function deleteProduct(id){
 module.exports = {
   addProduct,
   getProducts,
-  getProduct, 
+  getProduct,
+  getProdByCat, 
   updateProduct,
   deleteProduct
 }

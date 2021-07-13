@@ -15,13 +15,34 @@ function getProducts(){
 function oneProduct(filterProduct){
   return new Promise((resolve, reject)=>{
     let filter = {};
-    if(filterProduct != null){
+    if(filterProduct !== null){
       fileter = {
         name: filterProduct
       };
     }
     const product = Model.find(filter);
       resolve(product);
+  });
+}
+
+function getProductsCat(filterCat){
+  return new Promise((resolve, reject)=>{
+    let filter = {};
+    if(filterCat !== null){
+      filter = {
+        category: filterCat
+      }
+    }
+    const products = Model.find(filter)
+      .populate('category')
+      .exce((err, populate)=>{
+        if(err){
+          reject(err);
+          return false;
+        }
+        resolve(populate);
+      });
+      resolve(products)
   });
 }
 
@@ -45,5 +66,6 @@ module.exports = {
   list: getProducts,
   one: oneProduct,
   price: updatePrice,
-  remove: removeProduct
+  remove: removeProduct,
+  listCat: getProductsCat
 };

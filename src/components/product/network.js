@@ -2,14 +2,72 @@ const express = require('express');
 const multer = require('multer');
 const router = express.Router();
 const controller = require('./controller');
+const response = require('../../routes/response');
 
-router.get('/', async (req, res) => {
-  
+const upload = multer({
+  dest: 'uploads/files'
 });
 
-
-router.post('/add', async (req, res) =>{
-  const product =  new Product(req.body);
-  await product.save();
-  res.redirect('/');
+router.get('/', (req, res)=>{
+  controller.getProducts()
+    .then((productList)=>{
+      response.success(req, res, productList, 200);
+    })
+    .catch((err)=>{
+      response.error(req, res, 'Unexpected error', 500, err);
+    });
 });
+
+router.get('/', (req, res)=>{
+  const filterProduct = req.query.id || null;
+  controller.getProduct(filterProduct)
+    .then((productList)=>{
+      response.success(req, res, productList, 200);
+    })
+    .catch((err)=>{
+      response.error(req, res, 'Unexpected error', 500, err);
+    });
+});
+
+router.get('/', (req, res)=>{
+  const filterCat = req.query.category || null;
+  constroller.getProdByCat(filterCat)
+    .then((productList)=>{
+      response.success(req, res, productList, 200);
+    })
+    .catch((err)=>{
+      response.error(req, res, 'Invalid data', 500, err);
+    })
+});
+
+router.post('/', upload.single, (req, res) => {
+  controller.addProduct(req.body.name, req.body.price, req.body.category, req.body.description, req.file)
+    .then((newProduct)=>{
+      response.success(req, res, newProduct, 201);
+    })
+    .catch((err)=>{
+      response.error(req, res, 'Invalid data', 400, 'Controller error:', err);
+    });
+});
+
+router.patch('/:id', (req, res)=>{
+  controller.addProduct(re.params.id, req.body.price)
+    .then((data)=>{
+      response.success(req, res, data, 200);
+    })
+    .catch((err)=>{
+      response.error(req, res, 'Internal error', 500, err);
+    });
+});
+
+router.delete('/:id', (req, res)=>{
+  controller.deleteProduct(req.params.id)
+    .then(()=>{
+      response.success(req, res, `Product ${req.params.id} has been deleted`, 200);
+    })
+    .catch((err)=>{
+      response.error(req, res, 'Internal error', 500, err);
+    });
+});
+
+module.exports = router;

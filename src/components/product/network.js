@@ -8,64 +8,64 @@ const upload = multer({
   dest: 'uploads/files'
 });
 
-router.get('/', (req, res)=>{
+router.get('/', (req, res) => {
   controller.getProducts()
-    .then((productList)=>{
+    .then((productList) => {
       response.success(req, res, productList, 200);
     })
-    .catch((err)=>{
+    .catch((err) => {
       response.error(req, res, 'Unexpected error', 500, err);
     });
 });
 
-router.get('/', (req, res)=>{
+router.get('/:id', (req, res) => {
   const filterProduct = req.query.id || null;
   controller.getProduct(filterProduct)
-    .then((productList)=>{
+    .then((productList) => {
       response.success(req, res, productList, 200);
     })
-    .catch((err)=>{
+    .catch((err) => {
       response.error(req, res, 'Unexpected error', 500, err);
     });
 });
 
-router.get('/', (req, res)=>{
+router.get('/:id', (req, res) => {
   const filterCat = req.query.category || null;
   constroller.getProdByCat(filterCat)
-    .then((productList)=>{
+    .then((productList) => {
       response.success(req, res, productList, 200);
     })
-    .catch((err)=>{
+    .catch((err) => {
       response.error(req, res, 'Invalid data', 500, err);
     })
 });
 
 router.post('/', upload.single, (req, res) => {
   controller.addProduct(req.body.name, req.body.price, req.body.category, req.body.description, req.file)
-    .then((newProduct)=>{
+    .then((newProduct) => {
       response.success(req, res, newProduct, 201);
     })
-    .catch((err)=>{
+    .catch((err) => {
       response.error(req, res, 'Invalid data', 400, 'Controller error:', err);
     });
 });
 
-router.patch('/:id', (req, res)=>{
-  controller.addProduct(re.params.id, req.body.price)
-    .then((data)=>{
+router.put('/:id', (req, res) => {
+  controller.updateProduct(req.params.id, req.body.price)
+    .then((data) => {
       response.success(req, res, data, 200);
     })
-    .catch((err)=>{
+    .catch((err) => {
       response.error(req, res, 'Internal error', 500, err);
     });
 });
 
-router.delete('/:id', (req, res)=>{
+router.delete('/:id', (req, res) => {
   controller.deleteProduct(req.params.id)
-    .then(()=>{
+    .then(() => {
       response.success(req, res, `Product ${req.params.id} has been deleted`, 200);
     })
-    .catch((err)=>{
+    .catch((err) => {
       response.error(req, res, 'Internal error', 500, err);
     });
 });

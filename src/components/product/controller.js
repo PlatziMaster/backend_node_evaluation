@@ -36,7 +36,7 @@ function getProducts(){
 
 function getProduct(filterProduct){
   return new Promise((resolve, reject)=>{
-    resolve(store.one);
+    resolve(store.one(filterProduct));
   });
 }
 

@@ -2,7 +2,7 @@ const path = require('path');
 const express = require('express');
 const morgan = require('morgan');
 const mongoose = require('mongoose');
-const fileUpload = require('express-fileupload');
+
 
 //const cors = require('cors');
 const app = express();
@@ -14,13 +14,13 @@ mongoose.connect('mongodb://localhost/crud-mongo')
   
 
 //Importing Routes
-const indexRoutes = require('./routes/index');
+const indexRoutes = require('./routes/routes');
 
 //Settings
 app.set('port', process.env.PORT || 3000);
 app.set('views', path.join(__dirname, 'views'));
-app.set('view engine', 'ejs');
-app.use(fileUpload());
+// app.set('view engine', 'ejs');
+// app.use(fileUpload());
 
 app.listen(app.get('port'), () => {
   console.log(`Server on port ${app.get('port')}`);
@@ -31,7 +31,7 @@ app.use(morgan('dev'));
 app.use(express.urlencoded({extended: false}));
 
 //routes
-app.use('/', indexRoutes);
+app.use('/', indexProducts);
 
 
 // function createApp() { 

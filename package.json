@@ -33,9 +33,13 @@
     "typescript": "^4.3.5"
   },
   "scripts": {
-    "dev": "DEBUG=app:* nodemon src/index.js",
-    "start": "NODE_ENV=production node src/index.js",
-    "test:e2e": "jest --forceExit --config ./e2e/jest-e2e.json"
+    "build": "tsc --outDir lib",
+    "dev": "DEBUG=app:* nodemon --watch './src/**/*.ts' --exec 'ts-node -r tsconfig-paths/register' ./src/index.ts",
+    "lint:js": "eslint --ext \".js,.ts\" --ignore-path .gitignore .",
+    "lint": "npm run lint:js",
+    "start": "NODE_ENV=production node lib/index.js",
+    "test:e2e": "jest --forceExit --config ./e2e/jest-e2e.json",
+    "test": "npm run test:e2e"
   },
   "repository": {
     "type": "git",

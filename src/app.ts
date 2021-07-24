@@ -1,7 +1,12 @@
-import express from 'express'
+import express, { Express } from 'express'
 import cors from 'cors'
 
-const createApp = () => {
+/**
+ * Generates a pre configured express application
+ *
+ * @returns An express application
+ */
+const createApp = (): Express => {
   const app = express()
   app.use(cors())
   app.use(express.json())

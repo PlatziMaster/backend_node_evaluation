@@ -1,3 +1,5 @@
+/* eslint-disable */
+
 const request = require("supertest");
 const { MongoClient, ObjectId } = require("mongodb");
 
@@ -109,7 +111,7 @@ describe("Tests to categories", () => {
   });
 
   describe("GET /api/categories/{id}/products", () => {
-    
+
     it("should return a list products by category", async (done) => {
       const categories = await database.collection(collection).find().toArray();
       expect(categories.length > 0).toBe(true);
@@ -149,5 +151,5 @@ describe("Tests to categories", () => {
     });
   });
 
-  
+
 });

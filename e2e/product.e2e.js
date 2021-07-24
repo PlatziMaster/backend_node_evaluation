@@ -1,3 +1,5 @@
+/* eslint-disable */
+
 const request = require("supertest");
 const { MongoClient, ObjectId } = require("mongodb");
 
@@ -124,5 +126,5 @@ describe("Tests to products", () => {
     });
   });
 
-  
+
 });

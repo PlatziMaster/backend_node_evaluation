@@ -3,9 +3,8 @@ import createApp from './app'
 
 const app = createApp()
 
-app.listen(application.port, (err) => {
-  if (err) {
-    console.error('Error: ', err)
-    return
-  }
+app.listen(application.port, () => {
+  console.log(
+    `server started at http://${application.host}:${application.port}`
+  )
 })

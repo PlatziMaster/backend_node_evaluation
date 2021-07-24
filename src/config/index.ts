@@ -1,4 +1,6 @@
-require('dotenv').config();
+import dotenv from 'dotenv'
+
+dotenv.config()
 
 const config = {
   dev: process.env.NODE_ENV !== 'production',
@@ -9,6 +11,6 @@ const config = {
   dbName: process.env.MONGO_DB_NAME,
   dbPort: process.env.MONGO_PORT,
   dbConnection: process.env.MONGO_CONNECTION,
-};
+}
 
-module.exports = { config };
+export default config

@@ -1,11 +1,11 @@
-const { config } = require('./config');
-const createApp = require('./app');
+import config from './config'
+import createApp from './app'
 
-const app = createApp();
+const app = createApp()
 
 app.listen(config.port, err => {
   if (err) {
-    console.error("Error: ", err);
-    return;
+    console.error('Error: ', err)
+    return
   }
-});
+})

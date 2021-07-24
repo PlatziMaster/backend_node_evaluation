@@ -1,13 +1,13 @@
-const express = require('express');
-const cors = require('cors');
+import express from 'express'
+import cors from 'cors'
 
-function createApp() { 
-  const app = express();
-  app.use(cors());
-  app.use(express.json());
+const createApp = () => {
+  const app = express()
+  app.use(cors())
+  app.use(express.json())
 
   // ADD YOUR ROUTES
-  return app;
+  return app
 }
 
-module.exports = createApp;
+export default createApp

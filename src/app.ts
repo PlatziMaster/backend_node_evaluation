@@ -1,5 +1,6 @@
 import express, { Express } from 'express'
 import cors from 'cors'
+import categoriesApiRouter from './routes/api/categories'
 import productsApiRouter from './routes/api/products'
 
 /**
@@ -13,6 +14,7 @@ const createApp = (): Express => {
   app.use(express.json())
 
   // ADD YOUR ROUTES
+  categoriesApiRouter(app)
   productsApiRouter(app)
 
   return app

@@ -13,11 +13,11 @@
     "types": [
       "@types/node",
       "@types/express",
-      "@types/jest"
+      "@types/cors"
     ],
     "noImplicitAny": true
   },
   "include": [
     "./src/**/*"
-  ]
+  ],
 }

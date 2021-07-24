@@ -1,0 +1,23 @@
+{
+  "extends": "@tsconfig/node14/tsconfig.json",
+  "compilerOptions": {
+    "lib": [
+      "dom"
+    ],
+    "baseUrl": "src",
+    "paths": {
+      "~/*": [
+        "./*"
+      ],
+    },
+    "types": [
+      "@types/node",
+      "@types/express",
+      "@types/jest"
+    ],
+    "noImplicitAny": true
+  },
+  "include": [
+    "./src/**/*"
+  ]
+}

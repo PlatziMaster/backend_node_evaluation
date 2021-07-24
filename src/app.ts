@@ -1,5 +1,6 @@
 import express, { Express } from 'express'
 import cors from 'cors'
+import productsApiRouter from './routes/api/products'
 
 /**
  * Generates a pre configured express application
@@ -12,6 +13,8 @@ const createApp = (): Express => {
   app.use(express.json())
 
   // ADD YOUR ROUTES
+  productsApiRouter(app)
+
   return app
 }
 

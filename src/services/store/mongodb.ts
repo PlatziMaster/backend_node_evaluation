@@ -27,7 +27,6 @@ class MongoDB {
     return new Promise((resolve, reject) => {
       this.client.connect((err) => {
         if (err) {
-          console.error(err)
           reject(err)
         }
 
@@ -94,7 +93,7 @@ class MongoDB {
    *
    * @returns A resource document.
    */
-  async find(id: number): Promise<Document | undefined> {
+  async find(id: string): Promise<Document | undefined> {
     try {
       const collection = await this.getCollection()
       const query = { _id: new ObjectId(id) }
@@ -116,7 +115,7 @@ class MongoDB {
    *
    * @returns A resource document.
    */
-  async update(id: number, data: Document): Promise<Document | undefined> {
+  async update(id: string, data: Document): Promise<Document | undefined> {
     try {
       const collection = await this.getCollection()
       const query = { _id: new ObjectId(id) }
@@ -126,7 +125,6 @@ class MongoDB {
 
       return result
     } catch (err) {
-      console.error(err)
       throw err
     } finally {
       await this.client.close()
@@ -138,7 +136,7 @@ class MongoDB {
    *
    * @param id - Resource indentifier sended from request.
    */
-  async delete(id: number): Promise<Document | undefined> {
+  async delete(id: string): Promise<Document | undefined> {
     try {
       const collection = await this.getCollection()
       const query = { _id: new ObjectId(id) }

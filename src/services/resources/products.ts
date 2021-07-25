@@ -24,7 +24,7 @@ class Products {
     }
   }
 
-  static async find(id: number): Promise<Document | undefined> {
+  static async find(id: string): Promise<Document | undefined> {
     try {
       const result = await store.find(id)
 
@@ -35,7 +35,7 @@ class Products {
   }
 
   static async update(
-    id: number,
+    id: string,
     data: Document
   ): Promise<Document | undefined> {
     try {
@@ -47,7 +47,7 @@ class Products {
     }
   }
 
-  static async delete(id: number): Promise<Document | undefined> {
+  static async delete(id: string): Promise<Document | undefined> {
     try {
       const result = await store.delete(id)
 

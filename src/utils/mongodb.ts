@@ -1,4 +1,4 @@
-import { database } from '~/config'
+import { database } from '../config'
 
 /**
  * Generate a connection string with URI format based on the environment

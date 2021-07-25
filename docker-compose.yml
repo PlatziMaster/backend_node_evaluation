@@ -4,7 +4,7 @@ services:
   mongo:
     image: mongo:4.4
     environment:
-      MONGO_INITDB_ROOT_USERNAME: "${MONGO_USER}"
-      MONGO_INITDB_ROOT_PASSWORD: "${MONGO_PASSWORD}"
+      MONGO_INITDB_ROOT_USERNAME: "${DB_USER}"
+      MONGO_INITDB_ROOT_PASSWORD: "${DB_PASSWORD}"
     ports:
-      - "${MONGO_PORT}:${MONGO_PORT}"
+      - "${DB_PORT}:${DB_PORT}"

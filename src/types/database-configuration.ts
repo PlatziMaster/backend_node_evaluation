@@ -1,7 +1,6 @@
 /**
  * Interface to the database related configuration.
  */
-
 export interface DatabaseConfiguration {
   driver: string
   user: string

@@ -1,2 +1,3 @@
-export { ApplicationConfiguration } from './application-configuration'
-export { DatabaseConfiguration } from './database-configuration'
+export * from './application-configuration'
+export * from './database-configuration'
+export * from './store-service'

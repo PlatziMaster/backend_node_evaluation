@@ -1,10 +1,11 @@
 import { Collection, Document, MongoClient, ObjectId } from 'mongodb'
 import { database as db } from '../../config'
 import { getConnectionString } from '../../utils/mongodb'
+import { StoreService } from '../../types'
 
 const uri = getConnectionString()
 
-class MongoDB {
+class MongoDB implements StoreService {
   private client
   private resource
 

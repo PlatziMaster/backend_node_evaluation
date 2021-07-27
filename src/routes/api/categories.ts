@@ -10,11 +10,13 @@ const router = Router()
  * @param app - Express application.
  */
 const categories = (app: Express): void => {
+  const categoriesService = new CategoriesService('categories')
+
   // create
   router.post('/', async (req: Request, res: Response, next: NextFunction) => {
     try {
       const data = req.body
-      const result = await CategoriesService.create(data)
+      const result = await categoriesService.create(data)
 
       HttpResponse.success(res, result, 201)
     } catch (err) {
@@ -25,7 +27,7 @@ const categories = (app: Express): void => {
   // read all
   router.get('/', async (req: Request, res: Response, next: NextFunction) => {
     try {
-      const result = await CategoriesService.read()
+      const result = await categoriesService.read()
 
       HttpResponse.success(res, result)
     } catch (err) {
@@ -39,7 +41,7 @@ const categories = (app: Express): void => {
     async (req: Request, res: Response, next: NextFunction) => {
       try {
         const id = req.params.id
-        const result = await CategoriesService.find(id)
+        const result = await categoriesService.find(id)
 
         HttpResponse.success(res, result)
       } catch (err) {
@@ -55,7 +57,7 @@ const categories = (app: Express): void => {
       try {
         const id = req.params.id
         const data = req.body
-        const result = await CategoriesService.update(id, data)
+        const result = await categoriesService.update(id, data)
 
         HttpResponse.success(res, result)
       } catch (err) {
@@ -71,7 +73,7 @@ const categories = (app: Express): void => {
       try {
         const id = req.params.id
         const data = req.body
-        const result = await CategoriesService.update(id, data)
+        const result = await categoriesService.update(id, data)
 
         HttpResponse.success(res, result)
       } catch (err) {
@@ -86,7 +88,7 @@ const categories = (app: Express): void => {
     async (req: Request, res: Response, next: NextFunction) => {
       try {
         const id = req.params.id
-        const result = await CategoriesService.delete(id)
+        const result = await categoriesService.delete(id)
 
         HttpResponse.success(res, result)
       } catch (err) {

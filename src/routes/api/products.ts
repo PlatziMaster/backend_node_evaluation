@@ -10,11 +10,13 @@ const router = Router()
  * @param app - Express application.
  */
 const products = (app: Express): void => {
+  const productsService = new ProductsService('products')
+
   // create
   router.post('/', async (req: Request, res: Response, next: NextFunction) => {
     try {
       const data = req.body
-      const result = await ProductsService.create(data)
+      const result = await productsService.create(data)
 
       HttpResponse.success(res, result, 201)
     } catch (err) {
@@ -25,7 +27,7 @@ const products = (app: Express): void => {
   // read all
   router.get('/', async (req: Request, res: Response, next: NextFunction) => {
     try {
-      const result = await ProductsService.read()
+      const result = await productsService.read()
 
       HttpResponse.success(res, result)
     } catch (err) {
@@ -39,7 +41,7 @@ const products = (app: Express): void => {
     async (req: Request, res: Response, next: NextFunction) => {
       try {
         const id = req.params.id
-        const result = await ProductsService.find(id)
+        const result = await productsService.find(id)
 
         HttpResponse.success(res, result)
       } catch (err) {
@@ -55,7 +57,7 @@ const products = (app: Express): void => {
       try {
         const id = req.params.id
         const data = req.body
-        const result = await ProductsService.update(id, data)
+        const result = await productsService.update(id, data)
 
         HttpResponse.success(res, result)
       } catch (err) {
@@ -71,7 +73,7 @@ const products = (app: Express): void => {
       try {
         const id = req.params.id
         const data = req.body
-        const result = await ProductsService.update(id, data)
+        const result = await productsService.update(id, data)
 
         HttpResponse.success(res, result)
       } catch (err) {
@@ -86,7 +88,7 @@ const products = (app: Express): void => {
     async (req: Request, res: Response, next: NextFunction) => {
       try {
         const id = req.params.id
-        const result = await ProductsService.delete(id)
+        const result = await productsService.delete(id)
 
         HttpResponse.success(res, result)
       } catch (err) {

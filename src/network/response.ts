@@ -15,7 +15,7 @@ const HttpResponse = {
   error: (err: Error, res: Response, status?: number): void => {
     const statusCode = status || 500
 
-    res.status(statusCode).json({ err })
+    res.status(statusCode).json({ error: err })
   },
 }
 

@@ -1,2 +1,2 @@
-export { application } from './application'
-export { database } from './database'
+export * from './application'
+export * from './database'

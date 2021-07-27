@@ -2,6 +2,7 @@ import express, { Express } from 'express'
 import cors from 'cors'
 import categoriesApiRouter from './routes/api/categories'
 import productsApiRouter from './routes/api/products'
+import { errorsHandler, logErrors } from './utils/middlewares'
 
 /**
  * Generates a pre configured express application
@@ -13,9 +14,13 @@ const createApp = (): Express => {
   app.use(cors())
   app.use(express.json())
 
-  // ADD YOUR ROUTES
+  // Routes
   categoriesApiRouter(app)
   productsApiRouter(app)
+
+  // Middlewares
+  app.use(logErrors)
+  app.use(errorsHandler)
 
   return app
 }

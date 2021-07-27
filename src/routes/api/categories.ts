@@ -1,4 +1,6 @@
-import { Express, Request, Response, Router } from 'express'
+import { Express, NextFunction, Request, Response, Router } from 'express'
+import CategoriesService from '../../services/resources/categories'
+import HttpResponse from '../../network/response'
 
 const router = Router()
 
@@ -6,33 +8,92 @@ const router = Router()
  * Set all CRUD endpoints for the resource.
  *
  * @param app - Express application.
- *
- * @returns void
  */
 const categories = (app: Express): void => {
-  router.post('/', (req: Request, res: Response) => {
-    res.send('preparing to create...')
+  // create
+  router.post('/', async (req: Request, res: Response, next: NextFunction) => {
+    try {
+      const data = req.body
+      const result = await CategoriesService.create(data)
+
+      HttpResponse.success(res, result, 201)
+    } catch (err) {
+      next(err)
+    }
   })
 
-  router.get('/', (req: Request, res: Response) => {
-    res.send('preparing to read...')
+  // read all
+  router.get('/', async (req: Request, res: Response, next: NextFunction) => {
+    try {
+      const result = await CategoriesService.read()
+
+      HttpResponse.success(res, result)
+    } catch (err) {
+      next(err)
+    }
   })
 
-  router.get('/:id', (req: Request, res: Response) => {
-    res.send('preparing to find...')
-  })
+  // read one
+  router.get(
+    '/:id',
+    async (req: Request, res: Response, next: NextFunction) => {
+      try {
+        const id = req.params.id
+        const result = await CategoriesService.find(id)
 
-  router.put('/:id', (req: Request, res: Response) => {
-    res.send('preparing to upsert...')
-  })
+        HttpResponse.success(res, result)
+      } catch (err) {
+        next(err)
+      }
+    }
+  )
 
-  router.patch('/:id', (req: Request, res: Response) => {
-    res.send('preparing to update...')
-  })
+  // entire update
+  router.put(
+    '/:id',
+    async (req: Request, res: Response, next: NextFunction) => {
+      try {
+        const id = req.params.id
+        const data = req.body
+        const result = await CategoriesService.update(id, data)
 
-  router.delete('/:id', (req: Request, res: Response) => {
-    res.send('preparing to delete')
-  })
+        HttpResponse.success(res, result)
+      } catch (err) {
+        next(err)
+      }
+    }
+  )
+
+  // partial update
+  router.patch(
+    '/:id',
+    async (req: Request, res: Response, next: NextFunction) => {
+      try {
+        const id = req.params.id
+        const data = req.body
+        const result = await CategoriesService.update(id, data)
+
+        HttpResponse.success(res, result)
+      } catch (err) {
+        next(err)
+      }
+    }
+  )
+
+  // delete
+  router.delete(
+    '/:id',
+    async (req: Request, res: Response, next: NextFunction) => {
+      try {
+        const id = req.params.id
+        const result = await CategoriesService.delete(id)
+
+        HttpResponse.success(res, result)
+      } catch (err) {
+        next(err)
+      }
+    }
+  )
 
   app.use('/api/categories', router)
 }

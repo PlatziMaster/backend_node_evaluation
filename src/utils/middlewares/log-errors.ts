@@ -13,7 +13,7 @@ export const logErrors = (
   req: Request,
   res: Response,
   next: NextFunction
-) => {
+): void => {
   console.error(err.stack)
 
   next(err)

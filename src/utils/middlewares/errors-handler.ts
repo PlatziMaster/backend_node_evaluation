@@ -17,10 +17,11 @@ export const errorsHandler = (
   req: Request,
   res: Response,
   next: NextFunction
-) => {
+): void => {
   if (process.env.NODE_ENV === 'production') {
     delete err.stack
   }
 
   HttpResponse.error(err, res)
+  next()
 }

@@ -1,6 +1,3 @@
-/* eslint-disable @typescript-eslint/no-unused-vars */
-/* eslint-disable @typescript-eslint/explicit-module-boundary-types */
-
 import dotenv from 'dotenv'
 import { Request, Response, NextFunction } from 'express'
 import HttpResponse from '../../network/response'

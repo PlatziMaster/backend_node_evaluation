@@ -1,7 +1,7 @@
 const express = require("express");
 const bodyParser = require("body-parser");
 
-const MongoClient = require("mongodb").MongoClient;
+//const MongoClient = require("mongodb").MongoClient;
 
 // create express app
 const app = express();
@@ -14,13 +14,21 @@ app.use(bodyParser.json());
 
 // Configuring database
 const dbConfig = require("./config/database.config.js");
+const mongoose = require("mongoose");
+const Schema = mongoose.Schema;
+
+// To handle deprecation warning from findAndUpdate()
+mongoose.set("useFindAndModify", false);
+
+mongoose.Promise = global.Promise;
 
 // Connecting to the database
 
-MongoClient.connect(dbConfig.url, {
-  useNewUrlParser: true,
-  useUnifiedTopology: true
-})
+mongoose
+  .connect(dbConfig.url, {
+    useNewUrlParser: true,
+    useUnifiedTopology: true
+  })
   .then(() => {
     console.log("Successfully connected to the database");
   })

@@ -8,11 +8,11 @@ module.exports = app => {
   app.get("/notes", notes.findAll);
 
   // Retrieve a single item by ID
-  app.get("notes/:noteId", notes.findOne);
+  app.get("/notes/:noteId", notes.findOne);
 
   // Update an item with ID
   app.put("/notes/:noteId", notes.update);
 
   // Delete an intem by ID
-  app.delete("notes/:noteId", notes.delete);
+  app.delete("/notes/:noteId", notes.delete);
 };

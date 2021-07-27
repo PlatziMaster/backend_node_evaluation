@@ -1,18 +1,18 @@
-const Note = require("../models/note.model.js");
+const Product = require("../models/note.model.js");
 
 // Create and Save a new note
 exports.create = (req, res) => {
   // Validate request
-  if (!req.body.content) {
+  if (!req.body.name) {
     return res.status(400).send({
-      message: "Note content cannot be empty"
+      message: "field 'name' cannot be empty"
     });
   }
 
   // Create a Note
-  const note = new Note({
-    title: req.body.title || "Untitled note",
-    content: req.body.content
+  const note = new Product({
+    name: req.body.name || "Untitled product",
+    price: req.body.price
   });
 
   // Save note int the database
@@ -31,7 +31,7 @@ exports.create = (req, res) => {
 // Retrieve and return all notes from database
 
 exports.findAll = (req, res) => {
-  Note.find()
+  Product.find()
     .then(notes => {
       res.send(notes);
     })
@@ -46,7 +46,7 @@ exports.findAll = (req, res) => {
 // Find a single note with a noteId
 
 exports.findOne = (req, res) => {
-  Note.findById(req.params.noteId)
+  Product.findById(req.params.noteId)
     .then(note => {
       if (!note) {
         return res.status(404).send({
@@ -71,18 +71,18 @@ exports.findOne = (req, res) => {
 // Update a note identified by noteId in the request
 exports.update = (req, res) => {
   // Validate request
-  if (!req.body.content) {
+  if (!req.body.name) {
     return res.status(400).send({
-      message: "Note content cannot be empty"
+      message: "Name cannot be empty"
     });
   }
 
   // Find note and update it with request body
-  Note.findByIdAndUpdate(
+  Product.findByIdAndUpdate(
     req.params.noteId,
     {
-      title: req.body.title || "Untitled note",
-      content: req.body.content
+      name: req.body.name || "Unnamed item",
+      price: req.body.price
     },
     { new: true }
   ).then(note => {
@@ -101,7 +101,7 @@ exports.update = (req, res) => {
 
 // Delete a note with the specified noteId in the request
 exports.delete = (req, res) => {
-  Note.findByIdAndRemove(req.params.noteId)
+  Product.findByIdAndRemove(req.params.noteId)
     .then(note => {
       if (!note) {
         return res.status(404).send({

@@ -1,5 +1,5 @@
 import { Document } from 'mongodb'
-import Store from '../store/mongodb'
+import Store from '../../services/store/mongodb'
 
 class BaseResourceService {
   store

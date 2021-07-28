@@ -1,8 +1,9 @@
 import { Document } from 'mongodb'
+import { ResourceService, StoreService } from '../../types'
 import Store from '../../services/store/mongodb'
 
-class BaseResourceService {
-  store
+class BaseResourceService implements ResourceService {
+  store: StoreService
 
   constructor(resource: string) {
     this.store = new Store(resource)

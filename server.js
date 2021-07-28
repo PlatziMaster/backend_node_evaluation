@@ -1,7 +1,8 @@
 const express = require("express");
 const bodyParser = require("body-parser");
 
-//const MongoClient = require("mongodb").MongoClient;
+// Loading Environment variables
+require("dotenv").config();
 
 // create express app
 const app = express();

@@ -1,5 +1,12 @@
 module.exports = {
   url:
-    "mongodb+srv://db_user_platzi_master:fptkvsclpn6dCjurwxxpsucjyyujUmu7dq@cluster0.xceta.mongodb.net/myFirstDatabase?retryWrites=true&w=majority"
-  //"mongodb://localhost:27017/platzi-crud"
+    "mongodb+srv://" +
+    process.env.MONGO_USER +
+    ":" +
+    process.env.MONGO_PASSWORD +
+    "@" +
+    process.env.MONGO_HOST +
+    "/" +
+    process.env.MONGO_DB_NAME +
+    "?retryWrites=true&w=majority"
 };

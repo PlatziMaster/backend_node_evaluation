@@ -18,7 +18,12 @@ function createApp() {
   // ADD YOUR ROUTES
   categoriesRoutes(app);
   productsRoutes(app);
-
+  
+  // redirect
+  app.get("/", (req, res) => {
+    res.redirect("/api/products");
+  });
+  
   // errors handler
   app.use(logErrors);
   app.use(wrapErrors);

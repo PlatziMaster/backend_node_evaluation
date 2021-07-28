@@ -2,7 +2,7 @@ import express, { Express } from 'express'
 import cors from 'cors'
 import categoriesApiRouter from './routes/api/categories'
 import productsApiRouter from './routes/api/products'
-import { errorsHandler, logErrors } from './utils/middlewares'
+import { errorsHandler, logErrors } from './network/middlewares'
 
 /**
  * Generates a pre configured express application

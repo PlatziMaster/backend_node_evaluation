@@ -1,7 +1,13 @@
 import { NextFunction, Request, Response, Router } from 'express'
-import { StoreService } from '../../../types'
-import HttpResponse from '../../../network/response'
+import { StoreService } from '../../types'
+import HttpResponse from '../../network/response'
 
+/**
+ * Generate an endpoint to delete a resource.
+ *
+ * @param router - Instance of an express router.
+ * @param service - Service to connect with the database.
+ */
 const erase = (router: Router, service: StoreService): void => {
   router.delete(
     '/:id',

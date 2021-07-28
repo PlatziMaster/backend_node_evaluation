@@ -1,9 +1,15 @@
 import { NextFunction, Request, Response, Router } from 'express'
-import { StoreService } from '../../../types'
-import HttpResponse from '../../../network/response'
+import { StoreService } from '../../types'
+import HttpResponse from '../../network/response'
 
-const replace = (router: Router, service: StoreService): void => {
-  router.put(
+/**
+ * Generate an endpoint to update some props in a resource.
+ *
+ * @param router - Instance of an express router.
+ * @param service - Service to connect with the database.
+ */
+const update = (router: Router, service: StoreService): void => {
+  router.patch(
     '/:id',
     async (req: Request, res: Response, next: NextFunction) => {
       try {
@@ -19,4 +25,4 @@ const replace = (router: Router, service: StoreService): void => {
   )
 }
 
-export default replace
+export default update

@@ -1,12 +1,34 @@
-const express = require('express');
-const cors = require('cors');
+const express = require("express");
+const cors = require("cors");
 
-function createApp() { 
+const categoriesRoutes = require("./categories/routes");
+const productsRoutes = require("./products/routes");
+
+const {
+  wrapErrors,
+  logErrors,
+  errorHandler,
+} = require("./utils/middleware/errorHandler");
+
+function createApp() {
   const app = express();
   app.use(cors());
   app.use(express.json());
 
   // ADD YOUR ROUTES
+  categoriesRoutes(app);
+  productsRoutes(app);
+  
+  // redirect
+  app.get("/", (req, res) => {
+    res.redirect("/api/products");
+  });
+  
+  // errors handler
+  app.use(logErrors);
+  app.use(wrapErrors);
+  app.use(errorHandler);
+
   return app;
 }
 

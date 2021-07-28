@@ -1,9 +1,10 @@
 import { Express } from 'express'
 import ProductsService from '../../services/resources/products'
-import buildRoutes from './builder'
+import BaseRouter from '../../utils/base-router'
 
 const resource = 'products'
 const service = new ProductsService(resource)
+const router = new BaseRouter(resource, service)
 
 /**
  * Set all CRUD endpoints for the resource.
@@ -11,7 +12,7 @@ const service = new ProductsService(resource)
  * @param app - Express application.
  */
 const routes = (app: Express): void => {
-  return buildRoutes(app, resource, service)
+  router.applyTo(app)
 }
 
 export default routes

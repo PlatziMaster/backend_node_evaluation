@@ -1,10 +1,11 @@
 import { Express } from 'express'
+import { Category } from '../../models'
 import CategoriesService from '../../services/resources/categories'
 import BaseRouter from '../../utils/base-router'
 
 const resource = 'categories'
 const service = new CategoriesService(resource)
-const router = new BaseRouter(resource, service)
+const router = new BaseRouter(resource, service, Category)
 
 /**
  * Set all CRUD endpoints for the resource.

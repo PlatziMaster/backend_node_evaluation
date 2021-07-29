@@ -1,6 +1,7 @@
 import { NextFunction, Request, Response, Router } from 'express'
-import { StoreService } from '../../types'
+import { validationHandler } from '../../network/middlewares'
 import HttpResponse from '../../network/response'
+import { Model, StoreService } from '../../types'
 
 /**
  * Generate an endpoint to create a resource.
@@ -8,17 +9,21 @@ import HttpResponse from '../../network/response'
  * @param router - Instance of an express router.
  * @param service - Service to connect with the database.
  */
-const create = (router: Router, service: StoreService): void => {
-  router.post('/', async (req: Request, res: Response, next: NextFunction) => {
-    try {
-      const data = req.body
-      const result = await service.create(data)
+const create = (router: Router, service: StoreService, model: Model): void => {
+  router.post(
+    '/',
+    validationHandler(model.creation),
+    async (req: Request, res: Response, next: NextFunction) => {
+      try {
+        const data = req.body
+        const result = await service.create(data)
 
-      HttpResponse.success(res, result, 201)
-    } catch (err) {
-      next(err)
+        HttpResponse.success(res, result, 201)
+      } catch (err) {
+        next(err)
+      }
     }
-  })
+  )
 }
 
 export default create

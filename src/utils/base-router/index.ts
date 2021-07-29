@@ -1,11 +1,11 @@
 import { Express, Router } from 'express'
-import { ResourceService } from '../../types'
+import { Model, ResourceService } from '../../types'
 import create from './create'
-import read from './read'
+import erase from './erase'
 import find from './find'
+import read from './read'
 import replace from './replace'
 import update from './update'
-import erase from './erase'
 
 /**
  * Class that generate all endpoints for basic CRUD of a resource.
@@ -13,6 +13,7 @@ import erase from './erase'
 class RouteBuilder {
   resource: string
   service: ResourceService
+  model: Model
 
   /**
    * Create a route builder class.
@@ -20,9 +21,10 @@ class RouteBuilder {
    * @param resource - Name of the resource.
    * @param service - Instace of the service of the resource.
    */
-  constructor(resource: string, service: ResourceService) {
+  constructor(resource: string, service: ResourceService, model: Model) {
     this.resource = resource
     this.service = service
+    this.model = model
   }
 
   /**
@@ -33,7 +35,7 @@ class RouteBuilder {
   applyTo(app: Express): void {
     const router = Router()
 
-    create(router, this.service)
+    create(router, this.service, this.model)
     read(router, this.service)
     find(router, this.service)
     replace(router, this.service)

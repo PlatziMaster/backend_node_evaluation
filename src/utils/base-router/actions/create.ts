@@ -8,6 +8,7 @@ import { Model, StoreService } from '../../../types'
  *
  * @param router - Instance of an express router.
  * @param service - Service to connect with the database.
+ * @param model - Is a resource abstraction.
  */
 export const create = (
   router: Router,

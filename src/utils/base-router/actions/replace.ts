@@ -1,16 +1,24 @@
 import { NextFunction, Request, Response, Router } from 'express'
-import { StoreService } from '../../../types'
+import { validationHandler } from '../../../network/middlewares'
 import HttpResponse from '../../../network/response'
+import { Model, StoreService } from '../../../types'
 
 /**
  * Generate an endpoint to update all props in a resource.
  *
  * @param router - Instance of an express router.
  * @param service - Service to connect with the database.
+ * @param model - Is a resource abstraction.
  */
-export const replace = (router: Router, service: StoreService): void => {
+export const replace = (
+  router: Router,
+  service: StoreService,
+  model: Model
+): void => {
   router.put(
     '/:id',
+    validationHandler(model.identification, 'params'),
+    validationHandler(model.update),
     async (req: Request, res: Response, next: NextFunction) => {
       try {
         const id = req.params.id

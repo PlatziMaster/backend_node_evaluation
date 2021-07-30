@@ -31,9 +31,9 @@ class RouteBuilder {
     create(router, this.service, this.model)
     read(router, this.service)
     find(router, this.service, this.model)
-    replace(router, this.service)
-    update(router, this.service)
-    erase(router, this.service)
+    replace(router, this.service, this.model)
+    update(router, this.service, this.model)
+    erase(router, this.service, this.model)
 
     app.use(`/api/${this.model.resource}`, router)
   }

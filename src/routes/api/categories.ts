@@ -3,9 +3,8 @@ import { Category } from '../../models'
 import CategoriesService from '../../services/resources/categories'
 import BaseRouter from '../../utils/base-router'
 
-const resource = 'categories'
-const service = new CategoriesService(resource)
-const router = new BaseRouter(resource, service, Category)
+const service = new CategoriesService(Category.resource)
+const router = new BaseRouter(Category, service)
 
 /**
  * Set all CRUD endpoints for the resource.

@@ -18,8 +18,11 @@
   },
   "scripts": {
     "dev": "DEBUG=app:* nodemon src/index.js",
-    "start": "NODE_ENV=production node src/index.js",
+    "start": "NODE_ENV=production node server.js",
     "test:e2e": "jest --forceExit --config ./e2e/jest-e2e.json"
+  },
+  "engines": {
+    "node": "15.13.0"
   },
   "repository": {
     "type": "git",

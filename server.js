@@ -4,6 +4,8 @@ const bodyParser = require("body-parser");
 // Loading Environment variables
 require("dotenv").config();
 
+console.log(process.env.MONGO_USER);
+
 // create express app
 const app = express();
 

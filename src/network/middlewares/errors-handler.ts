@@ -1,5 +1,5 @@
 import dotenv from 'dotenv'
-import { Request, Response, NextFunction } from 'express'
+import { NextFunction, Request, Response } from 'express'
 import HttpResponse from '../../network/response'
 
 dotenv.config()

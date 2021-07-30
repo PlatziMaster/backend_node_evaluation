@@ -16,7 +16,6 @@ app.use(bodyParser.json());
 // Configuring database
 const dbConfig = require("./config/database.config.js");
 const mongoose = require("mongoose");
-const Schema = mongoose.Schema;
 
 // To handle deprecation warning from findAndUpdate()
 mongoose.set("useFindAndModify", false);

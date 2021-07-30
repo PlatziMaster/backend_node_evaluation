@@ -4,8 +4,6 @@ const bodyParser = require("body-parser");
 // Loading Environment variables
 require("dotenv").config();
 
-console.log(process.env.MONGO_USER);
-
 // create express app
 const app = express();
 
@@ -49,7 +47,11 @@ app.get("/", (req, res) => {
 // Require routes
 require("./app/routes/api.routes.js")(app);
 
+// Leer localhost de variables y puerto
+const host = process.env.HOST || "0.0.0.0";
+const port = process.env.PORT || 3000;
+
 // listen for requests
-app.listen(3000, () => {
+app.listen(port, host, () => {
   console.log("Server is listening on http://localhost:3000");
 });

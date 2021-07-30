@@ -1,6 +1,7 @@
 import { NextFunction, Request, Response, Router } from 'express'
-import { StoreService } from '../../types'
-import HttpResponse from '../../network/response'
+import { validationHandler } from '../../../network/middlewares'
+import HttpResponse from '../../../network/response'
+import { Model, StoreService } from '../../../types'
 
 /**
  * Generate an endpoint to read a resource.
@@ -8,9 +9,14 @@ import HttpResponse from '../../network/response'
  * @param router - Instance of an express router.
  * @param service - Service to connect with the database.
  */
-const find = (router: Router, service: StoreService): void => {
+export const find = (
+  router: Router,
+  service: StoreService,
+  model: Model
+): void => {
   router.get(
     '/:id',
+    validationHandler(model.identification, 'params'),
     async (req: Request, res: Response, next: NextFunction) => {
       try {
         const id = req.params.id
@@ -23,5 +29,3 @@ const find = (router: Router, service: StoreService): void => {
     }
   )
 }
-
-export default find

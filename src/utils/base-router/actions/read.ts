@@ -1,6 +1,6 @@
 import { NextFunction, Request, Response, Router } from 'express'
-import { StoreService } from '../../types'
-import HttpResponse from '../../network/response'
+import { StoreService } from '../../../types'
+import HttpResponse from '../../../network/response'
 
 /**
  * Generate an endpoint to read all resources.
@@ -8,7 +8,7 @@ import HttpResponse from '../../network/response'
  * @param router - Instance of an express router.
  * @param service - Service to connect with the database.
  */
-const read = (router: Router, service: StoreService): void => {
+export const read = (router: Router, service: StoreService): void => {
   router.get('/', async (req: Request, res: Response, next: NextFunction) => {
     try {
       const result = await service.read()
@@ -19,5 +19,3 @@ const read = (router: Router, service: StoreService): void => {
     }
   })
 }
-
-export default read

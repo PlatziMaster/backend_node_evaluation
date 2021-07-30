@@ -1,21 +1,20 @@
 import { NextFunction, Request, Response, Router } from 'express'
-import { StoreService } from '../../types'
-import HttpResponse from '../../network/response'
+import { StoreService } from '../../../types'
+import HttpResponse from '../../../network/response'
 
 /**
- * Generate an endpoint to update some props in a resource.
+ * Generate an endpoint to delete a resource.
  *
  * @param router - Instance of an express router.
  * @param service - Service to connect with the database.
  */
-const update = (router: Router, service: StoreService): void => {
-  router.patch(
+export const erase = (router: Router, service: StoreService): void => {
+  router.delete(
     '/:id',
     async (req: Request, res: Response, next: NextFunction) => {
       try {
         const id = req.params.id
-        const data = req.body
-        const result = await service.update(id, data)
+        const result = await service.delete(id)
 
         HttpResponse.success(res, result)
       } catch (err) {
@@ -24,5 +23,3 @@ const update = (router: Router, service: StoreService): void => {
     }
   )
 }
-
-export default update

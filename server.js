@@ -53,5 +53,5 @@ const port = process.env.PORT || 3000;
 
 // listen for requests
 app.listen(port, host, () => {
-  console.log("Server is listening on http://localhost:3000");
+  console.log("Server is listening on port " + port);
 });

@@ -3,15 +3,20 @@ import { Schema, ValidationError } from 'joi'
 import { Document } from 'mongodb'
 
 const validate = (
-  schema: Schema,
+  schema: Schema | undefined,
   data: Document
 ): ValidationError | undefined => {
-  const { error } = schema.validate(data)
+  if (schema) {
+    const { error } = schema.validate(data)
 
-  return error
+    return error
+  }
 }
 
-export const validationHandler = (schema: Schema, check = 'body') => {
+export const validationHandler = (
+  schema: Schema | undefined,
+  check = 'body'
+) => {
   return (req: Request, res: Response, next: NextFunction): void => {
     // next line solve the use of string as index
     // credits to: Guillaume F.

@@ -14,7 +14,8 @@
       "@types/node",
       "@types/express",
       "@types/cors",
-      "@types/jest"
+      "@types/jest",
+      "@types/supertest"
     ],
     "noImplicitAny": true
   },

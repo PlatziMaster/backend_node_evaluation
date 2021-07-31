@@ -4,7 +4,7 @@ import { database } from '../config'
  * Generate a connection string with URI format based on the environment
  * variables.
  *
- * @returns A connection string.
+ * @returns - A connection string.
  */
 export const getConnectionString = (): string => {
   const protocol = encodeURIComponent(database.protocol)

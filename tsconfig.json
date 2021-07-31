@@ -13,7 +13,8 @@
     "types": [
       "@types/node",
       "@types/express",
-      "@types/cors"
+      "@types/cors",
+      "@types/jest"
     ],
     "noImplicitAny": true
   },

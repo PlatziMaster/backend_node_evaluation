@@ -7,7 +7,7 @@ import { errorsHandler, logErrors } from './network/middlewares'
 /**
  * Generates a pre configured express application
  *
- * @returns An express application
+ * @returns - An express application
  */
 const createApp = (): Express => {
   const app = express()

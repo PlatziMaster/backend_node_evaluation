@@ -3,9 +3,8 @@ import { Product } from '../../models'
 import ProductsService from '../../services/resources/products'
 import BaseRouter from '../../utils/base-router'
 
-const resource = 'products'
-const service = new ProductsService(resource)
-const router = new BaseRouter(resource, service, Product)
+const service = new ProductsService(Product.resource)
+const router = new BaseRouter(Product, service)
 
 /**
  * Set all CRUD endpoints for the resource.

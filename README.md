@@ -1,47 +1,79 @@
-# Prueba de Backend NodeJS
-Crear un CRUD para crear productos conectado a MongoDB.
+# Backend App
+Create a CRUD to create products connected to MongoDB.
 
-### Instalación
-```
-npm install
+## Build
+
+* Copy the sample configuration file and fill the right values according to your environment
+
+```bash
+
+# develop
+cp .env-example .env
+
+# staging 
+cp .env-sample .stag.env
+
+# production
+cp .env-sample .prod.env
 ```
 
-### Ejecución
-```
-npm run start
+## Installation
+
+```bash
+$ npm install
 ```
 
-## Modelos
+## Running the app
+
+```bash
+# development
+$ npm run start
+
+# watch mode
+$ npm run start:dev
+
+# production mode
+$ npm run start:prod
+```
+
+## Build the app
+
+```bash
+$ npm run build
+```
+
+## Models
 
 ### Product
-Un Producto debe tener los siguientes atributos:
+A Product must have the following attributes:
 - name
 - price
 - description
+- stock
 - categoryId
 - image
 
 ### Category
-Una Categoría debe tener los siguientes atributos:
+A Category must have the following attributes:
 - name
 - image
 
-## Requerimientos
+## Requirements
 
-### CRUD de productos
-- [ ] GET `/api/products/` Endpoint para retornar la lista de productos.
-- [ ] GET `/api/products/{id}/` Endpoint para retornar un producto.
-- [ ] POST `/api/products/` Endpoint para crear un producto.
-- [ ] PUT `/api/products/{id}/` Endpoint para modificar un producto.
-- [ ] DELETE `/api/products/{id}/` Endpoint para eliminar un producto.
+### CRUD of products
+- [ ] GET `/api/products/` Endpoint to return list of products.
+- [ ] GET `/api/products/{id}/` Endpoint to return a product.
+- [ ] POST `/api/products/` Endpoint to create a product.
+- [ ] PUT `/api/products/{id}/` Endpoint to modify a product.
+- [ ] DELETE `/api/products/{id}/` Endpoint to delete a product.
 
-### CRUD de categorías
-- [ ] GET `/api/categories/` Endpoint para retornar la lista de categorías.
-- [ ] GET `/api/categories/{id}/` Endpoint para retornar un categoría.
-- [ ] POST `/api/categories/` Endpoint para crear un categoría.
-- [ ] PUT `/api/categories/{id}/` Endpoint para modificar un categoría.
-- [ ] DELETE `/api/categories/{id}/` Endpoint para eliminar un categoría.
-- [ ] GET `/api/categories/{id}/products` Endpoint para retornar la lista de productos que pertenecen a una categoría.
+### CRUD of categories
+- [ ] GET `/api/categories/` Endpoint to return list of categories.
+- [ ] GET `/api/categories/{id}/` Endpoint to return a category.
+- [ ] POST `/api/categories/` Endpoint to create a category.
+- [ ] PUT `/api/categories/{id}/` Endpoint to modify a category.
+- [ ] DELETE `/api/categories/{id}/` Endpoint to delete a category.
+- [ ] GET `/api/categories/{id}/products` Endpoint to return the list of products belonging to a category.
 
 ## Instrucciones
 
@@ -50,16 +82,21 @@ Una Categoría debe tener los siguientes atributos:
 3. Verificar que la conexión de tu aplicación a MongoDBAtlas funcione.
 4. Realizar el deploy de tu aplicación.
 
-### Correr pruebas en local
-```
-npm run test:e2e
+## Test
+
+```bash
+# unit tests
+$ npm run test
+
+# e2e tests
+$ npm run test:e2e
+
+# test coverage
+$ npm run test:cov
 ```
 1. Debes tener mongoDB en local corriendo para hacer las pruebas.
 2. Y poner las variables de ambiente en el archivo `.env`.
 
 
-## Enviar solución de reto
-Debes de crear un "Fork" de este proyecto, revolverlo desde tu cuenta personal.
-
-### Licencia
-La licencia [MIT](https://opensource.org/licenses/MIT).
+## Evidence
+![alt backend-api](/docs/images/api.png)

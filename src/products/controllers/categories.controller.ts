@@ -6,10 +6,11 @@ import {
   Body,
   Put,
   Delete,
+  Query,
 } from '@nestjs/common';
 import { ApiTags, ApiOperation } from '@nestjs/swagger';
 import { CategoriesService } from '../services/categories.service';
-import { CreateCategoryDto, UpdateCategoryDto } from './../dtos/category.dtos';
+import { CreateCategoryDto, FilterCategoriesDto, UpdateCategoryDto } from './../dtos/category.dtos';
 import { MongoIdPipe } from '../../common/mongo-id.pipe';
 import { ProductsService } from '../services/products.service';
 
@@ -23,7 +24,7 @@ export class CategoriesController {
 
   @Get()
   @ApiOperation({ summary: 'List of categories' })
-  findAll() {
+  getCategories(@Query() params: FilterCategoriesDto) {
     return this.categoriesService.findAll();
   }
 

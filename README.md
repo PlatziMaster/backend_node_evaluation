@@ -1,6 +1,9 @@
 # Backend App
 Create a CRUD to create products connected to MongoDB.
 
+## App Deploy Heroku
+[Heroku link](https://fast-everglades-22989.herokuapp.com/docs/#/)
+
 ## Build
 
 * Copy the sample configuration file and fill the right values according to your environment
@@ -75,13 +78,6 @@ A Category must have the following attributes:
 - [ ] DELETE `/api/categories/{id}/` Endpoint to delete a category.
 - [ ] GET `/api/categories/{id}/products` Endpoint to return the list of products belonging to a category.
 
-## Instrucciones
-
-1. Utilizando el archivo `.env-example` realiza la configuración para tu archivo `.env`.
-2. Proponer una arquitectura la aplicación.
-3. Verificar que la conexión de tu aplicación a MongoDBAtlas funcione.
-4. Realizar el deploy de tu aplicación.
-
 ## Test
 
 ```bash
@@ -94,9 +90,10 @@ $ npm run test:e2e
 # test coverage
 $ npm run test:cov
 ```
-1. Debes tener mongoDB en local corriendo para hacer las pruebas.
-2. Y poner las variables de ambiente en el archivo `.env`.
-
 
 ## Evidence
+* Local enviromente
 ![alt backend-api](/docs/images/api.png)
+
+* Production enviromente
+![alt backend-api](/docs/images/heroku.png)

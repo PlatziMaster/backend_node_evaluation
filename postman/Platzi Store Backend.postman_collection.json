@@ -1,0 +1,305 @@
+{
+	"info": {
+		"_postman_id": "ca3f0c10-5d26-471e-93d6-b2ac0117760e",
+		"name": "Platzi Store Backend",
+		"schema": "https://schema.getpostman.com/json/collection/v2.1.0/collection.json"
+	},
+	"item": [
+		{
+			"name": "Products",
+			"item": [
+				{
+					"name": "Products: Get products",
+					"request": {
+						"method": "GET",
+						"header": [],
+						"url": {
+							"raw": "localhost:3000/api/products?limit=20&minPrice=1&maxPrice=2500",
+							"host": [
+								"localhost"
+							],
+							"port": "3000",
+							"path": [
+								"api",
+								"products"
+							],
+							"query": [
+								{
+									"key": "limit",
+									"value": "20"
+								},
+								{
+									"key": "offset",
+									"value": "2",
+									"disabled": true
+								},
+								{
+									"key": "minPrice",
+									"value": "1"
+								},
+								{
+									"key": "maxPrice",
+									"value": "2500"
+								}
+							]
+						}
+					},
+					"response": []
+				},
+				{
+					"name": "Products: Create a product",
+					"request": {
+						"method": "POST",
+						"header": [],
+						"body": {
+							"mode": "raw",
+							"raw": "{\n    \"name\": \"Cuadro Fantasia\",\n    \"description\": \"Cuadro de 215*215cm\",\n    \"price\": 600,\n    \"image\": \"google.com/src/bn.png\",\n    \"stock\": 2,\n    \"category\": \"614a53dceb76511e06594b8a\"\n}",
+							"options": {
+								"raw": {
+									"language": "json"
+								}
+							}
+						},
+						"url": {
+							"raw": "localhost:3000/api/products",
+							"host": [
+								"localhost"
+							],
+							"port": "3000",
+							"path": [
+								"api",
+								"products"
+							]
+						}
+					},
+					"response": []
+				},
+				{
+					"name": "Products: Get a product",
+					"request": {
+						"method": "GET",
+						"header": [],
+						"url": {
+							"raw": "localhost:3000/api/products/614a5425eb76511e06594b93",
+							"host": [
+								"localhost"
+							],
+							"port": "3000",
+							"path": [
+								"api",
+								"products",
+								"614a5425eb76511e06594b93"
+							]
+						}
+					},
+					"response": []
+				},
+				{
+					"name": "Products: Update a product",
+					"request": {
+						"method": "PUT",
+						"header": [],
+						"body": {
+							"mode": "raw",
+							"raw": "{\n    \"name\": \"Depiladora Oster\",\n    \"description\": \"Tres tipos de cortes\",\n    \"price\": 250,\n    \"image\": \"google.com/src/bn.png\",\n    \"stock\": 4,\n    \"category\": \"614a5409eb76511e06594b8e\"\n}",
+							"options": {
+								"raw": {
+									"language": "json"
+								}
+							}
+						},
+						"url": {
+							"raw": "localhost:3000/api/products/614a5425eb76511e06594b93",
+							"host": [
+								"localhost"
+							],
+							"port": "3000",
+							"path": [
+								"api",
+								"products",
+								"614a5425eb76511e06594b93"
+							]
+						}
+					},
+					"response": []
+				},
+				{
+					"name": "Products: Delete a product",
+					"request": {
+						"method": "DELETE",
+						"header": [],
+						"url": {
+							"raw": "localhost:3000/api/products/614a573020101d1e9c278bb5",
+							"host": [
+								"localhost"
+							],
+							"port": "3000",
+							"path": [
+								"api",
+								"products",
+								"614a573020101d1e9c278bb5"
+							]
+						}
+					},
+					"response": []
+				}
+			]
+		},
+		{
+			"name": "Categories",
+			"item": [
+				{
+					"name": "Categories: Get categories",
+					"request": {
+						"method": "GET",
+						"header": [],
+						"url": {
+							"raw": "localhost:3000/api/categories?limit=20&minPrice=1&maxPrice=2500",
+							"host": [
+								"localhost"
+							],
+							"port": "3000",
+							"path": [
+								"api",
+								"categories"
+							],
+							"query": [
+								{
+									"key": "limit",
+									"value": "20"
+								},
+								{
+									"key": "minPrice",
+									"value": "1"
+								},
+								{
+									"key": "maxPrice",
+									"value": "2500"
+								}
+							]
+						}
+					},
+					"response": []
+				},
+				{
+					"name": "Categories: Create a category",
+					"request": {
+						"method": "POST",
+						"header": [],
+						"body": {
+							"mode": "raw",
+							"raw": "{\n    \"name\": \"Electronica\",\n    \"image\": \"google.com/src/bn\"\n}",
+							"options": {
+								"raw": {
+									"language": "json"
+								}
+							}
+						},
+						"url": {
+							"raw": "localhost:3000/api/categories",
+							"host": [
+								"localhost"
+							],
+							"port": "3000",
+							"path": [
+								"api",
+								"categories"
+							]
+						}
+					},
+					"response": []
+				},
+				{
+					"name": "Categories: Get a category",
+					"request": {
+						"method": "GET",
+						"header": [],
+						"url": {
+							"raw": "localhost:3000/api/categories/614a5409eb76511e06594b8e",
+							"host": [
+								"localhost"
+							],
+							"port": "3000",
+							"path": [
+								"api",
+								"categories",
+								"614a5409eb76511e06594b8e"
+							]
+						}
+					},
+					"response": []
+				},
+				{
+					"name": "Categories: Update a product",
+					"request": {
+						"method": "PUT",
+						"header": [],
+						"body": {
+							"mode": "raw",
+							"raw": "{\n    \"name\": \"Electrodomesticos\",\n    \"image\": \"google.com/src/bn.png\"\n}",
+							"options": {
+								"raw": {
+									"language": "json"
+								}
+							}
+						},
+						"url": {
+							"raw": "localhost:3000/api/categories/614a5409eb76511e06594b8e",
+							"host": [
+								"localhost"
+							],
+							"port": "3000",
+							"path": [
+								"api",
+								"categories",
+								"614a5409eb76511e06594b8e"
+							]
+						}
+					},
+					"response": []
+				},
+				{
+					"name": "Categories: Delete a category",
+					"request": {
+						"method": "DELETE",
+						"header": [],
+						"url": {
+							"raw": "localhost:3000/api/categories/614a57ba20101d1e9c278bbb",
+							"host": [
+								"localhost"
+							],
+							"port": "3000",
+							"path": [
+								"api",
+								"categories",
+								"614a57ba20101d1e9c278bbb"
+							]
+						}
+					},
+					"response": []
+				},
+				{
+					"name": "Categories: Get products by category",
+					"request": {
+						"method": "GET",
+						"header": [],
+						"url": {
+							"raw": "localhost:3000/api/categories/614a53dceb76511e06594b8a/products",
+							"host": [
+								"localhost"
+							],
+							"port": "3000",
+							"path": [
+								"api",
+								"categories",
+								"614a53dceb76511e06594b8a",
+								"products"
+							]
+						}
+					},
+					"response": []
+				}
+			]
+		}
+	]
+}

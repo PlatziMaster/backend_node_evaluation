@@ -1,12 +1,15 @@
-# Prueba de Backend NodeJS
+# Prueba de Backend NodeJS - Victor Noguera
+
 Crear un CRUD para crear productos conectado a MongoDB.
 
 ### Instalación
+
 ```
 npm install
 ```
 
 ### Ejecución
+
 ```
 npm run start
 ```
@@ -14,7 +17,9 @@ npm run start
 ## Modelos
 
 ### Product
+
 Un Producto debe tener los siguientes atributos:
+
 - name
 - price
 - description
@@ -22,13 +27,16 @@ Un Producto debe tener los siguientes atributos:
 - image
 
 ### Category
+
 Una Categoría debe tener los siguientes atributos:
+
 - name
 - image
 
 ## Requerimientos
 
 ### CRUD de productos
+
 - [ ] GET `/api/products/` Endpoint para retornar la lista de productos.
 - [ ] GET `/api/products/{id}/` Endpoint para retornar un producto.
 - [ ] POST `/api/products/` Endpoint para crear un producto.
@@ -36,6 +44,7 @@ Una Categoría debe tener los siguientes atributos:
 - [ ] DELETE `/api/products/{id}/` Endpoint para eliminar un producto.
 
 ### CRUD de categorías
+
 - [ ] GET `/api/categories/` Endpoint para retornar la lista de categorías.
 - [ ] GET `/api/categories/{id}/` Endpoint para retornar un categoría.
 - [ ] POST `/api/categories/` Endpoint para crear un categoría.
@@ -51,15 +60,18 @@ Una Categoría debe tener los siguientes atributos:
 4. Realizar el deploy de tu aplicación.
 
 ### Correr pruebas en local
+
 ```
 npm run test:e2e
 ```
+
 1. Debes tener mongoDB en local corriendo para hacer las pruebas.
 2. Y poner las variables de ambiente en el archivo `.env`.
 
-
 ## Enviar solución de reto
+
 Debes de crear un "Fork" de este proyecto, revolverlo desde tu cuenta personal.
 
 ### Licencia
+
 La licencia [MIT](https://opensource.org/licenses/MIT).

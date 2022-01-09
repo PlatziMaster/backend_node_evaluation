@@ -1,14 +1,16 @@
+/* eslint-disable */
+
 const request = require("supertest");
 const { MongoClient, ObjectId } = require("mongodb");
 
-const { config } = require("../src/config");
+const { database } = require("../src/config")
 const createApp = require("./../src/app");
 
-const USER = encodeURIComponent(config.dbUser);
-const PASSWORD = encodeURIComponent(config.dbPassword);
-const DB_NAME = config.dbName;
+const USER = encodeURIComponent(database.user);
+const PASSWORD = encodeURIComponent(database.password);
+const DB_NAME = database.name;
 
-const MONGO_URI = `${config.dbConnection}://${USER}:${PASSWORD}@${config.dbHost}:${config.dbPort}?retryWrites=true&w=majority`;
+const MONGO_URI = `${database.protocol}://${USER}:${PASSWORD}@${database.dbHost}:${database.dbPort}?retryWrites=true&w=majority`;
 const collection = 'products';
 
 describe("Tests to products", () => {
@@ -124,5 +126,5 @@ describe("Tests to products", () => {
     });
   });
 
-  
+
 });

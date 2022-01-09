@@ -1,14 +1,16 @@
+/* eslint-disable */
+
 const request = require("supertest");
 const { MongoClient, ObjectId } = require("mongodb");
 
-const { config } = require("../src/config");
+const { database } = require("../src/config")
 const createApp = require("../src/app");
 
-const USER = encodeURIComponent(config.dbUser);
-const PASSWORD = encodeURIComponent(config.dbPassword);
-const DB_NAME = config.dbName;
+const USER = encodeURIComponent(database.user);
+const PASSWORD = encodeURIComponent(database.password);
+const DB_NAME = database.name;
 
-const MONGO_URI = `${config.dbConnection}://${USER}:${PASSWORD}@${config.dbHost}:${config.dbPort}?retryWrites=true&w=majority`;
+const MONGO_URI = `${database.protocol}://${USER}:${PASSWORD}@${database.host}:${database.port}?retryWrites=true&w=majority`;
 const collection = 'categories';
 
 describe("Tests to categories", () => {
@@ -109,7 +111,7 @@ describe("Tests to categories", () => {
   });
 
   describe("GET /api/categories/{id}/products", () => {
-    
+
     it("should return a list products by category", async (done) => {
       const categories = await database.collection(collection).find().toArray();
       expect(categories.length > 0).toBe(true);
@@ -149,5 +151,5 @@ describe("Tests to categories", () => {
     });
   });
 
-  
+
 });
